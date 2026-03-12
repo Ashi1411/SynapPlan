@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    line-height: 1.5;
+}
+
+:root {
+    /*?todo *************** width of each sections ********************* */
+    --width-of-section : 80%;
+
+    /*? colors */
+    --navbar-background-color : #8DBEE1;
+    --navbar-link-color : #1E3A5F;
+    --hero-heading-color : #1E3A5F;
+    --hero-subheading-color : #3B6A94;
+    --hero-paragraph-color : #2A4F7A;
+    --hero-button-color : #2A4F7A;
+
+    --section-subheading-color : #1E3A5F;
+    --section-heading-color : #2A4F7A;
+    --section-paragraph-color : #3B6A94;
+
+    --how-it-works-paragraph-color : #2A4F7A;
+    --how-it-works-number-color : #ffffff;
+
+    --faq-question-color: #2A4F7A;
+    --faq-answer-color: #3B6A94;
+
+    --footer-text-color : #EAF4FF;
+
+    /*todo login page */
+    --login-heading-color : #1E3A5F;
+    --login-subheading-color : #3B6A94;
+    --login-text-color : #2A4F7A;
+    --login-button-text-color: #A3D5FF;
+
+    /*todo dashboard page */
+    --sidebar-link-color: #EAF4FF;
+    --dashboard-hero-heading-color: #1E3A5F;
+    --dashboard-hero-subheading-color: #3B6A94;
+    --dashboard-hero-paragraph-color: #2A4F7A;
+
+    
+
+    /*? size */
+    --navbar-link-size : 20px;
+    --hero-section-heading : 42px;
+    --hero-section-subheading : 16px;
+    --hero-section-paragraph : 20px;
+    --hero-section-button : 24px;
+    --home-page-heading : 18px;
+    --home-page-paragraph : 14px;
+
+    --section-subheading-size : 14px;
+    --section-heading-size : 36px;
+    --section-paragraph-size : 18px;
+
+    --how-it-works-number-size : 30px;
+    --how-it-works-subheading-size : 18px;
+    --how-it-works-paragraph-size : 16px;
+
+    --faq-question-size : 18px;
+    --faq-answer-size : 16px;
+    
+    --footer-icons-size : 30px;
+    --footer-heading : 18px;
+    --footer-paragraph : 16px;
+
+    --feature-heading-size : 18px;
+    --feature-paragraph-size  : 16px;
+
+    /*todo login page */
+    --login-heading-size : 36px;
+    --login-subheading-size: 16px;
+    --login-text-size: 18px;
+    --login-button-text-size: 24px;
+
+    /*todo sidebar */
+    --sidebar-link-size: 24px;
+
+    /*todo dashboard page */
+    --dashboard-hero-heading-size: 42px;
+    --dashboard-hero-subheading-size: 20px;
+    --dashboard-hero-paragraph-size: 18px;
+    --dashboard-battery-percent-size: 24px;
+    --dashboard-today-plan-button-size: 20px
+
+
+    /*? background */
+    /*todo home page */
+    --hero-section-button-background : linear-gradient(90deg, #8DBEE1 0%, #A3D5FF 50%, #B1E5FF 100%);
+    --hero-section-hover-button-background : linear-gradient(90deg, #B1E5FF 0%, #A3D5FF 50%, #8DBEE1 100%);
+
+    --card-color-1 : #BFF4FF;
+    --card-color-2 : #A3D5FF;
+
+    --number-color : #1E3A5F;
+    --how-it-works-color : #B1E5FF;
+
+    --cta-section-color : linear-gradient(90deg, #8DBEE1, #BFE4EF, #A3D5FF);
+
+    --faq-section-color : linear-gradient(180deg,rgba(107, 173, 219, 1) 0%, rgba(125, 196, 255, 1) 50%, rgba(143, 218, 255, 1) 100%);
+    --faq-question-background : #A3D5FF;
+    --faq-answer-background : #BFF4FF;
+
+    --footer-background : #2A4F7A;
+    --footer-icons-background : #1E3A5F;
+
+    /*todo feature page */
+    --feature-icons-background : #3B6A94;
+
+    --who-it-is-for-background : #BFF4FF;
+    --who-card-color-1 : #A3D5FF;
+    --who-card-color-2 : #8DBEE1;
+
+
+    /*todo how it works page */
+    --system-process-color : #B1E5FF;
+    --design-engine-background : #BFF4FF;
+
+    --decision-engine-heading : #A3D5FF;
+    --decision-engine-paragraph : #8DBEE1;
+
+    /* todo login page */
+    --login-page : #A3D5FF;
+    --login-page-card : #8DBEE1;
+    --login-button-background: #3B6A94;
+    --login-input-background: #B1E5FF;
+
+    /*todo dashboard page */
+    --sidebar-background: #3B6A94;
+    --sidebar-collapse-background: #A3D5FF;
+
+
+    /*? shadow */
+    /*! find more about it */
+    --button-shadow : [0_8px_20px_rgba(0,0,0,0.15)]; 
+}
+
+/*? styling for buttons */
+.hero-btn {
+  background: var(--hero-section-button-background);
+  background-size: 200% 100%;
+}
+
+.hero-btn:hover {
+  background: var(--hero-section-hover-button-background);
+  background-position: right;
+  transform: translateY(-2px);
+}
+
+.activeAns{
+  background-color: var(--faq-answer-background);
+  font-size: var(--faq-answer-size);
+  padding: 12px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: var(--faq-answer-color);
+  font-weight: 600;
+  font-size: var(--faq-answer-size);
+  transition: all 2s ease;
+  -webkit-transition: all 2s ease;
+  -moz-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  -o-transition: all 2s ease;
+}
+
+
+.notActiveAns {
+  display: none;
+}
+
+
+.sidebar {
+  width: 15rem;      
+  margin-top: 3rem; 
+  height: 100vh;     
+  position: fixed;   
+}
+
+.collapseSidebar {
+  width: 3rem;      
+  margin-top: 3rem;  
+  height: 100vh;     
+  position: fixed;  
+}
+
+.sidebarContainer{
+  width: 15rem;
+}
+
+.collapseSidebarContainer{
+  width: 3rem;
+}
+
