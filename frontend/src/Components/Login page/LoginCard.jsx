@@ -1,6 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import {useNavigate} from "react-router-dom";
+
+import {login} from "../../api/auth"
 
 export default function LoginCard() {
+  const navigate = useNavigate();
+
+  let [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData, 
+      [e.target.name]: e.target.value
+    })
+  };
+
+
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Login button clicked");
+    console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL) 
+
+    const {email, password} = formData;
+
+    if (!email || !password) {
+      setError("All the fields are required");
+      return;
+    }
+
+    try {
+      const res = await login(formData);
+
+      console.log(res.data);
+      alert("Login successful");
+
+      if (res.data.success) {
+        navigate("/dashboard");
+      }
+    }
+    catch(err) {
+      console.log(err);
+      alert("Invalid email or password");
+      navigate("/signup");
+    }
+  };
+
   return (
     <div style={{ background: "var(--login-page)" }} className="h-[50vw] p-40">
       <div
@@ -28,7 +78,7 @@ export default function LoginCard() {
             Log in to continue your personalized study journey.
           </p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mt-10">
               <label
                 style={{
@@ -40,10 +90,11 @@ export default function LoginCard() {
                 Email
               </label>
               <input
+                onChange={handleChange}
                 type="text"
                 name="email"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%]"
+                className="w-[90%] p-1"
               ></input>
             </div>
 
@@ -58,36 +109,48 @@ export default function LoginCard() {
                 Password
               </label>
               <input
+                onChange={handleChange}
                 type="password"
                 name="password"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%]"
+                className="w-[90%] p-1"
               ></input>
             </div>
-          </form>
 
-          <p
-            style={{
-              color: "var(--login-subheading-color)",
-              fontSize: "var(--login-subheading-size)",
-            }}
-            className="font-semibold"
-          >
-            Forgot password?
-          </p>
-
-          <div className="flex flex-col justify-center items-center ">
-            <button
+            <p
               style={{
-                color: "var(--login-button-text-color)",
-                fontSize: "var(--login-button-text-size)",
-                background: "var(--login-button-background)",
+                color: "var(--login-subheading-color)",
+                fontSize: "var(--login-subheading-size)",
               }}
-              className="font-semibold p-1 px-10 rounded-2xl mt-14 mb-2"
+              className="font-semibold"
             >
-              Log In
-            </button>
-          </div>
+              Forgot password?
+            </p>
+
+            <div className="flex flex-col justify-center items-center ">
+              <button
+                type="submit"
+                style={{
+                  color: "var(--login-button-text-color)",
+                  fontSize: "var(--login-button-text-size)",
+                  background: "var(--login-button-background)",
+                }}
+                className="font-semibold p-1 px-10 rounded-2xl mt-14 mb-2"
+              >
+                Log In
+              </button>
+            </div>
+          </form>
+          
+          {/* displaying the error mssg */}
+          {<p
+            style={{
+              fontSize: "var(--login-text-size)",
+            }}
+            className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
+          >
+            {error}
+          </p>}
 
           <p
             style={{

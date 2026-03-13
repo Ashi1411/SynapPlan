@@ -15,8 +15,8 @@ export default function Navbar() {
                     <li> <Link to={'/features'}> Features </Link> </li>
                     <li> <Link to={'/howitworks'}> How It Works </Link> </li>
                     <li> <Link to={'/blog'}> Demo </Link> </li>
-                    <li> <Link to={'/api/login'}> Login </Link> </li>
-                    <li> <Link to={'/api/signup'}> Signup </Link> </li>
+                    <li> <Link to={'/login'}> Login </Link> </li>
+                    <li> <Link to={'/signup'}> Signup </Link> </li>
                 </ul>
             </nav>
         </div>

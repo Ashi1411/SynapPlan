@@ -28,15 +28,15 @@ let allRoutes = createBrowserRouter(
       element : <HowItWorks></HowItWorks>
     },
     {
-      path : '/api/login',
+      path : '/login',
       element : <Login></Login>
     },
     {
-      path : '/api/signup',
+      path : '/signup',
       element : <Signup></Signup>
     },
     {
-      path : '/api/dashboard',
+      path : '/dashboard',
       element : <Dashboard></Dashboard>
     }
   ]
