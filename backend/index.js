@@ -33,7 +33,7 @@ connectToMongoDB(process.env.MONGODB_URL)
 //! middlewares
 app.use(express.json()) //? supports json data
 app.use(express.urlencoded({extended: false})); //? supports form data
-app.use(cookieParser()); //? supports form data
+app.use(cookieParser()); //? to parse the components of cookie
 app.use(checkForAuthentication);//? authentication middleware
 
 //! to connect with frontend

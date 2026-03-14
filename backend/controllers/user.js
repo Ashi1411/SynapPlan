@@ -1,6 +1,7 @@
 const User = require("../models/user");
-const {setUser, hashPassword, comparePassword} = require("../services/auth");
+const {setUser, hashPassword, comparePassword, getUser} = require("../services/auth");
 
+//! Create a new user
 async function handleUserSignup(req, res) {
     const {fullname, email, password} = req.body;
 
@@ -36,6 +37,7 @@ async function handleUserSignup(req, res) {
     
 }
 
+//! login a user
 async function handleUserLogin(req, res) {
     const {email, password} = req.body;
     const isPasswordValid = await comparePassword(email, password);
@@ -54,8 +56,8 @@ async function handleUserLogin(req, res) {
     //? sent via cookie
     res.cookie("token", token, {
         httpOnly: true,
-        secure: true,
-        sameSite: "None"
+        secure: false,
+        sameSite: "lax"
     });
     return res.json({
         success: true,
@@ -68,5 +70,29 @@ async function handleUserLogin(req, res) {
     });
 }
 
+//! checking if the user is logged in or not
+async function handleGetCurrentUser(req, res) {
+    const token = req.cookies.token;
 
-module.exports = {handleUserSignup, handleUserLogin};
+    if (!token) {
+        return res.status(401).json({
+            authenticated: false
+        });
+    }
+
+    try{
+        const user = getUser(token);
+
+        return res.json({
+            authenticated: true,
+            user
+        });
+    }
+    catch(err) {
+        return res.status(401).json({
+            authenticated: false
+        });
+    }
+}
+
+module.exports = {handleUserSignup, handleUserLogin, handleGetCurrentUser};

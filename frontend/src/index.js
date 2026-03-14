@@ -9,6 +9,7 @@ import HowItWorks from './Pages/HowItWorks';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Dashboard from './Pages/Dashboard';
+import ProtectedRoutes from './Components/ProtectedRoutes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -37,7 +38,10 @@ let allRoutes = createBrowserRouter(
     },
     {
       path : '/dashboard',
-      element : <Dashboard></Dashboard>
+      element : 
+      <ProtectedRoutes>
+        <Dashboard></Dashboard>
+      </ProtectedRoutes>
     }
   ]
 )
