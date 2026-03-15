@@ -87,7 +87,8 @@ html{
     --dashboard-hero-subheading-size: 20px;
     --dashboard-hero-paragraph-size: 18px;
     --dashboard-battery-percent-size: 24px;
-    --dashboard-today-plan-button-size: 20px
+    --dashboard-today-plan-button-size: 20px;
+    --dashboard-feature-subheading-size: 26px;
 
 
     /*? background */
@@ -134,6 +135,7 @@ html{
     /*todo dashboard page */
     --sidebar-background: #3B6A94;
     --sidebar-collapse-background: #A3D5FF;
+    --recommendation-card-background : #8DBEE1;
 
 
     /*? shadow */

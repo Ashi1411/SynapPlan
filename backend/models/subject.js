@@ -16,7 +16,7 @@ const topicSchema = new mongoose.Schema({
 const subjectSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "user",
         required: true
     },
 
@@ -32,8 +32,14 @@ const subjectSchema = new mongoose.Schema({
 
     priority: {
         type: String,
-        enum: ["low", "medium", "high"],
-        default: "medium"
+        enum: ["Low", "Medium", "High"],
+        default: "Medium"
+    },
+
+    intensity: {
+        type: String,
+        enum: ["High", "Medium", "Light"],
+        default: "Medium"
     },
 
     topics: [topicSchema],

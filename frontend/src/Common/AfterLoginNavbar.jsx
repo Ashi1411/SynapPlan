@@ -12,7 +12,7 @@ export default function AfterLoginNavbar() {
             <nav style={{color: "var(--navbar-link-color)", fontSize : "var(--navbar-link-size)"}}>
                 <ul className='flex gap-[16px]'>
                     <p> Hi Ashi 👋</p>
-                    <p>Today's Date</p>
+                    <p>{new Date().toLocaleDateString()}</p>
                     <p className='cursor-pointer'> Bell Icon </p>
                     <p className='cursor-pointer'> Profile Icon </p>
                 </ul>

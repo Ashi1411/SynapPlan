@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getDashboard } from "../../api/auth";
 
 export default function HeroSection() {
+  const [data, setData] = useState(null);
+  
+
+  useEffect(() => {
+    async function fetchDashboard() {
+      const res = await getDashboard();
+      setData(res.data);
+      console.log(res.data);
+    }
+
+    fetchDashboard()
+  }, []);
+
+
+
   return (
     <div style={{background: "var(--card-color-2 )"}} className="mt-12 grid grid-cols-[60%_40%] gap-6">
       {/* first grid */}
@@ -24,7 +40,7 @@ export default function HeroSection() {
           }}
           className="font-bold mb-10"
         >
-          🔵 Focus Day
+          🔵{data?.dayType}
         </p>
         <p
           style={{
@@ -33,7 +49,7 @@ export default function HeroSection() {
           }}
           className="font-semibold"
         >
-          Based on your recent productivity trends, today is optimized for focused study.
+          Based on your recent productivity trends, today is {data?.dayType}.
         </p>
       </div>
 
@@ -43,7 +59,7 @@ export default function HeroSection() {
         <div></div>
           {/* battery percentage */}
         <div>
-          <p style={{color: "var(--dashboard-hero-heading-color)", fontSize: "var(--dashboard-battery-percent-size)"}} className="font-bold">72% Cognitive Capacity Remaining</p>
+          <p style={{color: "var(--dashboard-hero-heading-color)", fontSize: "var(--dashboard-battery-percent-size)"}} className="font-bold">{data?.cognitive}% Cognitive Capacity Remaining</p>
         </div>
       </div>
     </div>

@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getDashboard } from "../../api/auth";
 
 export default function TodayPlan() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchDetails() {
+      const res = await getDashboard();
+      setData(res.data.todaySessions);
+    }
+
+    fetchDetails();
+  }, [])
+
+
   return (
     <div
-      style={{ background: "var(--design-engine-background" }}
+      style={{ background: "var(--design-engine-background)" }}
       className="p-10 px-40"
     >
       <h1
@@ -18,55 +31,85 @@ export default function TodayPlan() {
 
       <div className="grid grid-cols-2 gap-14 mb-20 p-10">
         {/* card - 1 */}
-        <div
-          style={{ background: "var(--decision-engine-heading)" }}
-          className="rounded-2xl"
-        >
-          <h2
-            style={{
-              color: "var(--section-subheading-color)",
-              fontSize: "var(--feature-heading-size)",
-            }}
-            className="text-center m-3 font-semibold"
-          >
-            Physics 
-          </h2>
-          <div
-            style={{ background: "var(--decision-engine-paragraph)" }}
-            className="rounded-2xl text-center p-2"
-          >
-            <p
-              style={{
-                color: "var(--section-heading-color)",
-                fontSize: "var(--feature-paragraph-size)",
-              }}
-              className="font-semibold"
+        {data?.map((elem, i) => {
+          return(
+            <div
+              style={{ background: "var(--decision-engine-heading)" }}
+              className="rounded-2xl"
+              key={i}
             >
-              Duration : 60 min
-            </p>
+              <h2
+                style={{
+                  color: "var(--section-subheading-color)",
+                  fontSize: "var(--feature-heading-size)",
+                }}
+                className="text-center m-3 font-semibold"
+              >
+                {elem.subjectId.subjectName} 
+              </h2>
+              <div
+                style={{ background: "var(--decision-engine-paragraph)" }}
+                className="rounded-2xl text-center p-2"
+              >
+                <p
+                  style={{
+                    color: "var(--section-heading-color)",
+                    fontSize: "var(--feature-paragraph-size)",
+                  }}
+                  className="font-semibold m-1"
+                >
+                  Duration : {elem.duration} min
+                </p>
 
-            <p
-              style={{
-                color: "var(--section-heading-color)",
-                fontSize: "var(--feature-paragraph-size)",
-              }}
-              className="font-semibold"
-            >
-                Intensity : High
-            </p>
+                <p
+                  style={{
+                    color: "var(--section-heading-color)",
+                    fontSize: "var(--feature-paragraph-size)",
+                  }}
+                  className="font-semibold m-1"
+                >
+                  Duration Completed : {elem.durationCompleted} min
+                </p>
 
-            <button
-            style={{
-              fontSize: "var(--dashboard-today-plan-button-size)",
-              color: "var(--hero-button-color)",
-              background: "var(--decision-engine-heading)" 
-            }}
-            className="px-10 py-1 rounded-2xl m-2 font-bold"
-          >
-            Try Demo
-          </button>
-          </div>
-        </div>
+                <p
+                  style={{
+                    color: "var(--section-heading-color)",
+                    fontSize: "var(--feature-paragraph-size)",
+                  }}
+                  className="font-semibold m-1"
+                >
+                    Intensity : {elem.subjectId.intensity}
+                </p>
+
+                <p
+                  style={{
+                    color: "var(--section-heading-color)",
+                    fontSize: "var(--feature-paragraph-size)",
+                  }}
+                  className="font-semibold m-2 mt-4"
+                >
+                    Topics : {elem.topics?.map((ele, idx) => {
+                      return(
+                        <div key={idx}>{ele}</div>
+                      )
+                    })}
+                </p>
+
+                <button
+                style={{
+                  fontSize: "var(--dashboard-today-plan-button-size)",
+                  color: "var(--hero-button-color)",
+                  background: "var(--decision-engine-heading)" 
+                }}
+                className="px-10 py-1 rounded-2xl m-2 font-bold"
+              >
+                Try Demo
+              </button>
+              </div>
+            </div>
+          )
+        })}
+        
       </div>
 
       {/* add subject button */}

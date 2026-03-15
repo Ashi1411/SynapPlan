@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const sessionSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "user",
         required: true
     },
 
     subjectId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Subject",
+        ref: "subject",
         required: true
     },
 
