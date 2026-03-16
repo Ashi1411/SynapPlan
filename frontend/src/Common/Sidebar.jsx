@@ -36,11 +36,11 @@ export default function Sidebar() {
           <ul className="flex flex-col items-center justify-center font-bold p-4">
             <li>
               {" "}
-              <Link to={"/api/dashboard"}> Dashboard </Link>{" "}
+              <Link to={"/dashboard"}> Dashboard </Link>{" "}
             </li>
             <li>
               {" "}
-              <Link to={"/"}> Planner </Link>{" "}
+              <Link to={"/planner"}> Planner </Link>{" "}
             </li>
             <li>
               {" "}

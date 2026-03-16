@@ -4,6 +4,7 @@ const router = express.Router();
 const {handleUserSignup, handleUserLogin, handleGetCurrentUser} = require("../controllers/user");
 const {getDashboard} = require("../controllers/dashboardController");
 const { checkForAuthentication } = require("../middlewares/auth");
+const { getPlanner } = require("../controllers/planningController");
 
 //! Create a new user
 router.post("/signup", handleUserSignup);
@@ -17,7 +18,8 @@ router.get("/me", handleGetCurrentUser)
 //! dashboard page
 router.get("/dashboard", checkForAuthentication, getDashboard);
 
-
+//! planner page
+router.get("/planner", checkForAuthentication, getPlanner);
 
 
 module.exports = router;

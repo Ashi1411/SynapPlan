@@ -11,6 +11,6 @@ export const login = (data) => API.post("/login", data)
 
 //! pages
 export const getDashboard = () => API.get("/dashboard")
-
+export const getPlanner = () => API.get("/planner")
 
 

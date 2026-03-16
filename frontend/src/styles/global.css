@@ -44,7 +44,11 @@ html{
     --dashboard-hero-subheading-color: #3B6A94;
     --dashboard-hero-paragraph-color: #2A4F7A;
 
-    
+    /*todo planner page */
+    --day-bar-color: #EAF4FF;
+
+
+
 
     /*? size */
     --navbar-link-size : 20px;
@@ -90,6 +94,9 @@ html{
     --dashboard-today-plan-button-size: 20px;
     --dashboard-feature-subheading-size: 26px;
 
+    /*todo planner page */
+    --date-bar-size: 18px;
+    --day-bar-size: 18px;
 
     /*? background */
     /*todo home page */
@@ -136,6 +143,11 @@ html{
     --sidebar-background: #3B6A94;
     --sidebar-collapse-background: #A3D5FF;
     --recommendation-card-background : #8DBEE1;
+
+
+    /*todo planner page */
+    --date-bar-background: #EAF4FF;
+    --day-bar-background: #3B6A94;
 
 
     /*? shadow */
