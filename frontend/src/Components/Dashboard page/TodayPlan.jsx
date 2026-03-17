@@ -103,7 +103,7 @@ export default function TodayPlan() {
                 }}
                 className="px-10 py-1 rounded-2xl m-2 font-bold"
               >
-                Try Demo
+                Start Session
               </button>
               </div>
             </div>

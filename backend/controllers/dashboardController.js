@@ -2,7 +2,7 @@ const {
   calculateDayType,
   calculateCognitiveCapacity,
   getTodaySessions,
-  calculateWeeklyConsistency,
+  calculateWeeklyCompletionRate,
   getWeeklyProductivity,
   getUpcomingDeadlines,
   generateRecommendations,
@@ -18,7 +18,7 @@ async function getDashboard(req, res) {
 
   const cognitive = calculateCognitiveCapacity(todaySessions);
 
-  const weeklyConsistency = await calculateWeeklyConsistency(userId);
+  const weeklyConsistency = await calculateWeeklyCompletionRate(userId);
 
   const weeklyProductivity = await getWeeklyProductivity(userId);
 

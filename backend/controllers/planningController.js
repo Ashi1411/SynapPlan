@@ -1,6 +1,7 @@
 const {
   getWeekDate,
   getWeekDays,
+  getTodayDay,
   calculateDayType,
   calculateDailyLoad,
   getTodaySessions,
@@ -17,6 +18,8 @@ async function getPlanner(req, res) {
 
   const days = getWeekDays(startOfWeek);
 
+  const todayDay = getTodayDay(days);
+
   const dayType = calculateDayType(todaySessions);
 
   const dailyLoad = calculateDailyLoad(todaySessions);
@@ -32,6 +35,7 @@ async function getPlanner(req, res) {
     startOfWeek,
     endOfWeek,
     days,
+    todayDay,
     dayType,
     dailyLoad,
     weeklySessions,

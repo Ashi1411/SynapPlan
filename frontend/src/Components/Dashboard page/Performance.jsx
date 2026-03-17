@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { getDashboard } from "../../api/auth";
 
 export default function Performance() {
-    const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
-    useState(() => {
-        async function fetchDetails() {
-            const res = await getDashboard();
-            setData(res.data);
-        }
+  useState(() => {
+    async function fetchDetails() {
+      const res = await getDashboard();
+      setData(res.data);
+    }
 
-        fetchDetails();
-    }, [])
-
+    fetchDetails();
+  }, []);
 
   return (
     <div style={{ background: "var(--card-color-2)" }}>
@@ -54,7 +53,7 @@ export default function Performance() {
             }}
             className="font-semibold text-center mt-8 mb-10"
           >
-            {data?.weeklyConsistency}% Consistency This Week
+            {data?.weeklyConsistency}% Average Completion Rate This Week
           </p>
 
           <h2
@@ -75,21 +74,27 @@ export default function Performance() {
             }}
             className="m-4 mb-40 rounded-2xl p-2"
           >
-            
             <div>
-                {data?.upcomingDeadlines?.map((elem, i) => {
-                    return(
-                        <div key={i}>
-                            <div style={{background: "var(--card-color-2)"}} className="m-2 p-2 rounded-2xl">
-                                <p className="font-semibold">{elem?.subjectName}</p>
-                                <p className="font-semibold">Exam Date: {new Date(elem?.examDate).toLocaleDateString()}</p>
-                                <p className="font-semibold">Priority: {elem?.priority}</p>
-                            </div>
-                        </div>
-                    )
-                })}
+              {data?.upcomingDeadlines?.map((elem, i) => {
+                return (
+                  <div key={i}>
+                    <div
+                      style={{ background: "var(--card-color-2)" }}
+                      className="m-2 p-2 rounded-2xl"
+                    >
+                      <p className="font-semibold">{elem?.subjectName}</p>
+                      <p className="font-semibold">
+                        Exam Date:{" "}
+                        {new Date(elem?.examDate).toLocaleDateString()}
+                      </p>
+                      <p className="font-semibold">
+                        Priority: {elem?.priority}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            
           </div>
         </div>
       </div>

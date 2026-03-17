@@ -44,7 +44,7 @@ async function getTodaySessions(userId) {
 }
 
 //! find weekly consistency
-async function calculateWeeklyConsistency(userId) {
+async function calculateWeeklyCompletionRate(userId) {
   const today = new Date();
   const startOfWeek = new Date(today);
 
@@ -241,7 +241,7 @@ module.exports = {
   calculateDayType,
   calculateCognitiveCapacity,
   getTodaySessions,
-  calculateWeeklyConsistency,
+  calculateWeeklyCompletionRate,
   getWeeklyProductivity,
   getUpcomingDeadlines,
   generateRecommendations

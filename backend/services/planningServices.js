@@ -1,7 +1,6 @@
 const Session = require("../models/session");
 const Subject = require("../models/subject");
 
-
 //! get the range of this week
 function getWeekDate() {
   const today = new Date();
@@ -28,18 +27,25 @@ function getWeekDays(startOfWeek) {
 
     days.push({
       date: d,
-      label: d.toLocaleDateString("en-IN", { weekday: "short" }),
+      label: d.toLocaleDateString("en-US", { weekday: "short" }),
     });
   }
 
   return days;
 }
 
+//! get today's day
+function getTodayDay(days) {
+  const today = new Date();
+  const day = today.getDay(); //? 0 (Sun) → 6 (Sat)
+  const idx = day === 0 ? 6 : day - 1;
+
+  return days[idx].label;
+}
+
 //! type of day today -> focus, normal/balanced, light
 function calculateDayType(todaySessions) {
-  const totalDuration = todaySessions.reduce((sum, s) => {
-    sum + s.duration;
-  }, 0);
+  const totalDuration = todaySessions.reduce((sum, s) => sum + s.duration, 0);
 
   if (totalDuration > 240) return "Focus Day";
   if (totalDuration > 120) return "Balanced Day";
@@ -48,6 +54,8 @@ function calculateDayType(todaySessions) {
 
 //! find daily load
 function calculateDailyLoad(todaySession) {
+  if (!todaySession.length) return 0;
+
   const planned = todaySession.reduce((sum, s) => sum + s.duration, 0);
 
   const dailyCapacity = 360;
@@ -68,7 +76,7 @@ async function getTodaySessions(userId) {
     date: { $gte: today, $lt: tomorrow },
   })
     .populate("subjectId", "subjectName intensity")
-    .select("topics duration durationCompleted status subjectId intensity");
+    .select("topics duration durationCompleted status subjectId intensity date");
 }
 
 //! get weekly planner
@@ -78,9 +86,9 @@ async function getWeeklySessions(userId, startOfWeek, endOfWeek) {
     date: { $gte: startOfWeek, $lte: endOfWeek },
   })
     .populate("subjectId", "subjectName intensity")
-    .select("topics duration durationCompleted status subjectId intensity");
+    .select("topics duration durationCompleted status subjectId intensity date");
 
-  const week = {
+  const weeklySessions = {
     Mon: [],
     Tue: [],
     Wed: [],
@@ -91,18 +99,21 @@ async function getWeeklySessions(userId, startOfWeek, endOfWeek) {
   };
 
   sessions.forEach((s) => {
-    const day = new Date(s.date).toLocaleDateString("en-IN", {
+    const day = new Date(s.date).toLocaleDateString("en-US", {
       weekday: "short",
     });
-    week[day].push(s);
+    if (weeklySessions[day]) {
+      weeklySessions[day].push(s);
+    }
   });
 
-  return week;
+  return weeklySessions;
 }
 
 module.exports = {
   getWeekDate,
   getWeekDays,
+  getTodayDay,
   calculateDayType,
   calculateDailyLoad,
   getTodaySessions,
