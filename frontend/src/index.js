@@ -11,6 +11,7 @@ import Signup from "./Pages/Signup";
 import Dashboard from "./Pages/Dashboard";
 import ProtectedRoutes from "./Components/ProtectedRoutes";
 import Planner from "./Pages/Planner";
+import Analytics from "./Pages/Analytics";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -52,6 +53,14 @@ let allRoutes = createBrowserRouter([
       </ProtectedRoutes>
     ),
   },
+  {
+    path: "/analytics",
+    element: (
+      <ProtectedRoutes>
+        <Analytics></Analytics>
+      </ProtectedRoutes>
+    )
+  }
 ]);
 
 root.render(

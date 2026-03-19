@@ -5,6 +5,7 @@ const {handleUserSignup, handleUserLogin, handleGetCurrentUser} = require("../co
 const {getDashboard} = require("../controllers/dashboardController");
 const { checkForAuthentication } = require("../middlewares/auth");
 const { getPlanner } = require("../controllers/planningController");
+const { getAnalytics } = require("../controllers/analyticsController");
 
 //! Create a new user
 router.post("/signup", handleUserSignup);
@@ -21,5 +22,7 @@ router.get("/dashboard", checkForAuthentication, getDashboard);
 //! planner page
 router.get("/planner", checkForAuthentication, getPlanner);
 
+//! analytics page
+router.get("/analytics", checkForAuthentication, getAnalytics);
 
 module.exports = router;

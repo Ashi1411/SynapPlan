@@ -48,7 +48,7 @@ export default function Sidebar() {
             </li>
             <li>
               {" "}
-              <Link to={"/"}> Analytics </Link>{" "}
+              <Link to={"/analytics"}> Analytics </Link>{" "}
             </li>
             <li>
               {" "}

@@ -212,3 +212,18 @@ html{
   width: 3rem;
 }
 
+
+/*? productivity graph on analytics page */
+.activeBtn {
+  background-color: var(--day-bar-background);
+  color: var(--sidebar-link-color);
+}
+
+.nonActiveBtn{
+  background-color: var(--card-color-2);
+  color: var(--navbar-link-color);
+}
+
+
+
+

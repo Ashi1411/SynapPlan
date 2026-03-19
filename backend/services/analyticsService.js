@@ -22,10 +22,10 @@ async function getWeeklySession(userId) {
   return weeklySessions;
 }
 
-//! get total study hours
+//! get total study hours of current week
 function getTotalStudyHours(weeklySessions) {
-  const planned = 0;
-  const durationCompleted = 0;
+  let planned = 0;
+  let durationCompleted = 0;
 
   weeklySessions.forEach((s) => {
     planned += s.duration;
@@ -58,9 +58,9 @@ function weeklyConsistencyScore(weeklySessions) {
 
 //! get focus efficiency
 function getFocusEfficiency(weeklySessions) {
-  const planned = 0;
-  const durationCompleted = 0;
-  const breakDuration = 0;
+  let planned = 0;
+  let durationCompleted = 0;
+  let breakDuration = 0;
 
   weeklySessions.forEach((s) => {
     planned += s.duration;
@@ -153,7 +153,7 @@ async function getWeeklyFocusEfficiency(userId) {
 }
 
 //! get monthly productivity (study) day by day for weekly productivity graph
-async function getWeeklyStudyTime(userId) {
+async function getMonthlyStudyTime(userId) {
   const today = new Date();
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
@@ -181,7 +181,7 @@ async function getWeeklyStudyTime(userId) {
 }
 
 //! find weekly productivity (focus efficiency) day by day for weekly productivity graph
-async function getWeeklyFocusEfficiency(userId) {
+async function getMonthlyFocusEfficiency(userId) {
   const today = new Date();
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
@@ -241,7 +241,7 @@ async function getInsights(userId) {
     return total === 0 ? 0 : s.durationCompleted / total;
   };
 
-  const avg = (arr) => 
+  const avg = (arr) =>
     arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
 
   const getTimeSlot = (hour) => {
@@ -254,9 +254,8 @@ async function getInsights(userId) {
     morning: [],
     afternoon: [],
     evening: [],
-    night: []
+    night: [],
   };
-
 
   const shortSessions = [];
   const longSessions = [];
@@ -277,7 +276,7 @@ async function getInsights(userId) {
 
     //? to analyze efficiency of each session of each subject
     if (s.subject) {
-      if (!subjectMap[s.subject]) subjectMap[s.subject] = []
+      if (!subjectMap[s.subject]) subjectMap[s.subject] = [];
       subjectMap[s.subject].push(eff);
     }
 
@@ -285,85 +284,146 @@ async function getInsights(userId) {
 
     if (!dailyStudy[day]) dailyStudy[day] = 0;
     dailyStudy[day] += s.durationCompleted;
+  });
 
-    const avgMorning = avg(timeBuckets.morning);
-    const avgAfternoon = avg(timeBuckets.afternoon);
-    const avgEvening = avg(timeBuckets.evening);
-    const avgNight = avg(timeBuckets.night);
+  //todo time based events -> in which time productivity is good
+  const avgMorning = avg(timeBuckets.morning);
+  const avgAfternoon = avg(timeBuckets.afternoon);
+  const avgEvening = avg(timeBuckets.evening);
+  const avgNight = avg(timeBuckets.night);
 
-    const timeAvg = {
-      morning: avgMorning,
-      afternoon: avgAfternoon,
-      evening: avgEvening,
-      night: avgNight
-    };
+  const timeAvg = {
+    morning: avgMorning,
+    afternoon: avgAfternoon,
+    evening: avgEvening,
+    night: avgNight,
+  };
 
-    const entries = Object.entries(timeAvg);
+  const entries = Object.entries(timeAvg);
 
-// filter out zero values (no data)
-const valid = entries.filter(([_, val]) => val > 0);
+  // filter out zero values (no data)
+  const valid = entries.filter(([_, val]) => val > 0);
 
-if (valid.length >= 2) {
-  // sort by efficiency
-  valid.sort((a, b) => b[1] - a[1]);
+  if (valid.length >= 2) {
+    // sort by efficiency
+    valid.sort((a, b) => b[1] - a[1]);
 
-  const [bestTime, bestVal] = valid[0];
-  const [worstTime, worstVal] = valid[valid.length - 1];
+    const [bestTime, bestVal] = valid[0];
+    const [worstTime, worstVal] = valid[valid.length - 1];
 
-  const diff = ((bestVal - worstVal) / worstVal) * 100;
+    const diff = ((bestVal - worstVal) / worstVal) * 100;
 
-  insights.push(
-    `📈 You perform ${diff.toFixed(0)}% better in ${bestTime} sessions compared to ${worstTime}.`
-  );
+    insights.push(
+      `📈 You perform ${diff.toFixed(0)}% better in ${bestTime} sessions compared to ${worstTime}.`,
+    );
+  }
+
+  if (valid.length >= 2) {
+    const [bestTime, bestVal] = valid[0];
+
+    insights.push(
+      `🔥 Your peak productivity occurs during ${bestTime} sessions.`,
+    );
+  }
+
+  if (valid.length >= 2) {
+    const [worstTime] = valid[valid.length - 1];
+
+    insights.push(
+      `⚠️ Your efficiency is lowest during ${worstTime} sessions. Consider adjusting your schedule.`,
+    );
+  }
+
+  const values = valid.map((v) => v[1]);
+  const max = Math.max(...values);
+  const min = Math.min(...values);
+
+  if (max - min < 0.1) {
+    insights.push(
+      "⚖️ Your productivity is fairly consistent throughout the day.",
+    );
+  }
+
+  if (
+    avgNight > avgMorning &&
+    avgNight > avgAfternoon &&
+    avgNight > avgEvening
+  ) {
+    insights.push(
+      "🌙 You are most productive at night. Late hours suit your focus style.",
+    );
+  }
+
+  if (avgMorning > avgEvening && avgMorning > avgNight) {
+    insights.push(
+      "🌅 Morning sessions give you the best focus. Consider scheduling important tasks early.",
+    );
+  }
+
+  //todo session duration insights
+  if (avg(longSessions) < avg(shortSessions)) {
+    insights.push("⚠️ Productivity decreases after long sessions (>90 mins).");
+  }
+
+  //todo subject insights
+  Object.keys(subjectMap).forEach((subject) => {
+    if (avg(subjectMap[subject]) < 0.5) {
+      insights.push(`📚 ${subject} requires additional focus.`);
+    }
+  });
+
+  //todo consistency insights
+  const totalDays = Object.keys(dailyStudy).length;
+  const activeDays = Object.values(dailyStudy).filter((d) => d > 0).length;
+
+  const consistency = totalDays === 0 ? 0 : activeDays / totalDays;
+
+  if (consistency < 0.5) {
+    insights.push("📉 Your consistency is low.");
+  } else {
+    insights.push("🔥 Great consistency!");
+  }
+
+  //todo overload insights
+  const sortedDays = Object.entries(dailyStudy).sort();
+
+  let streak = 0;
+
+  for (let i = 0; i < sortedDays.length; i++) {
+    if (sortedDays[i][1] > 300) {
+      streak++;
+      if (streak >= 2) {
+        insights.push("⚠️ Productivity drops after consecutive heavy days.");
+        break;
+      }
+    } else {
+      streak = 0;
+    }
+  }
+
+  return {
+    insights,
+    stats: {
+      avgMorningEfficiency: avgMorning,
+      avgAfternoonEfficiency: avgAfternoon,
+      avgEveningEfficiency: avgEvening,
+      avgNightEfficiency: avgNight,
+      consistency,
+      avgShortSessionEfficiency: avg(shortSessions),
+      avgLongSessionEfficiency: avg(longSessions),
+    },
+  };
 }
 
-if (valid.length >= 2) {
-  const [bestTime, bestVal] = valid[0];
-
-  insights.push(
-    `🔥 Your peak productivity occurs during ${bestTime} sessions.`
-  );
-}
-
-if (valid.length >= 2) {
-  const [worstTime] = valid[valid.length - 1];
-
-  insights.push(
-    `⚠️ Your efficiency is lowest during ${worstTime} sessions. Consider adjusting your schedule.`
-  );
-}
-
-const values = valid.map(v => v[1]);
-const max = Math.max(...values);
-const min = Math.min(...values);
-
-if (max - min < 0.1) {
-  insights.push(
-    "⚖️ Your productivity is fairly consistent throughout the day."
-  );
-}
-
-if (avgNight > avgMorning && avgNight > avgAfternoon && avgNight > avgEvening) {
-  insights.push(
-    "🌙 You are most productive at night. Late hours suit your focus style."
-  );
-}
-
-if (avgMorning > avgEvening && avgMorning > avgNight) {
-  insights.push(
-    "🌅 Morning sessions give you the best focus. Consider scheduling important tasks early."
-  );
-}
-
-
-
-
-
-
-  })
-
-
-
-
-
-}
+module.exports = {
+  getWeeklySession,
+  getTotalStudyHours,
+  averageCompletionRate,
+  weeklyConsistencyScore,
+  getFocusEfficiency,
+  getWeeklyStudyTime,
+  getWeeklyFocusEfficiency,
+  getMonthlyStudyTime,
+  getMonthlyFocusEfficiency,
+  getInsights,
+};
