@@ -12,6 +12,7 @@ import Dashboard from "./Pages/Dashboard";
 import ProtectedRoutes from "./Components/ProtectedRoutes";
 import Planner from "./Pages/Planner";
 import Analytics from "./Pages/Analytics";
+import AddSubject from "./Pages/AddSubject";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -58,6 +59,14 @@ let allRoutes = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <Analytics></Analytics>
+      </ProtectedRoutes>
+    )
+  },
+  {
+    path: "/add-subject",
+    element: (
+      <ProtectedRoutes>
+        <AddSubject></AddSubject>
       </ProtectedRoutes>
     )
   }

@@ -35,28 +35,25 @@ export default function Sidebar() {
         >
           <ul className="flex flex-col items-center justify-center font-bold p-4">
             <li>
-              {" "}
-              <Link to={"/dashboard"}> Dashboard </Link>{" "}
+              <Link to={"/dashboard"}> Dashboard </Link>
             </li>
             <li>
-              {" "}
-              <Link to={"/planner"}> Planner </Link>{" "}
+              <Link to={"/planner"}> Planner </Link>
             </li>
             <li>
-              {" "}
-              <Link to={"/"}> Sessions </Link>{" "}
+              <Link to={"/"}> Sessions </Link>
             </li>
             <li>
-              {" "}
-              <Link to={"/analytics"}> Analytics </Link>{" "}
+              <Link to={"/add-subject"}> Add Subject </Link>
             </li>
             <li>
-              {" "}
-              <Link to={"/"}> Settings </Link>{" "}
+              <Link to={"/analytics"}> Analytics </Link>
             </li>
             <li>
-              {" "}
-              <Link to={"/"}> Logout </Link>{" "}
+              <Link to={"/"}> Settings </Link>
+            </li>
+            <li>
+              <Link to={"/"}> Logout </Link>
             </li>
           </ul>
         </nav>

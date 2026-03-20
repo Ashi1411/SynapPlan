@@ -11,6 +11,23 @@ async function createSubjectWithSessions(data, userId) {
     topics,
   } = data;
 
+  //? divide topics into days
+  //* get the topics seperately
+  function getTopics(topics) {
+  if (Array.isArray(topics)) return topics;
+
+  return topics
+    .split(",")
+    .map((t) => t.trim())
+    .filter((t) => t.length > 0)
+    .map((t) => ({
+      name: t,
+      completed: false,
+    }));
+}
+
+  const parsedTopics = getTopics(topics);
+
   //? Save subject in Subject collection
   const subject = await Subject.create({
     userId,
@@ -18,14 +35,18 @@ async function createSubjectWithSessions(data, userId) {
     examDate,
     priority,
     intensity,
-    topics,
+    topics: parsedTopics,
     dailyStudyHours,
   });
 
   const today = new Date();
   const exam = new Date(examDate);
 
-  const totalDays = Math.ceil(((exam - today) / 24) * 60 * 60 * 1000);
+  const totalDays = Math.ceil((exam - today) / (1000 * 60 * 60 * 24));
+
+  if (totalDays <= 0) {
+  throw new Error("Exam date must be in the future");
+}
 
   //? find the adjusted no. of hours on the basis of priority of subjects
   const getAdjustedHours = (base, priority, intensity) => {
@@ -42,25 +63,19 @@ async function createSubjectWithSessions(data, userId) {
 
   const adjustedHours = getAdjustedHours(dailyStudyHours, priority, intensity);
 
-  //? divide topics into days
-  //* get the topics seperately
-  function getTopics(topics) {
-    return topics
-      .split(",")
-      .map((t) => t.trim())
-      .filter((t) => t.length > 0);
-  }
 
   //* group the topics -> keep related topics together
   function groupTopics(topics, groupSize = 2) {
-    const groups = [];
+  const groups = [];
 
-    for (let i = 0; i < topics.length; i += groupSize) {
-        groups.push(topics.slice(i, i + groupSize));
-    }
-
-    return groups;
+  for (let i = 0; i < topics.length; i += groupSize) {
+    groups.push(
+      topics.slice(i, i + groupSize).map((t) => t.name)
+    );
   }
+
+  return groups;
+}
 
   //* assign the group of topics to each day from today to exam day
   function distributeTopicGroups(groups, totalDays) {
@@ -91,32 +106,43 @@ async function createSubjectWithSessions(data, userId) {
   }
 
 
-  function generateTopicPlan(topicString, totalDays) {
-    const topics = getTopics(topicString);
+  function generateTopicPlan(topicsArray, totalDays) {
+  const groups = groupTopics(topicsArray, 2);
 
-    const groups = groupTopics(topics, 2);
+  let plan = distributeTopicGroups(groups, totalDays);
 
-    let plan = distributeTopicGroups(groups, totalDays);
+  plan = addRevision(
+    plan,
+    topicsArray.map((t) => t.name)
+  );
 
-    plan = addRevision(plan, topics);
-
-    return plan;
-  }
+  return plan;
+}
 
 
   //? add the data to sessions collection
-  const topicPlan = generateTopicPlan(topics, totalDays);
+  const topicPlan = generateTopicPlan(parsedTopics, totalDays);
+
+  const sessions = [];
 
   for (let i = 0; i < totalDays; i++) {
+    const sessionDate = new Date(today);
+    sessionDate.setDate(today.getDate() + i);
+
     sessions.push({
         userId,
-        subjectId: createSubjectWithSessions._id,
+        subjectId: subject._id,
         date: sessionDate,
-        duration: adjustedhours * 60,
-        topic: topicPlan[i].join(", ");
-    })
+        duration: adjustedHours * 60,
+        topic: topicPlan[i].join(", ")
+    });
   }
 
+  await Session.insertMany(sessions);
 
+  return {subject, sessionsCount: sessions.length};
 
 }
+
+
+module.exports = {createSubjectWithSessions};

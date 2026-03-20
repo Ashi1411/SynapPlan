@@ -13,5 +13,5 @@ export const login = (data) => API.post("/login", data);
 export const getDashboard = () => API.get("/dashboard");
 export const getPlanner = () => API.get("/planner");
 export const getAnalytics = () => API.get("/analytics");
-
+export const addSubject = (data) => API.post("/add-subject", data);
 
