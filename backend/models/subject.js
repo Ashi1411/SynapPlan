@@ -38,7 +38,7 @@ const subjectSchema = new mongoose.Schema({
 
     intensity: {
         type: String,
-        enum: ["High", "Medium", "Light"],
+        enum: ["High", "Medium", "Low"],
         default: "Medium"
     },
 

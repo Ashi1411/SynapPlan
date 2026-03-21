@@ -58,7 +58,7 @@ function calculateDailyLoad(todaySession) {
 
   const planned = todaySession.reduce((sum, s) => sum + s.duration, 0);
 
-  const dailyCapacity = 360;
+  const dailyCapacity = 8 * 60; // 8 hours
 
   return Math.round((planned / dailyCapacity) * 100);
 }

@@ -39,9 +39,14 @@ export default function AddSubjectFrom() {
       !priority ||
       !intensity ||
       !dailyStudyHours ||
-      !topics
+      !topics.trim()
     ) {
       setError("All the fields are required");
+      return;
+    }
+
+    if (new Date(examDate) <= new Date()) {
+      setError("Exam date must be in future");
       return;
     }
 
@@ -86,6 +91,7 @@ export default function AddSubjectFrom() {
                 Subject Name
               </label>
               <input
+                value={formData.subjectName}
                 onChange={handleChange}
                 type="text"
                 name="subjectName"
@@ -105,6 +111,7 @@ export default function AddSubjectFrom() {
                 Exam Date
               </label>
               <input
+                value={formData.examDate}
                 onChange={handleChange}
                 type="date"
                 name="examDate"
@@ -124,6 +131,7 @@ export default function AddSubjectFrom() {
                 Priority
               </label>
               <select
+                value={formData.priority}
                 name="priority"
                 onChange={handleChange}
                 style={{ background: "var(--login-input-background)" }}
@@ -147,6 +155,7 @@ export default function AddSubjectFrom() {
                 Intensity
               </label>
               <select
+                value={formData.intensity}
                 name="intensity"
                 onChange={handleChange}
                 style={{ background: "var(--login-input-background)" }}
@@ -170,6 +179,7 @@ export default function AddSubjectFrom() {
                 Daily Study Hours
               </label>
               <input
+                value={formData.dailyStudyHours}
                 onChange={handleChange}
                 type="number"
                 name="dailyStudyHours"
@@ -189,6 +199,7 @@ export default function AddSubjectFrom() {
                 Topics List
               </label>
               <input
+                value={formData.topics}
                 onChange={handleChange}
                 type="text"
                 name="topics"

@@ -14,19 +14,24 @@ async function createSubjectWithSessions(data, userId) {
   //? divide topics into days
   //* get the topics seperately
   function getTopics(topics) {
-  if (Array.isArray(topics)) return topics;
+    if (Array.isArray(topics)) return topics;
 
-  return topics
-    .split(",")
-    .map((t) => t.trim())
-    .filter((t) => t.length > 0)
-    .map((t) => ({
-      name: t,
-      completed: false,
-    }));
-}
+    return topics
+      .split(",")
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0)
+      .map((t) => ({
+        name: t,
+        completed: false,
+      }));
+  }
 
   const parsedTopics = getTopics(topics);
+
+  //! check for some errors
+  if (!parsedTopics.length) {
+    throw new Error("Topics are required");
+  }
 
   //? Save subject in Subject collection
   const subject = await Subject.create({
@@ -40,13 +45,20 @@ async function createSubjectWithSessions(data, userId) {
   });
 
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const exam = new Date(examDate);
+  exam.setHours(0, 0, 0, 0);
+
+  //! check for some errors
+  if (!examDate || isNaN(exam.getTime())) {
+    throw new Error("Invalid exam date");
+  }
 
   const totalDays = Math.ceil((exam - today) / (1000 * 60 * 60 * 24));
 
   if (totalDays <= 0) {
-  throw new Error("Exam date must be in the future");
-}
+    throw new Error("Exam date must be in the future");
+  }
 
   //? find the adjusted no. of hours on the basis of priority of subjects
   const getAdjustedHours = (base, priority, intensity) => {
@@ -61,21 +73,19 @@ async function createSubjectWithSessions(data, userId) {
     return Math.max(1, Math.round(base * factor));
   };
 
-  const adjustedHours = getAdjustedHours(dailyStudyHours, priority, intensity);
-
+  const baseHours = Number(dailyStudyHours);
+  const adjustedHours = getAdjustedHours(baseHours, priority, intensity);
 
   //* group the topics -> keep related topics together
   function groupTopics(topics, groupSize = 2) {
-  const groups = [];
+    const groups = [];
 
-  for (let i = 0; i < topics.length; i += groupSize) {
-    groups.push(
-      topics.slice(i, i + groupSize).map((t) => t.name)
-    );
+    for (let i = 0; i < topics.length; i += groupSize) {
+      groups.push(topics.slice(i, i + groupSize).map((t) => t.name));
+    }
+
+    return groups;
   }
-
-  return groups;
-}
 
   //* assign the group of topics to each day from today to exam day
   function distributeTopicGroups(groups, totalDays) {
@@ -84,11 +94,11 @@ async function createSubjectWithSessions(data, userId) {
     let groupIndex = 0;
 
     for (let i = 0; i < totalDays; i++) {
-        plan.push(groups[groupIndex]);
+      plan.push(groups[groupIndex]);
 
-        if (groupIndex < groups.length - 1) {
-            groupIndex++;
-        }
+      if (groupIndex < groups.length - 1) {
+        groupIndex++;
+      }
     }
 
     return plan;
@@ -99,26 +109,24 @@ async function createSubjectWithSessions(data, userId) {
     const revisionStart = Math.floor(plan.length * 0.8);
 
     for (let i = revisionStart; i < plan.length; i++) {
-        plan[i] = ["Revision", ...topics];
+      plan[i] = ["Revision", ...topics];
     }
 
     return plan;
   }
 
-
   function generateTopicPlan(topicsArray, totalDays) {
-  const groups = groupTopics(topicsArray, 2);
+    const groups = groupTopics(topicsArray, 2);
 
-  let plan = distributeTopicGroups(groups, totalDays);
+    let plan = distributeTopicGroups(groups, totalDays);
 
-  plan = addRevision(
-    plan,
-    topicsArray.map((t) => t.name)
-  );
+    plan = addRevision(
+      plan,
+      topicsArray.map((t) => t.name),
+    );
 
-  return plan;
-}
-
+    return plan;
+  }
 
   //? add the data to sessions collection
   const topicPlan = generateTopicPlan(parsedTopics, totalDays);
@@ -130,19 +138,22 @@ async function createSubjectWithSessions(data, userId) {
     sessionDate.setDate(today.getDate() + i);
 
     sessions.push({
-        userId,
-        subjectId: subject._id,
-        date: sessionDate,
-        duration: adjustedHours * 60,
-        topic: topicPlan[i].join(", ")
+      userId,
+      subjectId: subject._id,
+      date: sessionDate,
+      duration: adjustedHours * 60,
+      topics: topicPlan[i],
+      durationCompleted: 0,
+      breakDuration: 0,
+      breakCount: 0,
+      completed: false,
+      status: "pending",
     });
   }
 
   await Session.insertMany(sessions);
 
-  return {subject, sessionsCount: sessions.length};
-
+  return { subject, sessionsCount: sessions.length };
 }
 
-
-module.exports = {createSubjectWithSessions};
+module.exports = { createSubjectWithSessions };
