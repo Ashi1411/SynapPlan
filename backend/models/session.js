@@ -45,12 +45,14 @@ const sessionSchema = new mongoose.Schema({
         default: false
     },
 
+    breakStartTime: Date,
+    
     startTime: Date,
     endTime: Date,
 
     status: {
         type: String,
-        enum: ["pending", "active", "completed", "missed"],
+        enum: ["pending", "active", "completed", "missed", "break"],
         default: "pending"
     }
     
