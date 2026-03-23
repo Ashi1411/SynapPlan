@@ -15,3 +15,25 @@ export const getPlanner = () => API.get("/planner");
 export const getAnalytics = () => API.get("/analytics");
 export const addSubject = (data) => API.post("/add-subject", data);
 
+//! session page
+//? todays session + default session
+export const getTodaySessions = () => API.get("/session/today")
+
+//? start session
+export const startSession = (id) => API.put(`/session/start/${id}`);
+
+//? pause session
+export const pauseSession = (id) => API.put(`/session/pause/${id}`);
+
+//? start break
+export const startBreak = (id) => API.put(`/session/start-break/${id}`);
+
+//? end break
+export const endBreak = (id) => API.put(`/session/end-break/${id}`);
+
+//? complete session
+export const completeSession = (id) => API.put(`/session/complete/${id}`);
+
+//? get single session (for times)
+export const getSession = (id) => API.get(`/session/${id}`);
+

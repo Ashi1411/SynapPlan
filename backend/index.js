@@ -18,6 +18,7 @@ const cors = require("cors");
 
 //! routes import
 const userRoute = require("./routes/user");
+const sessionRoutes = require("./routes/sessionRoutes");
 
 //! port details
 const app = express();
@@ -49,6 +50,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", userRoute);
+app.use("/api/session", sessionRoutes);
 
 
 
