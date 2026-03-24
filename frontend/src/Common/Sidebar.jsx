@@ -41,7 +41,7 @@ export default function Sidebar() {
               <Link to={"/planner"}> Planner </Link>
             </li>
             <li>
-              <Link to={"/"}> Sessions </Link>
+              <Link to={"/session"}> Sessions </Link>
             </li>
             <li>
               <Link to={"/add-subject"}> Add Subject </Link>

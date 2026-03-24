@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("../middlewares/auth");
+// const {checkForAuthentication} = require("../middlewares/auth");
 
 const {
   getTodaySessionsController,
@@ -14,11 +14,11 @@ const {
 } = require("../controllers/sessionController");
 
 //todo middlewares
-router.use(auth);
+// router.use(checkForAuthentication);
 
 //todo routes
 //! get todays session
-router.get("/today", getTodaySessionsController);
+router.get("/", getTodaySessionsController);
 
 //! start session
 router.get("/start/:id", startSessionController);

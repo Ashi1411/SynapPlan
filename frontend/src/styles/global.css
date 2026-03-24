@@ -47,6 +47,8 @@ html{
     /*todo planner page */
     --day-bar-color: #EAF4FF;
 
+    /*todo session page */
+    --timer-font-color: #BFF4FF;
 
 
 
@@ -98,6 +100,9 @@ html{
     --date-bar-size: 18px;
     --day-bar-size: 18px;
     --today-details-size: 16px;
+
+    /*todo session page */
+    --timer-font-size: 52px;
 
     /*? background */
     /*todo home page */

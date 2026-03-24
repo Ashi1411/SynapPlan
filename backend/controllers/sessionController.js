@@ -17,11 +17,14 @@ async function getTodaySessionsController(req, res) {
     const sessions = await getPendingSession(userId);
     const defaultSess = defaultSession(sessions);
 
+    console.log("FINAL RESPONSE:", { sessions, defaultSess });
+
     res.json({
       sessions,
       defaultSession: defaultSess,
     });
   } catch (err) {
+    console.error("ERROR:", err.message);
     res.status(400).json({ message: err.message });
   }
 }

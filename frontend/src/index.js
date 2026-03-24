@@ -13,6 +13,7 @@ import ProtectedRoutes from "./Components/ProtectedRoutes";
 import Planner from "./Pages/Planner";
 import Analytics from "./Pages/Analytics";
 import AddSubject from "./Pages/AddSubject";
+import SessionsPage from "./Pages/SessionsPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -67,6 +68,14 @@ let allRoutes = createBrowserRouter([
     element: (
       <ProtectedRoutes>
         <AddSubject></AddSubject>
+      </ProtectedRoutes>
+    )
+  },
+  {
+    path: "/session/:id?",
+    element: (
+      <ProtectedRoutes>
+        <SessionsPage></SessionsPage>
       </ProtectedRoutes>
     )
   }

@@ -17,7 +17,7 @@ export const addSubject = (data) => API.post("/add-subject", data);
 
 //! session page
 //? todays session + default session
-export const getTodaySessions = () => API.get("/session/today")
+export const getTodaySessions = () => API.get("/session")
 
 //? start session
 export const startSession = (id) => API.put(`/session/start/${id}`);

@@ -3,7 +3,7 @@ import AfterLoginNavbar from '../Common/AfterLoginNavbar'
 import Sidebar from '../Common/Sidebar'
 import FocusTimer from '../Components/Sessions Page/FocusTimer'
 
-export default function Sessions() {
+export default function SessionsPage() {
   return (
     <div>
         <AfterLoginNavbar></AfterLoginNavbar>

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getPlanner } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function PlannerCard() {
+  const navigate = useNavigate();
+  
   const [data, setData] = useState(null);
   const [day, setDay] = useState(null);
 
@@ -169,6 +172,7 @@ export default function PlannerCard() {
                 </div>
 
                 <button
+                onClick={() => navigate(`/session/${elem._id._id || elem._id}`)}
                 style={{
                   fontSize: "var(--dashboard-today-plan-button-size)",
                   color: "var(--hero-button-color)",
@@ -176,6 +180,8 @@ export default function PlannerCard() {
                 }}
                 className="px-10 py-1 rounded-2xl m-2 font-bold"
               >
+                {console.log(elem._id)}
+                {console.log(typeof elem._id)}
                 Start Session
               </button>
               </div>

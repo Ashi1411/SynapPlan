@@ -13,7 +13,11 @@ async function getPendingSession(userId) {
     userId,
     date: { $gte: today, $lt: tomorrow },
     status: { $ne: "completed" },
-  }).sort({ date: 1 });
+  })
+  .populate("subjectId", "subjectName intensity")
+  .sort({ date: 1 });
+
+  console.log("SESSIONS FOUND:", sessions);
 
   return sessions;
 }
@@ -25,7 +29,11 @@ function defaultSession(remSessions) {
   const active = remSessions.find((s) => s.status === "active");
   const onBreak = remSessions.find((s) => s.status === "break");
 
-  return active || onBreak || remSessions.find((s) => s.status === "pending");
+  const result = active || onBreak || remSessions.find((s) => s.status === "pending");
+
+  console.log("DEFAULT SESSION:", result);
+
+  return result;
 }
 
 //todo start session
@@ -147,7 +155,7 @@ async function completeSession(sessionId, userId) {
 
 //todo get current session
 async function getSession(sessionId, userId) {
-  const session = await Session.findOne({ _id: sessionId, userId });
+  const session = await Session.findOne({ _id: sessionId, userId }).populate("subjectId", "subjectName intensity");
 
   if (!session) {
     throw new Error("Session not found");
