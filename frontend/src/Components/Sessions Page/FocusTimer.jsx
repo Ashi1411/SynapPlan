@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getTodaySessions } from "../../api/auth";
 import { startSession } from "../../api/auth";
 import { pauseSession } from "../../api/auth";
+import { startBreak } from "../../api/auth";
 import { endBreak } from "../../api/auth";
 import { completeSession } from "../../api/auth";
 import { getSession } from "../../api/auth";
@@ -14,6 +15,13 @@ export default function FocusTimer() {
   const [session, setSession] = useState(null);
   const [time, setTime] = useState(0);
   const [breakTime, setBreakTime] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const [baseTime, setBaseTime] = useState(0);
+  const [baseBreak, setBaseBreak] = useState(0);
+
+  const [isSessionRunning, setIsSessionRunning] = useState(false);
+  const [isBreakRunning, setIsBreakRunning] = useState(false);
 
 
   //! get correct session
@@ -46,6 +54,131 @@ export default function FocusTimer() {
 
     fetchSessions();
   }, [id]);
+
+  //! for setting the correct time even after reloading the page
+  useEffect(() => {
+    if (session) {
+      setBaseTime((session.durationCompleted || 0) * 60);
+      setBaseBreak((session.breakDuration || 0) * 60);
+    }
+  }, [session]);
+
+
+  //! timer logic
+  useEffect(() => {
+    if (!session) return;
+
+    const interval = setInterval(() => {
+      const now = new Date();
+
+      let currentTime = baseTime;
+      let currentBreak = baseBreak;
+
+      // 🟢 active session timer
+      if (isSessionRunning && session.startTime) {
+        const elapsed = Math.floor((now - new Date(session.startTime)) / 1000);
+        currentTime += elapsed;
+      }
+
+      // 🟡 break timer
+      if (isBreakRunning && session.breakStartTime) {
+        const elapsed = Math.floor((now - new Date(session.breakStartTime)) / 1000);
+        currentBreak += elapsed;
+      }
+
+      setTime(currentTime);
+      setBreakTime(currentBreak);
+
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [session, baseTime, baseBreak, isSessionRunning, isBreakRunning]);
+
+  //! complete session
+  useEffect(() => {
+    const complete = async () => {
+      if (session && time >= session.duration * 60 && session.status !== "completed" && !isCompleted) {
+        setIsCompleted(true);
+        try{
+          await completeSession(session._id);
+          alert("Session Completed!!");
+        }
+        catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    complete();
+  }, [time, session, isCompleted]);
+
+  //! formatting minutes in correct format
+  const formatTime = (seconds) => {
+    const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
+    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+    const sec = String(seconds % 60).padStart(2, "0");
+
+    return `${hrs}:${mins}:${sec}`;
+  }
+
+
+  //! handle buttons
+  //? start button
+  const handleStart = async () => {
+    if (!session) return;
+    const res = await startSession(session._id);
+    setBaseTime((res.data.durationCompleted || 0) * 60);
+    setSession(res.data);
+
+    setIsSessionRunning(true);
+    setIsBreakRunning(false);
+  }
+
+  //? pause button
+  const handlePause = async () => {
+    if (!session) return;
+    const res = await pauseSession(session._id);
+
+    setBaseTime((res.data.durationCompleted || 0) * 60);
+    setSession(res.data);
+
+    setIsSessionRunning(false);
+  }
+
+  //? handle start and end break
+  const handleBreakToggle = async () => {
+    if (!session) return;
+
+    let res;
+
+    if (session.status !== "break" && session.status !== "active") {
+      alert("No session is active");
+      return;
+    }
+
+    if (isBreakRunning) {
+      // end break now
+      res = await endBreak(session._id);
+      setBaseBreak((res.data.breakDuration || 0) * 60);
+
+      setSession(res.data);
+
+      setIsBreakRunning(false);
+      setIsSessionRunning(false);
+    }
+    else {
+      // start break now
+      res = await startBreak(session._id);
+
+      setBaseTime((res.data.durationCompleted || 0) * 60);
+      setSession(res.data);
+
+      setIsBreakRunning(true);
+      setIsSessionRunning(false);
+    }
+
+  }
+
 
   return (
     <div style={{ background: "var(--card-color-2)" }} className="mt-12 p-10">
@@ -104,13 +237,15 @@ export default function FocusTimer() {
             }}
             className="font-bold px-20 py-10"
           >
-            01:24:32
+            {formatTime(isBreakRunning ? breakTime : time)}
           </h1>
         </div>
 
           {/* buttons */}
         <div className="grid grid-cols-3 gap-10 mx-8">
           <button
+            onClick={handleStart}
+            disabled={isSessionRunning}
             style={{
               background: "var(--feature-icons-background)",
               color: "var(--timer-font-color)",
@@ -122,6 +257,8 @@ export default function FocusTimer() {
           </button>
 
           <button
+            onClick={handlePause}
+            disabled={!isSessionRunning}
             style={{
               background: "var(--feature-icons-background)",
               color: "var(--timer-font-color)",
@@ -133,6 +270,7 @@ export default function FocusTimer() {
           </button>
 
           <button
+            onClick={handleBreakToggle}
             style={{
               background: "var(--feature-icons-background)",
               color: "var(--timer-font-color)",
@@ -140,7 +278,7 @@ export default function FocusTimer() {
             }}
             className="px-8 py-1 rounded-3xl font-bold m-2"
           >
-            Break Time
+            {session?.status === "break" ? "End Break" : "Break Time"}
           </button>
         </div>
 
@@ -153,7 +291,7 @@ export default function FocusTimer() {
           }}
           className="font-semibold mb-6"
         >
-          Duration Completed: {session?.durationCompleted}
+          Duration Completed: {Math.floor(time / 60)} mins
         </p>
         <p
           style={{
@@ -162,7 +300,7 @@ export default function FocusTimer() {
           }}
           className="font-semibold mb-6"
         >
-          Break Duration: {session?.breakDuration}
+          Break Duration: {Math.floor(breakTime / 60)} mins
         </p>
         <p
           style={{
@@ -185,7 +323,7 @@ export default function FocusTimer() {
           }}
           className="font-bold p-10"
         >
-          Session Completed : 75%
+          Session Completed : {((time / 60) / session?.duration * 100).toFixed(1)}%
         </p>
       </div>
     </div>

@@ -1,6 +1,11 @@
 const Session = require("../models/session");
 const Subject = require("../models/subject");
 
+//! populate function -> to add the subject data also along with session data
+async function populateSession(session) {
+  return await session.populate("subjectId", "subjectName intensity");
+}
+
 //! get the user pending sessions
 async function getPendingSession(userId) {
   const today = new Date();
@@ -66,7 +71,7 @@ async function startSession(sessionId, userId) {
 
   await session.save();
 
-  return session;
+  return await populateSession(session);
 }
 
 //todo pause session
@@ -88,7 +93,7 @@ async function pauseSession(sessionId, userId) {
   session.status = "pending";
 
   await session.save();
-  return session;
+  return await populateSession(session);
 }
 
 //todo start break
@@ -108,7 +113,7 @@ async function startBreak(sessionId, userId) {
   session.breakStartTime = new Date();
 
   await session.save();
-  return session;
+  return await populateSession(session);
 }
 
 //todo end break
@@ -129,7 +134,7 @@ async function endBreak(sessionId, userId) {
   session.startTime = new Date();
 
   await session.save();
-  return session;
+  return await populateSession(session);
 }
 
 //todo complete session
@@ -150,7 +155,7 @@ async function completeSession(sessionId, userId) {
   session.status = "completed";
 
   await session.save();
-  return session;
+  return await populateSession(session);
 }
 
 //todo get current session

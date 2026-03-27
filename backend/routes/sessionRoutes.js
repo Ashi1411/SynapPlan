@@ -21,19 +21,19 @@ const {
 router.get("/", getTodaySessionsController);
 
 //! start session
-router.get("/start/:id", startSessionController);
+router.put("/start/:id", startSessionController);
 
 //! pause session
-router.get("/pause/:id", pauseSessionController);
+router.put("/pause/:id", pauseSessionController);
 
 //! start break
-router.get("/start-break/:id", startBreakController);
+router.put("/start-break/:id", startBreakController);
 
 //! end break
-router.get("/end-break/:id", endBreakController);
+router.put("/end-break/:id", endBreakController);
 
 //! complete session
-router.get("/complete/:id", completeSessionController);
+router.put("/complete/:id", completeSessionController);
 
 //! get session
 router.get("/:id", getSessionController);
