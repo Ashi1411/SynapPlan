@@ -7,6 +7,10 @@ const {
   endBreak,
   completeSession,
   getSession,
+  getCompletedSessions,
+  getCurrentSession,
+  getSessionEfficiency,
+  getEfficiencyLabel
 } = require("../services/sessionService");
 
 //! to get default session
@@ -113,6 +117,48 @@ async function getSessionController(req, res) {
   }
 }
 
+//! get today's completed sessions
+async function getTodayCompletedSession(req, res) {
+  try {
+    const userId = req.user._id;
+
+    const completedSession = await getCompletedSessions(userId);
+
+    console.log("Today's Completed Sessions:", completedSession);
+
+    res.json({
+      completedSession,
+    });
+  } catch (err) {
+    console.log("Error:", err.message);
+    res.status(400).json({ message: err.message });
+  }
+}
+
+//! get session efficiency
+async function calculateSessionEfficiency(req, res) {
+  try{
+    const userId = req.user._id;
+    const sessionId = req.params.id;
+
+    const currentSession = await getCurrentSession(userId, sessionId);
+
+    const efficiency = getSessionEfficiency(currentSession);
+
+    const efficiencyLabel = getEfficiencyLabel(efficiency);
+
+    res.json({
+      session: currentSession,
+      efficiency,
+      efficiencyLabel
+    })
+  }
+  catch (err) {
+    console.log("Error:", err.message);
+    res.status(400).json({ message: err.message });
+  }
+}
+
 module.exports = {
   getTodaySessionsController,
   startSessionController,
@@ -121,4 +167,6 @@ module.exports = {
   endBreakController,
   completeSessionController,
   getSessionController,
+  getTodayCompletedSession,
+  calculateSessionEfficiency
 };

@@ -23,7 +23,6 @@ export default function FocusTimer() {
   const [isSessionRunning, setIsSessionRunning] = useState(false);
   const [isBreakRunning, setIsBreakRunning] = useState(false);
 
-
   //! get correct session
   useEffect(() => {
     const fetchSessions = async () => {
@@ -63,7 +62,6 @@ export default function FocusTimer() {
     }
   }, [session]);
 
-
   //! timer logic
   useEffect(() => {
     if (!session) return;
@@ -82,13 +80,14 @@ export default function FocusTimer() {
 
       // 🟡 break timer
       if (isBreakRunning && session.breakStartTime) {
-        const elapsed = Math.floor((now - new Date(session.breakStartTime)) / 1000);
+        const elapsed = Math.floor(
+          (now - new Date(session.breakStartTime)) / 1000,
+        );
         currentBreak += elapsed;
       }
 
       setTime(currentTime);
       setBreakTime(currentBreak);
-
     }, 1000);
 
     return () => clearInterval(interval);
@@ -97,13 +96,16 @@ export default function FocusTimer() {
   //! complete session
   useEffect(() => {
     const complete = async () => {
-      if (session && time >= session.duration * 60 && session.status !== "completed" && !isCompleted) {
+      if (
+        session &&
+        time >= session.duration * 60 &&
+        !isCompleted
+      ) {
         setIsCompleted(true);
-        try{
+        try {
           await completeSession(session._id);
           alert("Session Completed!!");
-        }
-        catch (err) {
+        } catch (err) {
           console.error(err);
         }
       }
@@ -119,8 +121,7 @@ export default function FocusTimer() {
     const sec = String(seconds % 60).padStart(2, "0");
 
     return `${hrs}:${mins}:${sec}`;
-  }
-
+  };
 
   //! handle buttons
   //? start button
@@ -132,18 +133,24 @@ export default function FocusTimer() {
 
     setIsSessionRunning(true);
     setIsBreakRunning(false);
-  }
+  };
 
   //? pause button
   const handlePause = async () => {
     if (!session) return;
+
+    if (!isSessionRunning) {
+      alert("Start session first");
+      return;
+    }
+
     const res = await pauseSession(session._id);
 
     setBaseTime((res.data.durationCompleted || 0) * 60);
     setSession(res.data);
 
     setIsSessionRunning(false);
-  }
+  };
 
   //? handle start and end break
   const handleBreakToggle = async () => {
@@ -151,7 +158,7 @@ export default function FocusTimer() {
 
     let res;
 
-    if (session.status !== "break" && session.status !== "active") {
+    if (!isSessionRunning && !isBreakRunning) {
       alert("No session is active");
       return;
     }
@@ -165,8 +172,7 @@ export default function FocusTimer() {
 
       setIsBreakRunning(false);
       setIsSessionRunning(false);
-    }
-    else {
+    } else {
       // start break now
       res = await startBreak(session._id);
 
@@ -176,9 +182,7 @@ export default function FocusTimer() {
       setIsBreakRunning(true);
       setIsSessionRunning(false);
     }
-
-  }
-
+  };
 
   return (
     <div style={{ background: "var(--card-color-2)" }} className="mt-12 p-10">
@@ -196,7 +200,6 @@ export default function FocusTimer() {
         style={{ background: "var(--card-color-1)" }}
         className="text-center w-[55%] m-auto rounded-3xl"
       >
-
         {/* topics and heading */}
         <p
           style={{
@@ -225,7 +228,7 @@ export default function FocusTimer() {
           })}
         </div>
 
-          {/* timer card */}
+        {/* timer card */}
         <div
           style={{ background: "var(--feature-icons-background)" }}
           className="mx-20 mb-10 mt-5 rounded-3xl"
@@ -241,7 +244,7 @@ export default function FocusTimer() {
           </h1>
         </div>
 
-          {/* buttons */}
+        {/* buttons */}
         <div className="grid grid-cols-3 gap-10 mx-8">
           <button
             onClick={handleStart}
@@ -278,43 +281,43 @@ export default function FocusTimer() {
             }}
             className="px-8 py-1 rounded-3xl font-bold m-2"
           >
-            {session?.status === "break" ? "End Break" : "Break Time"}
+            {isBreakRunning ? "End Break" : "Break Time"}
           </button>
         </div>
 
-          {/* duration and break related text */}
+        {/* duration and break related text */}
         <div className="grid grid-cols-3">
-            <p
-          style={{
-            color: "var(--dashboard-hero-paragraph-color)",
-            fontSize: "var(--dashboard-hero-paragraph-size)",
-          }}
-          className="font-semibold mb-6"
-        >
-          Duration Completed: {Math.floor(time / 60)} mins
-        </p>
-        <p
-          style={{
-            color: "var(--dashboard-hero-paragraph-color)",
-            fontSize: "var(--dashboard-hero-paragraph-size)",
-          }}
-          className="font-semibold mb-6"
-        >
-          Break Duration: {Math.floor(breakTime / 60)} mins
-        </p>
-        <p
-          style={{
-            color: "var(--dashboard-hero-paragraph-color)",
-            fontSize: "var(--dashboard-hero-paragraph-size)",
-          }}
-          className="font-semibold mb-6"
-        >
-          Break Count: {session?.breakCount}
-        </p>
+          <p
+            style={{
+              color: "var(--dashboard-hero-paragraph-color)",
+              fontSize: "var(--dashboard-hero-paragraph-size)",
+            }}
+            className="font-semibold mb-6"
+          >
+            Duration Completed: {Math.floor(time / 60)} mins
+          </p>
+          <p
+            style={{
+              color: "var(--dashboard-hero-paragraph-color)",
+              fontSize: "var(--dashboard-hero-paragraph-size)",
+            }}
+            className="font-semibold mb-6"
+          >
+            Break Duration: {Math.floor(breakTime / 60)} mins
+          </p>
+          <p
+            style={{
+              color: "var(--dashboard-hero-paragraph-color)",
+              fontSize: "var(--dashboard-hero-paragraph-size)",
+            }}
+            className="font-semibold mb-6"
+          >
+            Break Count: {session?.breakCount}
+          </p>
         </div>
       </div>
 
-          {/* progress bar of current session */}
+      {/* progress bar of current session */}
       <div>
         <p
           style={{
@@ -323,7 +326,8 @@ export default function FocusTimer() {
           }}
           className="font-bold p-10"
         >
-          Session Completed : {((time / 60) / session?.duration * 100).toFixed(1)}%
+          Session Completed :{" "}
+          {((time / 60 / session?.duration) * 100).toFixed(1)}%
         </p>
       </div>
     </div>

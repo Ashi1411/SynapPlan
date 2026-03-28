@@ -19,8 +19,8 @@ async function getPendingSession(userId) {
     date: { $gte: today, $lt: tomorrow },
     status: { $ne: "completed" },
   })
-  .populate("subjectId", "subjectName intensity")
-  .sort({ date: 1 });
+    .populate("subjectId", "subjectName intensity")
+    .sort({ date: 1 });
 
   console.log("SESSIONS FOUND:", sessions);
 
@@ -34,7 +34,8 @@ function defaultSession(remSessions) {
   const active = remSessions.find((s) => s.status === "active");
   const onBreak = remSessions.find((s) => s.status === "break");
 
-  const result = active || onBreak || remSessions.find((s) => s.status === "pending");
+  const result =
+    active || onBreak || remSessions.find((s) => s.status === "pending");
 
   console.log("DEFAULT SESSION:", result);
 
@@ -130,8 +131,8 @@ async function endBreak(sessionId, userId) {
   session.breakCount += 1;
 
   session.breakStartTime = null;
-  session.status = "active";
-  session.startTime = new Date();
+  session.status = "pending";
+  session.startTime = null;
 
   await session.save();
   return await populateSession(session);
@@ -160,7 +161,10 @@ async function completeSession(sessionId, userId) {
 
 //todo get current session
 async function getSession(sessionId, userId) {
-  const session = await Session.findOne({ _id: sessionId, userId }).populate("subjectId", "subjectName intensity");
+  const session = await Session.findOne({ _id: sessionId, userId }).populate(
+    "subjectId",
+    "subjectName intensity",
+  );
 
   if (!session) {
     throw new Error("Session not found");
@@ -190,6 +194,69 @@ async function getSession(sessionId, userId) {
   };
 }
 
+//todo get today's completed sessions to display their details
+async function getCompletedSessions(userId) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+
+  const sessions = await Session.find({
+    userId,
+    date: { $gte: today, $lt: tomorrow },
+    status: "completed",
+  })
+    .populate("subjectId", "subjectName intensity")
+    .sort({ date: 1 });
+
+  console.log("Sessions Found:", sessions);
+
+  return sessions;
+}
+
+// todo get session by session_id
+async function getCurrentSession(userId, sessionId) {
+  const session = await Session.findOne({
+    _id: sessionId,
+    userId
+  })
+    .populate("subjectId", "subjectName intensity");
+
+  console.log("Sessions Found:", session);
+
+  return session;
+}
+
+//todo get session efficiency
+function getSessionEfficiency(session) {
+  const duration = session.durationCompleted;
+  const breakDuration = session.breakDuration;
+  const breakCount = session.breakCount;
+
+  if (duration === 0) return 0;
+
+  let efficiency = duration / (duration + breakDuration);
+
+  //? penalty for break count
+  efficiency *= (1 - breakCount * 0.05);
+
+  //? clamp the efficiency between 0 and 1
+  efficiency = Math.max(0, Math.min(1, efficiency));
+
+  return (efficiency * 100).toFixed(1);
+}
+
+//todo get session efficiency label
+function getEfficiencyLabel(efficiency) {
+  const value = efficiency / 100;
+
+  if (value >= 0.85) return "Excellent 🔥";
+  if (value >= 0.7) return "Good 👍";
+  if (value >= 0.5) return "Average 😐";
+  return "Poor ⚠️";
+}
+
 module.exports = {
   getPendingSession,
   defaultSession,
@@ -199,4 +266,8 @@ module.exports = {
   endBreak,
   completeSession,
   getSession,
+  getCompletedSessions,
+  getCurrentSession,
+  getSessionEfficiency,
+  getEfficiencyLabel
 };
