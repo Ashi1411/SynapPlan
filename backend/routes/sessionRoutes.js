@@ -37,14 +37,15 @@ router.put("/end-break/:id", endBreakController);
 //! complete session
 router.put("/complete/:id", completeSessionController);
 
-//! get session by id
-router.get("/:id", getSessionController);
-
 //! get todays session
 router.get("/completed", getTodayCompletedSession);
 
 //! get current session efficiency
 router.get("/efficiency/:id", calculateSessionEfficiency);
+
+//! get session by id
+//? they are placed at last because Dynamic routes (/:id) are greedy. They capture EVERYTHING unless placed last.
+router.get("/:id", getSessionController);
 
 
 module.exports = router;

@@ -13,6 +13,7 @@ async function getWeeklySession(userId) {
 
   const endOfWeek = new Date(startOfWeek);
   endOfWeek.setDate(startOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
 
   const weeklySessions = await Session.find({
     userId,

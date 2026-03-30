@@ -194,6 +194,7 @@ async function getSession(sessionId, userId) {
   };
 }
 
+//! session summary section
 //todo get today's completed sessions to display their details
 async function getCompletedSessions(userId) {
   const today = new Date();
@@ -256,6 +257,9 @@ function getEfficiencyLabel(efficiency) {
   if (value >= 0.5) return "Average 😐";
   return "Poor ⚠️";
 }
+
+
+
 
 module.exports = {
   getPendingSession,

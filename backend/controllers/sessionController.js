@@ -122,12 +122,12 @@ async function getTodayCompletedSession(req, res) {
   try {
     const userId = req.user._id;
 
-    const completedSession = await getCompletedSessions(userId);
+    const completedSessions = await getCompletedSessions(userId);
 
-    console.log("Today's Completed Sessions:", completedSession);
+    console.log("Today's Completed Sessions:", completedSessions);
 
     res.json({
-      completedSession,
+      completedSessions,
     });
   } catch (err) {
     console.log("Error:", err.message);

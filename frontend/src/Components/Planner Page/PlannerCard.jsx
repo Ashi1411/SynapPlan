@@ -180,8 +180,6 @@ export default function PlannerCard() {
                 }}
                 className="px-10 py-1 rounded-2xl m-2 font-bold"
               >
-                {console.log(elem._id)}
-                {console.log(typeof elem._id)}
                 Start Session
               </button>
               </div>

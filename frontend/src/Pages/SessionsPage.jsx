@@ -3,6 +3,7 @@ import AfterLoginNavbar from '../Common/AfterLoginNavbar'
 import Sidebar from '../Common/Sidebar'
 import FocusTimer from '../Components/Sessions Page/FocusTimer'
 import SessionDetail from '../Components/Sessions Page/SessionDetail'
+import WeeklySummary from '../Components/Sessions Page/WeeklySummary'
 
 export default function SessionsPage() {
   return (
@@ -14,6 +15,7 @@ export default function SessionsPage() {
             <div className='flex-1'>
                 <FocusTimer></FocusTimer>
                 <SessionDetail></SessionDetail>
+                <WeeklySummary></WeeklySummary>
             </div>
         </div>
     </div>

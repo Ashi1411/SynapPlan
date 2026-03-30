@@ -37,3 +37,12 @@ export const completeSession = (id) => API.put(`/session/complete/${id}`);
 //? get single session (for times)
 export const getSession = (id) => API.get(`/session/${id}`);
 
+//? get completed session summary
+export const getCompletedSessions = () => API.get("/session/completed");
+
+//? get efficiency of current completed session
+export const getSessionEfficiency = (id) => API.get(`/session/efficiency/${id}`);
+
+
+
+
