@@ -19,6 +19,7 @@ const cors = require("cors");
 //! routes import
 const userRoute = require("./routes/user");
 const sessionRoutes = require("./routes/sessionRoutes");
+const settingsRoutes = require("./routes/settingsRoutes");
 
 //! port details
 const app = express();
@@ -51,7 +52,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", userRoute);
 app.use("/api/session", sessionRoutes);
-
+app.use("/api/settings", settingsRoutes);
 
 
 app.listen(PORT, () => console.log(`Server started at PORT ${PORT}`));

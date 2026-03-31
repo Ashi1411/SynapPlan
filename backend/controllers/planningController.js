@@ -22,7 +22,7 @@ async function getPlanner(req, res) {
 
   const dayType = calculateDayType(todaySessions);
 
-  const dailyLoad = calculateDailyLoad(todaySessions);
+  const dailyLoad = await calculateDailyLoad(userId, todaySessions);
 
   const weeklySessions = await getWeeklySessions(
     userId,

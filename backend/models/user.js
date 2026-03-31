@@ -15,10 +15,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    maxStudyHoursPerDay: {
+        type: Number,
+        default: 8
+    },
+    interests: {
+        type: String,
+        default: ""
+    },
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
 }, 
 {timestamps: true});
 

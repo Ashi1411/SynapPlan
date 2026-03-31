@@ -43,6 +43,18 @@ export const getCompletedSessions = () => API.get("/session/completed");
 //? get efficiency of current completed session
 export const getSessionEfficiency = (id) => API.get(`/session/efficiency/${id}`);
 
+//! settings page
+//? get user details
+export const getUserDetails = () => API.get("settings/details");
+
+//? edit profile
+export const editProfile = (data) => API.put("/settings/edit", data);
+
+export const editStudyHours = (data) => API.put("/settings/study-hours", data);
+
+export const changePassword = (data) => API.put("/settings/change-password", data);
+
+export const deleteAccount = () => API.delete("/settings/delete-account");
 
 
 

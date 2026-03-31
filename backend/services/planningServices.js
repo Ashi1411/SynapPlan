@@ -1,5 +1,6 @@
 const Session = require("../models/session");
 const Subject = require("../models/subject");
+const User = require("../models/user");
 
 //! get the range of this week
 function getWeekDate() {
@@ -53,12 +54,12 @@ function calculateDayType(todaySessions) {
 }
 
 //! find daily load
-function calculateDailyLoad(todaySession) {
+async function calculateDailyLoad(userId, todaySession) {
   if (!todaySession.length) return 0;
 
   const planned = todaySession.reduce((sum, s) => sum + s.duration, 0);
-
-  const dailyCapacity = 8 * 60; // 8 hours
+  const user = await User.findOne({ _id: userId });
+  const dailyCapacity = user.maxStudyHoursPerDay * 60; // 8 hours
 
   return Math.round((planned / dailyCapacity) * 100);
 }
@@ -76,7 +77,9 @@ async function getTodaySessions(userId) {
     date: { $gte: today, $lt: tomorrow },
   })
     .populate("subjectId", "subjectName intensity")
-    .select("topics duration durationCompleted status subjectId intensity date");
+    .select(
+      "topics duration durationCompleted status subjectId intensity date",
+    );
 }
 
 //! get weekly planner
@@ -86,7 +89,9 @@ async function getWeeklySessions(userId, startOfWeek, endOfWeek) {
     date: { $gte: startOfWeek, $lte: endOfWeek },
   })
     .populate("subjectId", "subjectName intensity")
-    .select("topics duration durationCompleted status subjectId intensity date");
+    .select(
+      "topics duration durationCompleted status subjectId intensity date",
+    );
 
   const weeklySessions = {
     Mon: [],
