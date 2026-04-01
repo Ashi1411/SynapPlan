@@ -45,7 +45,7 @@ export const getSessionEfficiency = (id) => API.get(`/session/efficiency/${id}`)
 
 //! settings page
 //? get user details
-export const getUserDetails = () => API.get("settings/details");
+export const getUserDetails = () => API.get("/settings/details");
 
 //? edit profile
 export const editProfile = (data) => API.put("/settings/edit", data);
@@ -56,5 +56,5 @@ export const changePassword = (data) => API.put("/settings/change-password", dat
 
 export const deleteAccount = () => API.delete("/settings/delete-account");
 
-
+export const todayNotifications = () => API.get("settings/notifications");
 

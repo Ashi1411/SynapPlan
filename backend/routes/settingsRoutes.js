@@ -8,6 +8,7 @@ const {
   editStudyHoursController,
   changePasswordController,
   deleteAccountController,
+  getNotificationController
 } = require("../controllers/settingController");
 
 
@@ -27,6 +28,8 @@ router.put("/change-password", changePasswordController);
 //! delete account
 router.delete("/delete-account", deleteAccountController);
 
+//! today's notifications 
+router.get("notifications", getNotificationController);
 
 
 module.exports = router;

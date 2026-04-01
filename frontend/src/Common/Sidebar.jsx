@@ -50,7 +50,7 @@ export default function Sidebar() {
               <Link to={"/analytics"}> Analytics </Link>
             </li>
             <li>
-              <Link to={"/"}> Settings </Link>
+              <Link to={"/settings"}> Settings </Link>
             </li>
             <li>
               <Link to={"/"}> Logout </Link>

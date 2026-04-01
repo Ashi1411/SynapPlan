@@ -4,6 +4,7 @@ const {
   editStudyHours,
   changePassword,
   deleteAccount,
+  getTodayNotification
 } = require("../services/settingsService");
 
 //! get user details
@@ -81,12 +82,27 @@ async function deleteAccountController(req, res) {
   }
 }
 
+//! get today session notifications
+async function getNotificationController(req, res) {
+  try {
+    const userId = req.user._id;
+    
+    const notifications = await getTodayNotification(userId);
+
+    res.json(notifications);
+  }
+  catch (err) {
+    res.status(400).json({message: err.message});
+  }
+}
+
 module.exports = {
   getUserDetailsController,
   editProfileController,
   editStudyHoursController,
   changePasswordController,
   deleteAccountController,
+  getNotificationController
 };
 
 
