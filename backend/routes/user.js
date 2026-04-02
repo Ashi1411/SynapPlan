@@ -29,4 +29,11 @@ router.post("/add-subject", checkForAuthentication, addSubject);
 //! analytics page
 router.get("/analytics", checkForAuthentication, getAnalytics);
 
+//! logout code
+router.post("/logout", (req, res) => {
+  res.clearCookie("token"); // same cookie used in login
+
+  res.json({ message: "Logged out successfully" });
+});
+
 module.exports = router;

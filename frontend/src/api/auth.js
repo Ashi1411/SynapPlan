@@ -56,5 +56,8 @@ export const changePassword = (data) => API.put("/settings/change-password", dat
 
 export const deleteAccount = () => API.delete("/settings/delete-account");
 
-export const todayNotifications = () => API.get("settings/notifications");
+export const todayNotifications = () => API.get("/settings/notifications");
 
+
+//! logout 
+export const logout = () => API.post("/logout");

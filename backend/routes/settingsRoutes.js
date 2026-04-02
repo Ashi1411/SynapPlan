@@ -29,7 +29,7 @@ router.put("/change-password", changePasswordController);
 router.delete("/delete-account", deleteAccountController);
 
 //! today's notifications 
-router.get("notifications", getNotificationController);
+router.get("/notifications", getNotificationController);
 
 
 module.exports = router;

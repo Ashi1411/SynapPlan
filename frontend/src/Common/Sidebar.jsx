@@ -1,9 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css";
+import { logout } from "../api/auth";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   let [sidebar, toggleSidebar] = useState(true); //* true if sidebar is visible and false when it is collapsed.
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+
+      localStorage.clear();
+
+      navigate("/");
+    }
+    catch(err) {
+      console.log(err);
+      alert("Logout failed");
+    }
+  }
 
   return (
     // outer container (participates in flex layout) -> so that other components will get the remaining workspace
@@ -53,7 +69,7 @@ export default function Sidebar() {
               <Link to={"/settings"}> Settings </Link>
             </li>
             <li>
-              <Link to={"/"}> Logout </Link>
+              <Link to={"/logout"} onClick={handleLogout}> Logout </Link>
             </li>
           </ul>
         </nav>

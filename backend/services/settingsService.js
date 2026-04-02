@@ -79,8 +79,8 @@ async function changePassword(userId, data) {
     throw new Error("new password and confirm password are not same");
   }
 
-  if (newPassword.length < 8) {
-    throw new Error("Password must be at least 8 characters");
+  if (newPassword.length < 6) {
+    throw new Error("Password must be at least  characters");
   }
 
   const user = await User.findById(userId);
@@ -102,36 +102,17 @@ async function changePassword(userId, data) {
 //! delete user account
 //! delete account with all related data (transactional)
 async function deleteAccount(userId) {
-  const session = await mongoose.startSession();
-  session.startTransaction();
+  const user = await User.findById(userId);
 
-  try {
-    // ✅ check if user exists
-    const user = await User.findById(userId).session(session);
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    // ✅ delete related sessions
-    await Session.deleteMany({ userId }).session(session);
-
-    // ✅ delete related subjects
-    await Subject.deleteMany({ userId }).session(session);
-
-    // ✅ delete user
-    await User.findByIdAndDelete(userId).session(session);
-
-    // ✅ commit transaction
-    await session.commitTransaction();
-    session.endSession();
-
-    return { message: "Account and all related data deleted successfully" };
-  } catch (err) {
-    // ❌ rollback everything if error occurs
-    await session.abortTransaction();
-    session.endSession();
-    throw err;
+  if (!user) {
+    throw new Error("User not found");
   }
+
+  await Session.deleteMany({ userId });
+  await Subject.deleteMany({ userId });
+  await User.findByIdAndDelete(userId);
+
+  return { message: "Account deleted successfully" };
 }
 
 //! get today's session notifications
@@ -141,6 +122,7 @@ async function getTodayNotification(userId) {
   today.setHours(0, 0, 0, 0);
 
   const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
 
   const sessions = await Session.find({
     userId,

@@ -1,7 +1,287 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import {
+  getUserDetails,
+  editStudyHours,
+  changePassword,
+  deleteAccount,
+} from "../../api/auth";
 
 export default function SecurityComponent() {
+  const [isEditingHours, setIsEditingHours] = useState(false);
+  const [maxHours, setMaxHours] = useState(0);
+  const [formData, setFormData] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
+
+  //! for getting max study hours
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getUserDetails();
+
+      setMaxHours(res.data.maxStudyHoursPerDay);
+    };
+
+    fetchData();
+  }, []);
+
+  //! handle save hours
+  const handleSaveHours = async () => {
+    try {
+      const res = await editStudyHours({
+        maxStudyHours: maxHours,
+      });
+
+      setMaxHours(res.data.user.maxStudyHoursPerDay);
+      setIsEditingHours(false);
+    } catch (err) {
+      alert(err.response?.data?.message);
+    }
+  };
+
+  //! handle change
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  //! handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("Password change button clicked");
+
+    const { password, confirmPassword } = formData;
+
+    //? required fields
+    if (!password || !confirmPassword) {
+      setError("All the fields are required");
+      return;
+    }
+
+    //? password match
+    if (password !== confirmPassword) {
+      setError("Password and Confirm Password are not same");
+      return;
+    }
+
+    //? password length
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    try {
+      const res = await changePassword({
+        newPassword: password,
+        confirmPassword: confirmPassword,
+      });
+
+      console.log(res.data);
+      alert("Password changed successfully");
+      setFormData({
+        password: "",
+        confirmPassword: "",
+      });
+      setError("");
+    } catch (err) {
+      console.log(err);
+      setError(err.response?.data?.message || "Signup Failed");
+    }
+  };
+
+  //! delete account
+  const handleDeleteAccount = async () => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete your account?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await deleteAccount();
+
+    alert("Account deleted successfully");
+
+    window.location.href = "/login"; // redirect
+  } catch (err) {
+    alert(err.response?.data?.message);
+  }
+};
+
   return (
-    <div>Security</div>
-  )
+    <div style={{ background: "var(--card-color-1)" }} className="p-10">
+      <h1
+        style={{
+          color: "var(--hero-paragraph-color)",
+          fontSize: "var(--section-heading-size)",
+        }}
+        className="text-center p-4 font-bold"
+      >
+        STUDY PREFERENCES AND SECURITY
+      </h1>
+
+      <div className="grid grid-cols-[40%_60%]">
+        {/* content */}
+        <div className="mx-10">
+          <div className="my-4">
+            <h2
+              style={{
+                color: "var(--dashboard-hero-heading-color)",
+                fontSize: "var(--dashboard-hero-subheading-size)",
+              }}
+              className="font-bold"
+            >
+              Max Study Hours Per Day (hours)
+            </h2>
+            <div className="grid grid-cols-[70%_30%] gap-10">
+              <div className="grid grid-cols-[70%_30%] gap-4 items-center">
+                {isEditingHours ? (
+                  <input
+                    type="number"
+                    value={maxHours}
+                    onChange={(e) => setMaxHours(Number(e.target.value))}
+                    className="p-2 border rounded"
+                    style={{
+                      color: "var(--dashboard-hero-paragraph-color)",
+                      fontSize: "var(--dashboard-hero-paragraph-size)",
+                      background: "var(--card-color-2)",
+                    }}
+                  />
+                ) : (
+                  <p
+                    style={{
+                      color: "var(--dashboard-hero-paragraph-color)",
+                      fontSize: "var(--dashboard-hero-paragraph-size)",
+                    }}
+                    className="font-semibold"
+                  >
+                    {maxHours} hrs
+                  </p>
+                )}
+
+                {!isEditingHours ? (
+                  <button
+                    onClick={() => setIsEditingHours(true)}
+                    className="px-4 py-1 rounded-2xl font-bold my-1"
+                    style={{
+                      background: "var(--login-button-background)",
+                      color: "var(--login-button-text-color)",
+                    }}
+                  >
+                    Edit
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSaveHours}
+                    className="px-4 py-1 rounded-2xl font-bold my-1"
+                    style={{
+                      background: "var(--login-button-background)",
+                      color: "var(--login-button-text-color)",
+                    }}
+                  >
+                    Save
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="my-4">
+            <h2
+              style={{
+                color: "var(--dashboard-hero-heading-color)",
+                fontSize: "var(--dashboard-hero-subheading-size)",
+              }}
+              className="font-bold"
+            >
+              Change Password
+            </h2>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              style={{
+                color: "var(--dashboard-hero-paragraph-color)",
+                fontSize: "var(--dashboard-hero-paragraph-size)",
+                background: "var(--card-color-2)",
+              }}
+              className="font-semibold w-full"
+            ></input>
+          </div>
+
+          <div className="my-4">
+            <h2
+              style={{
+                color: "var(--dashboard-hero-heading-color)",
+                fontSize: "var(--dashboard-hero-subheading-size)",
+              }}
+              className="font-bold"
+            >
+              Confirm Changed Password
+            </h2>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              style={{
+                color: "var(--dashboard-hero-paragraph-color)",
+                fontSize: "var(--dashboard-hero-paragraph-size)",
+                background: "var(--card-color-2)",
+              }}
+              className="font-semibold w-full"
+            ></input>
+          </div>
+
+          {/* displaying the error mssg */}
+          {
+            <p
+              style={{
+                fontSize: "var(--login-text-size)",
+              }}
+              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
+            >
+              {error}
+            </p>
+          }
+
+          <div className="my-6 text-center">
+            <button
+              onClick={handleSubmit}
+              style={{
+                background: "var(--login-button-background)",
+                color: "var(--login-button-text-color)",
+                fontSize: "var(--dashboard-today-plan-button-size)",
+              }}
+              className="px-10 py-2 rounded-3xl font-bold"
+            >
+              Change Password
+            </button>
+          </div>
+
+          <div className="my-6 text-center">
+            <button
+              onClick={handleDeleteAccount}
+              style={{
+                background: "var(--login-button-background)",
+                color: "var(--login-button-text-color)",
+                fontSize: "var(--dashboard-today-plan-button-size)",
+              }}
+              className="px-10 py-2 rounded-3xl font-bold"
+            >
+              Delete Account
+            </button>
+          </div>
+        </div>
+
+        {/* image */}
+        <div></div>
+      </div>
+    </div>
+  );
 }
