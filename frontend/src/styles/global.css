@@ -13,6 +13,7 @@ html{
     --width-of-section : 80%;
 
     /*? colors */
+    --navbar-logo-color: #1E3A5F;
     --navbar-background-color : #8DBEE1;
     --navbar-link-color : #1E3A5F;
     --hero-heading-color : #1E3A5F;
@@ -53,56 +54,60 @@ html{
 
 
     /*? size */
-    --navbar-link-size : 20px;
-    --hero-section-heading : 42px;
-    --hero-section-subheading : 16px;
-    --hero-section-paragraph : 20px;
-    --hero-section-button : 24px;
-    --home-page-heading : 18px;
-    --home-page-paragraph : 14px;
+    --navbar-logo-size: 1.625rem;      /* 26px */
+    --navbar-link-size: 1.25rem;       /* 20px */
 
-    --section-subheading-size : 14px;
-    --section-heading-size : 36px;
-    --section-paragraph-size : 18px;
+    --hero-section-heading: 2.625rem;  /* 42px */
+    --hero-section-subheading: 1rem;   /* 16px */
+    --hero-section-paragraph: 1.25rem; /* 20px */
+    --hero-section-button: 1.5rem;     /* 24px */
 
-    --how-it-works-number-size : 30px;
-    --how-it-works-subheading-size : 18px;
-    --how-it-works-paragraph-size : 16px;
+    --home-page-heading: 1.125rem;     /* 18px */
+    --home-page-paragraph: 1rem;   /* 14px */
 
-    --faq-question-size : 18px;
-    --faq-answer-size : 16px;
-    
-    --footer-icons-size : 30px;
-    --footer-heading : 18px;
-    --footer-paragraph : 16px;
+    --section-subheading-size: 1rem; /* 14px */
+    --section-heading-size: 2.25rem;     /* 36px */
+    --section-paragraph-size: 1.125rem;  /* 18px */
 
-    --feature-heading-size : 18px;
-    --feature-paragraph-size  : 16px;
+    --how-it-works-number-size: 1.875rem;   /* 30px */
+    --how-it-works-subheading-size: 1.125rem; /* 18px */
+    --how-it-works-paragraph-size: 1rem;      /* 16px */
+
+    --faq-question-size: 1.125rem; /* 18px */
+    --faq-answer-size: 1rem;       /* 16px */
+
+    --footer-icons-size: 1.875rem; /* 30px */
+    --footer-heading: 1.125rem;    /* 18px */
+    --footer-paragraph: 1rem;      /* 16px */
+
+    --feature-heading-size: 1.125rem; /* 18px */
+    --feature-paragraph-size: 1rem;   /* 16px */
 
     /*todo login page */
-    --login-heading-size : 36px;
-    --login-subheading-size: 16px;
-    --login-text-size: 18px;
-    --login-button-text-size: 24px;
+    --login-heading-size: 2.25rem;     /* 36px */
+    --login-subheading-size: 1rem;     /* 16px */
+    --login-text-size: 1.125rem;       /* 18px */
+    --login-button-text-size: 1.5rem;  /* 24px */
 
     /*todo sidebar */
-    --sidebar-link-size: 24px;
+    --sidebar-link-size: 1.5rem; /* 24px */
 
     /*todo dashboard page */
-    --dashboard-hero-heading-size: 42px;
-    --dashboard-hero-subheading-size: 20px;
-    --dashboard-hero-paragraph-size: 18px;
-    --dashboard-battery-percent-size: 24px;
-    --dashboard-today-plan-button-size: 20px;
-    --dashboard-feature-subheading-size: 26px;
+    --dashboard-hero-heading-size: 2.625rem; /* 42px */
+    --dashboard-hero-subheading-size: 1.25rem; /* 20px */
+    --dashboard-hero-paragraph-size: 1.125rem; /* 18px */
+    --dashboard-battery-percent-size: 1.5rem;  /* 24px */
+    --dashboard-today-plan-button-size: 1.25rem; /* 20px */
+    --dashboard-feature-subheading-size: 1.625rem; /* 26px */
 
     /*todo planner page */
-    --date-bar-size: 18px;
-    --day-bar-size: 18px;
-    --today-details-size: 16px;
+    --date-bar-size: 1.125rem; /* 18px */
+    --day-bar-size: 1.125rem;  /* 18px */
+    --today-details-size: 1rem; /* 16px */
 
     /*todo session page */
-    --timer-font-size: 52px;
+    --timer-font-size: 3.25rem; /* 52px */
+
 
     /*? background */
     /*todo home page */
@@ -228,6 +233,29 @@ html{
   background-color: var(--card-color-2);
   color: var(--navbar-link-color);
 }
+
+
+/*todo responsive layout */
+html {
+  font-size: 14px; /* mobile (minimum) */
+}
+
+@media (min-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+
+
+
+
 
 
 
