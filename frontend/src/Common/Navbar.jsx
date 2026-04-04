@@ -81,10 +81,14 @@ export default function Navbar() {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white z-50 shadow-lg transform transition-transform duration-300 
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+        style={{backgroundColor: "var(--navbar-background-color)"}}
+        className={`fixed top-0 right-0 h-full w-64 bg-white z-50 shadow-lg transform transition-transform duration-300 
+        ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="p-6 flex flex-col gap-6">
+        <div style={{
+            color: "var(--navbar-link-color)",
+            fontSize: "var(--navbar-link-size)",
+          }} className="p-6 flex flex-col gap-6 font-bold">
 
           {/* Close Button */}
           <button

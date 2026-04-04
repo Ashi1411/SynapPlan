@@ -1,13 +1,15 @@
 import React from "react";
+import solution_section from "../../images/home_page_solution_section.png";
+
 
 export default function Solution() {
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-[60%_40%]">
       {/* card part */}
-      <div className="grid grid-cols-2 grid-rows-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 order-2 md:order-1">
         <div
           style={{ background: "var(--card-color-1)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh]"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
         >
           <h1
             style={{ fontSize: "var(--home-page-heading)" }}
@@ -26,7 +28,7 @@ export default function Solution() {
 
         <div
           style={{ background: "var(--card-color-2)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh]"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-2"
         >
           <h1
             style={{ fontSize: "var(--home-page-heading)" }}
@@ -45,7 +47,7 @@ export default function Solution() {
 
         <div
           style={{ background: "var(--card-color-2)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh]"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-4 md:order-3"
         >
           <h1
             style={{ fontSize: "var(--home-page-heading)" }}
@@ -64,7 +66,7 @@ export default function Solution() {
 
         <div
           style={{ background: "var(--card-color-1)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh]"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-3 md:order-4"
         >
           <h1
             style={{ fontSize: "var(--home-page-heading)" }}
@@ -83,7 +85,11 @@ export default function Solution() {
       </div>
 
       {/* image part */}
-      <div className="flex flex-col justify-center  p-10">
+      <div style={{
+              backgroundImage: `url(${solution_section})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center"}} className="flex flex-col justify-center p-6 md:p-10 order-1 md:order-2 min-h-[50vh]">
         <p
           style={{
             color: "var(--section-subheading-color)",

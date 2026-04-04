@@ -170,12 +170,22 @@ html{
 .hero-btn {
   background: var(--hero-section-button-background);
   background-size: 200% 100%;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
 }
 
 .hero-btn:hover {
   background: var(--hero-section-hover-button-background);
   background-position: right;
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  -webkit-transform: translateY(-2px) scale(1.03);
+  -moz-transform: translateY(-2px) scale(1.03);
+  -ms-transform: translateY(-2px) scale(1.03);
+  -o-transform: translateY(-2px) scale(1.03);
 }
 
 .activeAns{
