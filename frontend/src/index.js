@@ -15,6 +15,7 @@ import Analytics from "./Pages/Analytics";
 import AddSubject from "./Pages/AddSubject";
 import SessionsPage from "./Pages/SessionsPage";
 import Settings from "./Pages/Settings";
+import Demo from "./Pages/Demo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -31,6 +32,10 @@ let allRoutes = createBrowserRouter([
   {
     path: "/howitworks",
     element: <HowItWorks></HowItWorks>,
+  },
+  {
+    path: "/demo",
+    element: <Demo></Demo>,
   },
   {
     path: "/login",

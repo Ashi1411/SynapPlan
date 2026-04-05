@@ -63,25 +63,25 @@ html{
     --hero-section-button: 1.5rem;     /* 24px */
 
     --home-page-heading: 1.125rem;     /* 18px */
-    --home-page-paragraph: 1rem;   /* 14px */
+    --home-page-paragraph: 1.125rem;   /* 18px */
 
-    --section-subheading-size: 1rem; /* 14px */
+    --section-subheading-size: 1rem; /* 16px */
     --section-heading-size: 2.25rem;     /* 36px */
     --section-paragraph-size: 1.125rem;  /* 18px */
 
     --how-it-works-number-size: 1.875rem;   /* 30px */
     --how-it-works-subheading-size: 1.125rem; /* 18px */
-    --how-it-works-paragraph-size: 1rem;      /* 16px */
+    --how-it-works-paragraph-size: 1.125rem;      /* 16px */
 
     --faq-question-size: 1.125rem; /* 18px */
-    --faq-answer-size: 1rem;       /* 16px */
+    --faq-answer-size: 1.125rem;       /* 16px */
 
     --footer-icons-size: 1.875rem; /* 30px */
     --footer-heading: 1.125rem;    /* 18px */
-    --footer-paragraph: 1rem;      /* 16px */
+    --footer-paragraph: 1.125rem;      /* 16px */
 
     --feature-heading-size: 1.125rem; /* 18px */
-    --feature-paragraph-size: 1rem;   /* 16px */
+    --feature-paragraph-size: 1.125rem;   /* 16px */
 
     /*todo login page */
     --login-heading-size: 2.25rem;     /* 36px */

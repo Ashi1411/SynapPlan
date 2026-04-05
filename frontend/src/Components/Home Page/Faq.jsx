@@ -14,19 +14,19 @@ export default function Faq() {
   return (
     <div
       style={{ background: "var(--faq-section-color)" }}
-      className="flex flex-col justify-center items-center p-16 pb-40"
+      className="flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 py-12 md:py-20"
     >
       <h1
         style={{
           color: "var(--section-heading-color)",
           fontSize: "var(--section-heading-size)",
         }}
-        className="font-bold"
+        className="font-bold text-center"
       >
         Frequently Asked Questions
       </h1>
 
-      <div className="w-[90%]">{ques}</div>
+      <div className="w-full mt-8">{ques}</div>
     </div>
   );
 }
@@ -35,14 +35,14 @@ export function FaqItems({ details }) {
   let { items, currentFaq, setCurrentFaq } = details;
 
   return (
-    <div className="p-4">
+    <div className="mb-4">
       <h2
         style={{
           background: "var(--faq-question-background)",
           fontSize: "var(--faq-question-size)",
           color: "var(--faq-question-color)",
         }}
-        className="p-2 font-semibold"
+        className="p-3 sm:p-4 font-semibold rounded-lg cursor-pointer"
         onClick={() => setCurrentFaq(items.id)}
       >
         {items.question}

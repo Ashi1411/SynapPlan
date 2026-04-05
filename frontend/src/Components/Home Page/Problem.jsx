@@ -1,18 +1,19 @@
 import React from "react";
-import problem_section from "../../images/home_page_problem_section.png";
+import problem_section from "../../images/home page/home_page_problem_section.png";
 
 export default function Problem() {
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-[40%_60%]"
-    >
+    <div className="grid grid-cols-1 md:grid-cols-[40%_60%]">
       {/* image part */}
-      <div style={{
-        backgroundImage: `url(${problem_section})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center"
-      }} className="flex flex-col justify-center p-6 md:p-10 min-h-[50vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+      <div
+        style={{
+          backgroundImage: `url(${problem_section})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+        className="flex flex-col justify-center p-6 md:p-10 min-h-[50vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+      >
         <p
           style={{
             color: "var(--section-subheading-color)",
@@ -36,7 +37,7 @@ export default function Problem() {
             color: "var(--section-paragraph-color)",
             fontSize: "var(--section-paragraph-size)",
           }}
-          className="font-semibold text-left"
+          className="font-bold text-left"
         >
           Real learning isn't linear. Your planner should understand that.
         </p>
@@ -49,14 +50,20 @@ export default function Problem() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Rigid Schedules
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Fixed study plans don't match your real energy levels.
           </p>
@@ -67,14 +74,20 @@ export default function Problem() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-2"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Burnout Ignored
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Most planners push harder when you actually need rest.
           </p>
@@ -85,14 +98,20 @@ export default function Problem() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-4 md:order-3"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Missed Tasks Pile Up
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Skipping one session shouldn't destroy your whole plan.
           </p>
@@ -103,14 +122,20 @@ export default function Problem() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-3 md:order-4"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             No Personalization
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Generic schedules ignore how you actually learn best.
           </p>

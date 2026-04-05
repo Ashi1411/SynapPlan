@@ -54,7 +54,7 @@ export default function Navbar() {
             </li>
             <li>
               {" "}
-              <Link to={"/"} className="inline-block transition duration-200 hover:font-bold hover:scale-105"> Demo </Link>{" "}
+              <Link to={"/demo"} className="inline-block transition duration-200 hover:font-bold hover:scale-105"> Demo </Link>{" "}
             </li>
             <li>
               {" "}

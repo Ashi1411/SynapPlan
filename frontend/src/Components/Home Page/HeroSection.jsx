@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/global.css";
-import hero_section from "../../images/home_page_hero_section.png";
+import hero_section from "../../images/home page/home_page_hero_section.png";
+import { Link } from "react-router-dom";
 
 export default function HeroSection() {
   return (
@@ -48,24 +49,29 @@ export default function HeroSection() {
         </p>
 
         <div className="flex gap-10 m-10">
-          <button
-            style={{
-              fontSize: "var(--hero-section-button)",
-              color: "var(--hero-button-color)",
-            }}
-            className="px-5 py-1 rounded-2xl hero-btn font-semibold"
-          >
-            Try Demo
-          </button>
-          <button
-            style={{
-              fontSize: "var(--hero-section-button)",
-              color: "var(--hero-button-color)",
-            }}
-            className="px-5 py-1 rounded-2xl hero-btn font-semibold"
-          >
-            Get Started
-          </button>
+          <Link to="/demo">
+            <button
+              style={{
+                fontSize: "var(--hero-section-button)",
+                color: "var(--hero-button-color)",
+              }}
+              className="px-5 py-1 rounded-2xl hero-btn font-semibold"
+            >
+              Try Demo
+            </button>
+          </Link>
+
+          <Link to="/signup">
+            <button
+              style={{
+                fontSize: "var(--hero-section-button)",
+                color: "var(--hero-button-color)",
+              }}
+              className="px-5 py-1 rounded-2xl hero-btn font-semibold"
+            >
+              Get Started
+            </button>
+          </Link>
         </div>
       </div>
     </div>

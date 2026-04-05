@@ -1,20 +1,32 @@
 import React from "react";
+import image1 from "../../images/home page/home_page_how_it_works_1.png";
+import image2 from "../../images/home page/home_page_how_it_works_2.png";
+import image3 from "../../images/home page/home_page_how_it_works_3.png";
+import image4 from "../../images/home page/home_page_how_it_works_4.png";
 
 export default function HowItWorks() {
   return (
-    <div style={{backgroundColor : "var(--how-it-works-color)"}}>
+    <div style={{ backgroundColor: "var(--how-it-works-color)" }}>
       <h1
         style={{
           color: "var(--section-heading-color)",
           fontSize: "var(--section-heading-size)",
         }}
-        className="pt-20 p-14 flex flex-col justify-center items-center font-bold"
+        className="pt-16 px-4 md:px-10 text-center flex flex-col justify-center items-center font-bold"
       >
         How It Works?
       </h1>
-      <div className="grid grid-cols-4 w-[95%] g-4 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-10">
         {/* card - 1 */}
-        <div className="flex flex-col items-center bg-cyan-100 m-4 h-[350px] mb-40">
+        <div
+          style={{
+            backgroundImage: `url(${image1})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+          className="flex flex-col items-center bg-cyan-100 min-h-[250px] md:min-h-[300px] my-10"
+        >
           {/* number icon */}
           <div
             style={{
@@ -43,7 +55,7 @@ export default function HowItWorks() {
                 color: "var(--section-paragraph-color)",
                 fontSize: "var(--how-it-works-paragraph-size)",
               }}
-              className="text-center font-semibold"
+              className="text-center font-bold"
             >
               Add subjects, exam dates, and study availability.
             </p>
@@ -51,7 +63,15 @@ export default function HowItWorks() {
         </div>
 
         {/* card - 2 */}
-        <div className="flex flex-col items-center bg-cyan-100 m-4 h-[350px] mb-40">
+        <div
+          style={{
+            backgroundImage: `url(${image2})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+          className="flex flex-col items-center bg-cyan-100 min-h-[250px] md:min-h-[300px] my-10"
+        >
           {/* number icon */}
           <div
             style={{
@@ -80,7 +100,7 @@ export default function HowItWorks() {
                 color: "var(--section-paragraph-color)",
                 fontSize: "var(--how-it-works-paragraph-size)",
               }}
-              className="text-center font-semibold"
+              className="text-center font-bold"
             >
               Use focus mode while studying and your activity is recorded.
             </p>
@@ -88,7 +108,15 @@ export default function HowItWorks() {
         </div>
 
         {/* card - 3 */}
-        <div className="flex flex-col items-center bg-cyan-100 m-4 h-[350px] mb-40">
+        <div
+          style={{
+            backgroundImage: `url(${image3})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+          className="flex flex-col items-center bg-cyan-100 min-h-[250px] md:min-h-[300px] my-10"
+        >
           {/* number icon */}
           <div
             style={{
@@ -117,7 +145,7 @@ export default function HowItWorks() {
                 color: "var(--section-paragraph-color)",
                 fontSize: "var(--how-it-works-paragraph-size)",
               }}
-              className="text-center font-semibold"
+              className="text-center font-bold"
             >
               Productivity trends and fatigue levels are evaluated.
             </p>
@@ -125,7 +153,15 @@ export default function HowItWorks() {
         </div>
 
         {/* card - 4 */}
-        <div className="flex flex-col items-center bg-cyan-100 m-4 h-[350px] mb-40">
+        <div
+          style={{
+            backgroundImage: `url(${image4})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+          className="flex flex-col items-center bg-cyan-100 min-h-[250px] md:min-h-[300px] my-10"
+        >
           {/* number icon */}
           <div
             style={{
@@ -154,7 +190,7 @@ export default function HowItWorks() {
                 color: "var(--section-paragraph-color)",
                 fontSize: "var(--how-it-works-paragraph-size)",
               }}
-              className="text-center font-semibold"
+              className="text-center font-bold"
             >
               Your planner adjusts automatically for the next day.
             </p>

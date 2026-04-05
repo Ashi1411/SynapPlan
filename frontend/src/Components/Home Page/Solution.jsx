@@ -1,6 +1,5 @@
 import React from "react";
-import solution_section from "../../images/home_page_solution_section.png";
-
+import solution_section from "../../images/home page/home_page_solution_section.png";
 
 export default function Solution() {
   return (
@@ -12,14 +11,20 @@ export default function Solution() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Adaptive Planning
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Your schedule adjusts automatically based on your real performance
             and consistency.
@@ -31,14 +36,20 @@ export default function Solution() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-2"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Burnout Prevention
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             The system detects productivity drops and suggests lighter days
             before burnout hits.
@@ -50,14 +61,20 @@ export default function Solution() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-4 md:order-3"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Task Recovery
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Instead of piling tasks, your planner redistributes workload
             intelligently.
@@ -69,14 +86,20 @@ export default function Solution() {
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-3 md:order-4"
         >
           <h1
-            style={{ fontSize: "var(--home-page-heading)" }}
+            style={{
+              fontSize: "var(--home-page-heading)",
+              color: "var(--section-subheading-color)",
+            }}
             className="font-bold"
           >
             Personalized System
           </h1>
           <p
-            style={{ fontSize: "var(--home-page-paragraph)" }}
-            className="my-auto font-semibold"
+            style={{
+              fontSize: "var(--home-page-paragraph)",
+              color: "var(--section-paragraph-color)",
+            }}
+            className="my-auto font-bold"
           >
             Every recommendation adapts to your habits, energy levels, and
             learning patterns.
@@ -85,11 +108,15 @@ export default function Solution() {
       </div>
 
       {/* image part */}
-      <div style={{
-              backgroundImage: `url(${solution_section})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center"}} className="flex flex-col justify-center p-6 md:p-10 order-1 md:order-2 min-h-[50vh]">
+      <div
+        style={{
+          backgroundImage: `url(${solution_section})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+        className="flex flex-col justify-center p-6 md:p-10 order-1 md:order-2 min-h-[50vh]"
+      >
         <p
           style={{
             color: "var(--section-subheading-color)",
@@ -113,7 +140,7 @@ export default function Solution() {
             color: "var(--section-paragraph-color)",
             fontSize: "var(--section-paragraph-size)",
           }}
-          className="font-semibold text-right"
+          className="font-bold text-right"
         >
           Our adaptive system analyzes your study behavior, detects patterns,
           and continuously adjusts your schedule to match your productivity
