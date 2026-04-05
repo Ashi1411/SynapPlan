@@ -1,12 +1,23 @@
 import React from "react";
+import bio_rhythm from "../../images/feature page/bio_rhythm.png";
 
 export default function BioRhythm() {
   return (
-    <div className="grid grid-cols-2 h-[100vh]">
-      <div>{/* image */}</div>
+    <div className="grid grid-cols-1 md:grid-cols-2 h-[180vh] md:h-[90vh]">
+      {/* image */}
+      <div style={{
+                backgroundImage: `url(${bio_rhythm})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+              }}
+              className="flex flex-col justify-center p-6 md:p-10 min-h-[90vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)]"></div>
 
       {/* content */}
-      <div style={{background : "var(--card-color-1)"}} className="flex flex-col justify-center p-20">
+      <div
+        style={{ background: "var(--card-color-1)" }}
+        className="flex flex-col justify-center p-20 h-[90vh]"
+      >
         <h1
           style={{
             color: "var(--section-heading-color)",

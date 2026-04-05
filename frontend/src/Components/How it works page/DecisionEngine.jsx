@@ -4,7 +4,7 @@ export default function DecisionEngine() {
   return (
     <div
       style={{ background: "var(--design-engine-background" }}
-      className="p-10 px-40"
+      className="py-8 md:py-10 px-4 sm:px-8 md:px-16 lg:px-24"
     >
       <h1
         style={{
@@ -21,13 +21,13 @@ export default function DecisionEngine() {
           fontSize: "var(--section-paragraph-size)",
           color: "var(--hero-subheading-color)",
         }}
-        className="text-center font-semibold"
+        className="text-center font-semibold mb-10"
       >
         Every recommendation is generated through structured decision logic
         based on your real performance and study behavior.
       </p>
 
-      <div className="grid grid-cols-2 gap-14 mb-40 p-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-12 mb-20 md:mb-40 px-2 sm:px-4 md:px-10">
         {/* card - 1 */}
         <div
           style={{ background: "var(--decision-engine-heading)" }}
@@ -203,7 +203,7 @@ export default function DecisionEngine() {
               }}
               className="p-4 font-semibold"
             >
-              ------------- find this -------
+              System increases task complexity gradually.
             </p>
           </div>
         </div>

@@ -1,12 +1,13 @@
 import React from "react";
+import context_aware from "../../images/feature page/context_aware.png";
 
 export default function ContextAwarePlanning() {
   return (
-    <div className="grid grid-cols-2 h-[100vh]">
+    <div className="grid grid-cols-1 md:grid-cols-2 h-[180vh] md:h-[90vh]">
       {/* content */}
       <div
         style={{ background: "var(--card-color-2)" }}
-        className="flex flex-col justify-center p-20"
+        className="flex flex-col justify-center p-20 order-2 md:order-1 h-[90vh]"
       >
         <h1
           style={{
@@ -39,7 +40,14 @@ export default function ContextAwarePlanning() {
         </p>
       </div>
 
-      <div>{/* image */}</div>
+            {/* image */}
+            <div style={{
+                      backgroundImage: `url(${context_aware})`,
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                    }}
+                    className="flex flex-col justify-center p-6 md:p-10 min-h-[90vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"></div>
     </div>
   );
 }
