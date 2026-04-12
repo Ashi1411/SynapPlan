@@ -1,33 +1,32 @@
 import React, { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import loginImage from "../../images/login and signup pages/login_page_image.png";
 
-import {login} from "../../api/auth"
+import { login } from "../../api/auth";
 
 export default function LoginCard() {
   const navigate = useNavigate();
 
   let [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
-      ...formData, 
-      [e.target.name]: e.target.value
-    })
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login button clicked");
-    console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL) 
+    console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL);
 
-    const {email, password} = formData;
+    const { email, password } = formData;
 
     if (!email || !password) {
       setError("All the fields are required");
@@ -43,8 +42,7 @@ export default function LoginCard() {
       if (res.data.success) {
         navigate("/dashboard");
       }
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
       alert("Invalid email or password");
       navigate("/signup");
@@ -52,13 +50,16 @@ export default function LoginCard() {
   };
 
   return (
-    <div style={{ background: "var(--login-page)" }} className="h-[50vw] p-40">
+    <div
+      style={{ background: "var(--login-page)" }}
+      className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-10 flex items-center justify-center"
+    >
       <div
         style={{ background: "var(--login-page-card)" }}
-        className="p-10 px-20 rounded-3xl grid grid-cols-2 gap-10 flex flex-col items-center justify-center"
+        className="rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-10 md:mt-20 items-stretch"
       >
         {/* content */}
-        <div>
+        <div className="order-2 md:order-1 p-6 sm:p-8 md:p-10 lg:px-20">
           <h1
             style={{
               color: "var(--login-heading-color)",
@@ -94,7 +95,7 @@ export default function LoginCard() {
                 type="text"
                 name="email"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%] p-1"
+                className="w-full p-1"
               ></input>
             </div>
 
@@ -113,7 +114,7 @@ export default function LoginCard() {
                 type="password"
                 name="password"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%] p-1"
+                className="w-full p-1"
               ></input>
             </div>
 
@@ -135,22 +136,24 @@ export default function LoginCard() {
                   fontSize: "var(--login-button-text-size)",
                   background: "var(--login-button-background)",
                 }}
-                className="font-semibold p-1 px-10 rounded-2xl mt-14 mb-2"
+                className="font-semibold p-1 px-10 rounded-2xl mt-8 md:mt-12 mb-2"
               >
                 Log In
               </button>
             </div>
           </form>
-          
+
           {/* displaying the error mssg */}
-          {<p
-            style={{
-              fontSize: "var(--login-text-size)",
-            }}
-            className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
-          >
-            {error}
-          </p>}
+          {
+            <p
+              style={{
+                fontSize: "var(--login-text-size)",
+              }}
+              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
+            >
+              {error}
+            </p>
+          }
 
           <p
             style={{
@@ -164,7 +167,13 @@ export default function LoginCard() {
         </div>
 
         {/* image */}
-        <div></div>
+        <div className="md:h-full w-full overflow-hidden rounded-2xl order-1 md:order-2">
+          <img
+            src={loginImage}
+            alt="signup"
+            className="w-full h-full object-cover"
+          />
+        </div>
       </div>
     </div>
   );

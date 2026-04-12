@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import signupImage from "../../images/login and signup pages/signup_page_image.png";
 
-import {signup} from "../../api/auth";
+import { signup } from "../../api/auth";
 
 export default function SignupCard() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function SignupCard() {
     fullname: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [error, setError] = useState("");
@@ -18,20 +19,18 @@ export default function SignupCard() {
   const handleChange = (e) => {
     setFromData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
+      [e.target.name]: e.target.value,
+    });
   };
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log("Signup button clicked");
 
-    const {fullname, email, password, confirmPassword} = formData;
+    const { fullname, email, password, confirmPassword } = formData;
 
-    //? required fields 
+    //? required fields
     if (!fullname || !email || !password || !confirmPassword) {
       setError("All the fields are required");
       return;
@@ -49,10 +48,9 @@ export default function SignupCard() {
       return;
     }
 
-
     //? main logic
-    try{
-      const res = await signup({fullname, email, password});
+    try {
+      const res = await signup({ fullname, email, password });
 
       console.log(res.data);
       alert("Account Created Successfully");
@@ -60,26 +58,32 @@ export default function SignupCard() {
       if (res.data.success) {
         navigate("/dashboard");
       }
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
       setError(err.response?.data?.message || "Signup Failed");
     }
-  }
-
+  };
 
   return (
-    <div style={{ background: "var(--login-page)" }} className="h-[80vw] p-40">
+    <div
+      style={{ background: "var(--login-page)" }}
+      className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-8 md:py-10 flex items-center justify-center"
+    >
       <div
         style={{ background: "var(--login-page-card)" }}
-        className="p-10 px-20 rounded-3xl grid grid-cols-2 gap-10 flex flex-col items-center justify-center"
+        className="rounded-3xl grid grid-cols-1 md:grid-cols-2 mt-20 gap-8 md:gap-10 items-stretch overflow-hidden"
       >
-        
         {/* image */}
-        <div></div>
+        <div className=" md:h-full w-full overflow-hidden rounded-2xl">
+          <img
+            src={signupImage}
+            alt="signup"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
         {/* content */}
-        <div>
+        <div className="p-6 sm:p-8 md:p-10 lg:px-20">
           <h1
             style={{
               color: "var(--login-heading-color)",
@@ -115,7 +119,7 @@ export default function SignupCard() {
                 type="text"
                 name="fullname"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%]"
+                className="w-full p-1"
               ></input>
             </div>
 
@@ -134,7 +138,7 @@ export default function SignupCard() {
                 type="text"
                 name="email"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%]"
+                className="w-full p-1"
               ></input>
             </div>
 
@@ -153,7 +157,7 @@ export default function SignupCard() {
                 type="password"
                 name="password"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%]"
+                className="w-full p-1"
               ></input>
             </div>
 
@@ -172,7 +176,7 @@ export default function SignupCard() {
                 type="password"
                 name="confirmPassword"
                 style={{ background: "var(--login-input-background)" }}
-                className="w-[90%]"
+                className="w-full p-1"
               ></input>
             </div>
 
@@ -183,7 +187,7 @@ export default function SignupCard() {
                   fontSize: "var(--login-button-text-size)",
                   background: "var(--login-button-background)",
                 }}
-                className="font-semibold p-1 px-10 rounded-2xl mt-14 mb-2"
+                className="font-semibold p-1 px-10 rounded-2xl mt-8 md:mt-12 mb-2"
               >
                 Create Account
               </button>
@@ -191,14 +195,16 @@ export default function SignupCard() {
           </form>
 
           {/* displaying the error mssg */}
-          {<p
-            style={{
-              fontSize: "var(--login-text-size)",
-            }}
-            className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
-          >
-            {error}
-          </p>}
+          {
+            <p
+              style={{
+                fontSize: "var(--login-text-size)",
+              }}
+              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
+            >
+              {error}
+            </p>
+          }
 
           <p
             style={{
@@ -212,7 +218,7 @@ export default function SignupCard() {
 
           <h2
             style={{
-              color: "var(--login-heading-color)"
+              color: "var(--login-heading-color)",
             }}
             className="font-bold text-center text-4xl mt-10"
           >
@@ -226,7 +232,7 @@ export default function SignupCard() {
                 fontSize: "var(--login-button-text-size)",
                 background: "var(--login-button-background)",
               }}
-              className="font-semibold p-1 px-10 rounded-2xl mt-14 mb-2"
+              className="font-semibold p-1 px-10 rounded-2xl mt-8 md:mt-12 mb-2"
             >
               Try Demo Without Signing Up
             </button>
