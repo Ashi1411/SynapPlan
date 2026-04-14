@@ -185,20 +185,20 @@ export default function FocusTimer() {
   };
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-12 p-10">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-8 sm:mt-12 px-3 sm:px-6 md:px-10 py-6 sm:py-10">
       {/* main heading */}
       <h2
         style={{
           color: "var(--dashboard-hero-paragraph-color)",
           fontSize: "var(--login-heading-size)",
         }}
-        className="font-bold text-center p-10"
+        className="font-bold text-center py-6 sm:py-10 px-2"
       >
         FOCUS TIMER
       </h2>
       <div
         style={{ background: "var(--card-color-1)" }}
-        className="text-center w-[55%] m-auto rounded-3xl"
+        className="text-center w-full max-w-3xl mx-auto rounded-3xl px-3 sm:px-6"
       >
         {/* topics and heading */}
         <p
@@ -231,21 +231,21 @@ export default function FocusTimer() {
         {/* timer card */}
         <div
           style={{ background: "var(--feature-icons-background)" }}
-          className="mx-20 mb-10 mt-5 rounded-3xl"
+          className="mx-2 sm:mx-6 md:mx-10 mb-6 mt-4 rounded-3xl"
         >
           <h1
             style={{
               fontSize: "var(--timer-font-size)",
               color: "var(--timer-font-color)",
             }}
-            className="font-bold px-20 py-10"
+            className="font-bold px-4 sm:px-8 md:px-12 py-6 sm:py-8"
           >
             {formatTime(isBreakRunning ? breakTime : time)}
           </h1>
         </div>
 
         {/* buttons */}
-        <div className="grid grid-cols-3 gap-10 mx-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 mx-2 sm:mx-6">
           <button
             onClick={handleStart}
             disabled={isSessionRunning}
@@ -267,7 +267,7 @@ export default function FocusTimer() {
               color: "var(--timer-font-color)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
             }}
-            className="px-8 py-1 rounded-3xl font-bold m-2"
+            className="px-4 sm:px-6 py-2 w-full rounded-3xl font-bold"
           >
             Pause
           </button>
@@ -286,7 +286,7 @@ export default function FocusTimer() {
         </div>
 
         {/* duration and break related text */}
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 px-2">
           <p
             style={{
               color: "var(--dashboard-hero-paragraph-color)",

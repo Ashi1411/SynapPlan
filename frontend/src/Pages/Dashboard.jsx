@@ -8,12 +8,12 @@ import Recommendation from '../Components/Dashboard page/Recommendation'
 
 export default function Dashboard() {
   return (
-    <div>
+    <div className="h-screen overflow-hidden">
         <AfterLoginNavbar></AfterLoginNavbar>
-        <div className='flex'>
+        <div className='flex h-full'>
           <Sidebar></Sidebar>
 
-          <div className='flex-1'>
+          <div className="flex-1 overflow-y-auto">
             <HeroSection></HeroSection>
             <TodayPlan></TodayPlan>
             <Performance></Performance>

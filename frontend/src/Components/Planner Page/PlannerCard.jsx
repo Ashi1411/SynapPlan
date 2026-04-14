@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PlannerCard() {
   const navigate = useNavigate();
-  
+
   const [data, setData] = useState(null);
   const [day, setDay] = useState(null);
 
@@ -20,7 +20,7 @@ export default function PlannerCard() {
   }, []);
 
   return (
-    <div style={{background: "var(--card-color-2)"}} className="mt-14">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-14">
       {/* date bar */}
       <div
         style={{
@@ -42,13 +42,15 @@ export default function PlannerCard() {
         }}
         className="text-center p-2 font-bold"
       >
-        <div className="mx-80">
-          <ul className="flex justify-between">
+        <div className="max-w-5xl mx-auto px-2 sm:px-4">
+          <ul className="flex justify-between flex-wrap gap-2 sm:gap-4">
             {data?.days?.map((ele, i) => {
               return (
                 <li key={i}>
                   <p
-                    className={`cursor-pointer ${day === ele.label ? "text-[#FFDE59]" : ""}`}
+                    className={`cursor-pointer px-2 sm:px-3 py-1 rounded-lg ${
+              day === ele.label ? "text-[#FFDE59]" : ""
+            }`}
                     onClick={() => setDay(ele.label)}
                   >
                     {ele.label}
@@ -105,13 +107,13 @@ export default function PlannerCard() {
       </div>
 
       {/* Today's Plan */}
-      <div className="grid grid-cols-2 gap-20 mb-20 p-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-10 px-2 sm:px-4 md:px-8">
         {/* cards */}
         {data?.weeklySessions?.[day]?.map((elem, i) => {
-          return(
+          return (
             <div
               style={{ background: "var(--how-it-works-color)" }}
-              className="rounded-2xl"
+              className="rounded-2xl h-full"
               key={i}
             >
               <h2
@@ -121,7 +123,7 @@ export default function PlannerCard() {
                 }}
                 className="text-center m-3 font-semibold"
               >
-                {elem.subjectId.subjectName} 
+                {elem.subjectId.subjectName}
               </h2>
               <div
                 style={{ background: "var(--decision-engine-paragraph)" }}
@@ -154,7 +156,7 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-1"
                 >
-                    Intensity : {elem.subjectId.intensity}
+                  Intensity : {elem.subjectId.intensity}
                 </p>
 
                 <div
@@ -164,27 +166,28 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-2 mt-4"
                 >
-                    Topics : {elem.topics?.map((ele, idx) => {
-                      return(
-                        <div key={idx}>{ele}</div>
-                      )
-                    })}
+                  Topics :{" "}
+                  {elem.topics?.map((ele, idx) => {
+                    return <div key={idx}>{ele}</div>;
+                  })}
                 </div>
 
                 <button
-                onClick={() => navigate(`/session/${elem._id._id || elem._id}`)}
-                style={{
-                  fontSize: "var(--dashboard-today-plan-button-size)",
-                  color: "var(--hero-button-color)",
-                  background: "var(--how-it-works-color)" 
-                }}
-                className="px-10 py-1 rounded-2xl m-2 font-bold"
-              >
-                Start Session
-              </button>
+                  onClick={() =>
+                    navigate(`/session/${elem._id._id || elem._id}`)
+                  }
+                  style={{
+                    fontSize: "var(--dashboard-today-plan-button-size)",
+                    color: "var(--hero-button-color)",
+                    background: "var(--how-it-works-color)",
+                  }}
+                  className="px-4 sm:px-6 py-1 w-full sm:w-auto rounded-2xl m-2 font-bold"
+                >
+                  Start Session
+                </button>
               </div>
             </div>
-          )
+          );
         })}
       </div>
 

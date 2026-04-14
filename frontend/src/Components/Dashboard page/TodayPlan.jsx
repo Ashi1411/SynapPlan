@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getDashboard } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
+
 
 export default function TodayPlan() {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -17,7 +20,7 @@ export default function TodayPlan() {
   return (
     <div
       style={{ background: "var(--design-engine-background)" }}
-      className="p-10 px-40"
+      className="py-8 md:py-10 px-4 sm:px-8 md:px-16 lg:px-24"
     >
       <h1
         style={{
@@ -29,7 +32,7 @@ export default function TodayPlan() {
         TODAY'S PLAN
       </h1>
 
-      <div className="grid grid-cols-2 gap-14 mb-20 p-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 mb-12 md:mb-20 mt-6 md:mt-10">
         {/* card - 1 */}
         {data?.map((elem, i) => {
           return(
@@ -43,13 +46,13 @@ export default function TodayPlan() {
                   color: "var(--section-subheading-color)",
                   fontSize: "var(--feature-heading-size)",
                 }}
-                className="text-center m-3 font-semibold"
+                className="text-center m-2 sm:m-3  font-semibold"
               >
                 {elem.subjectId.subjectName} 
               </h2>
               <div
                 style={{ background: "var(--decision-engine-paragraph)" }}
-                className="rounded-2xl text-center p-2"
+                className="rounded-2xl text-center p-3 sm:p-4"
               >
                 <p
                   style={{
@@ -96,12 +99,13 @@ export default function TodayPlan() {
                 </p>
 
                 <button
+                onClick={() => navigate(`/session/${elem._id}`)}
                 style={{
                   fontSize: "var(--dashboard-today-plan-button-size)",
                   color: "var(--hero-button-color)",
                   background: "var(--decision-engine-heading)" 
                 }}
-                className="px-10 py-1 rounded-2xl m-2 font-bold"
+                className="px-6 sm:px-8 md:px-10 py-1.5 rounded-2xl m-2 font-bold"
               >
                 Start Session
               </button>
@@ -111,18 +115,6 @@ export default function TodayPlan() {
         })}
         
       </div>
-
-      {/* add subject button */}
-        <button
-            style={{
-              fontSize: "var(--dashboard-today-plan-button-size)",
-              color: "var(--hero-button-color)",
-              background: "var(--decision-engine-heading)" 
-            }}
-            className="px-10 py-1 rounded-2xl m-2 font-bold"
-          >
-            + Add Subject
-          </button>
     </div>
   );
 }

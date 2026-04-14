@@ -1,10 +1,11 @@
 const Session = require("../models/session");
 const Subject = require("../models/subject");
+const mongoose = require("mongoose");
 
 //! type of day today -> focus, normal/balanced, light
 function calculateDayType(todaySessions) {
   const totalDuration = todaySessions.reduce((sum, s) => {
-    sum + s.duration;
+    return sum + s.durationCompleted;
   }, 0);
 
   if (totalDuration > 240) return "Focus Day";
@@ -75,19 +76,30 @@ async function calculateWeeklyCompletionRate(userId) {
 async function getWeeklyProductivity(userId) {
   const today = new Date();
   const startOfWeek = new Date(today);
+  const day = today.getDay() || 7; // fix Sunday
 
-  startOfWeek.setDate(today.getDate() - today.getDay());
+  startOfWeek.setDate(today.getDate() - day + 1);
+  startOfWeek.setHours(0, 0, 0, 0);
+
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 7);
 
   const sessions = await Session.aggregate([
     {
       $match: {
-        userId,
-        date: { $gte: startOfWeek },
+        userId: new mongoose.Types.ObjectId(userId),
+        status: "completed",
+        date: {
+          $gte: startOfWeek,
+          $lt: endOfWeek, // ✅ limit to current week
+        }
       },
     },
     {
       $group: {
-        _id: "$date",
+        _id: {
+  $dateToString: { format: "%Y-%m-%d", date: "$date" }
+},
         totalStudy: { $sum: "$durationCompleted" },
       },
     },
@@ -180,9 +192,13 @@ function generateRecommendations({todaySessions, upcomingDeadlines, weeklyProduc
     }
 
     //? recommendation related to weekly productivity
-    if (weeklyProductivity < 180) {
-        recommendations.push("Your weekly consistency is low. Try shorter but more frequent sessions.");
-    }
+    const totalWeekly = weeklyProductivity.reduce(
+  (sum, d) => sum + d.totalStudy, 0
+);
+
+if (totalWeekly < 180) {
+  recommendations.push("Your weekly consistency is low...");
+}
 
     return recommendations
 }

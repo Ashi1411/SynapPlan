@@ -16,21 +16,21 @@ export default function Recommendation() {
   return (
     <div
       style={{ background: "var(--design-engine-background)" }}
-      className="p-10 px-40"
+      className="py-8 md:py-10 px-4 sm:px-8 md:px-16 lg:px-24"
     >
       <h1
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
         }}
-        className="text-center pt-10 font-bold"
+        className="text-center pt-6 md:pt-10 px-2 sm:px-4 font-bold"
       >
         SMART RECOMMENDATIONS PANEL
       </h1>
 
       <div
         style={{ background: "var(--recommendation-card-background)" }}
-        className="p-4 rounded-2xl"
+        className="p-3 sm:p-4 md:p-6 max-w-4xl mx-auto rounded-2xl"
       >
         {data?.map((elem, i) => {
           return (
@@ -41,7 +41,7 @@ export default function Recommendation() {
                 color: "var(--hero-paragraph-color)",
                 fontSize: "var(--dashboard-hero-paragraph-size)",
               }}
-              className="m-2 rounded-2xl p-2 text-center font-semibold"
+              className="m-2 sm:m-3 p-2 sm:p-3 md:p-4 rounded-2xl text-center font-semibold"
             >
               <p>{elem}</p>
             </div>
