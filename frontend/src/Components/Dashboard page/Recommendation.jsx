@@ -41,7 +41,7 @@ export default function Recommendation() {
                 color: "var(--hero-paragraph-color)",
                 fontSize: "var(--dashboard-hero-paragraph-size)",
               }}
-              className="m-2 sm:m-3 p-2 sm:p-3 md:p-4 rounded-2xl text-center font-semibold"
+              className="p-1 rounded-2xl text-center font-semibold my-4"
             >
               <p>{elem}</p>
             </div>

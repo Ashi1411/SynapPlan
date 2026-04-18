@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAnalytics } from "../../api/auth";
 
+import image from "../../images/sessions page/weekly_summary.png";
+
 export default function WeeklySummary() {
   const [data, setData] = useState(null);
 
@@ -15,21 +17,24 @@ export default function WeeklySummary() {
   }, []);
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="p-10">
+    <div
+      style={{ background: "var(--card-color-2)" }}
+      className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10"
+    >
       <h1
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
         }}
-        className="text-center pt-10 font-bold m-10"
+        className="text-center pt-6 sm:pt-10 px-2 font-bold"
       >
         WEEKLY SUMMARY
       </h1>
 
-      <div className="grid grid-cols-2 gap-10 m-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 mt-6 sm:mt-10">
         <div
           style={{ background: "var(--recommendation-card-background)" }}
-          className="p-6 rounded-2xl"
+          className="order-2 md:order-1 p-3 sm:p-4 md:p-6 rounded-2xl w-full"
         >
           <p
             style={{
@@ -37,7 +42,7 @@ export default function WeeklySummary() {
               fontSize: "var(--dashboard-hero-paragraph-size)",
               color: "var(--dashboard-hero-paragraph-color)",
             }}
-            className="p-1 rounded-2xl text-center font-bold my-4"
+            className="p-2 rounded-2xl text-center font-bold my-2 sm:my-3"
           >
             Total Study Hours: {data?.durationCompleted} mins
           </p>
@@ -80,7 +85,13 @@ export default function WeeklySummary() {
         </div>
 
         {/* image */}
-        <div></div>
+        <div className="order-1 md:order-2 flex items-center justify-center w-full min-h-[200px] sm:min-h-[250px] md:min-h-[350px] p-2">
+          <img
+            src={image}
+            alt="weekly-summary"
+            className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain drop-shadow-xl"
+          ></img>
+        </div>
       </div>
     </div>
   );

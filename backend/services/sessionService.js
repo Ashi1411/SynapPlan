@@ -252,10 +252,10 @@ function getSessionEfficiency(session) {
 function getEfficiencyLabel(efficiency) {
   const value = efficiency / 100;
 
-  if (value >= 0.85) return "Excellent 🔥";
-  if (value >= 0.7) return "Good 👍";
-  if (value >= 0.5) return "Average 😐";
-  return "Poor ⚠️";
+  if (value >= 0.85) return "Excellent";
+  if (value >= 0.7) return "Good";
+  if (value >= 0.5) return "Average";
+  return "Poor";
 }
 
 

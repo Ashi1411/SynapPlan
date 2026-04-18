@@ -20,7 +20,7 @@ export default function PlannerCard() {
   }, []);
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-14">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-14 min-h-screen">
       {/* date bar */}
       <div
         style={{
@@ -190,18 +190,6 @@ export default function PlannerCard() {
           );
         })}
       </div>
-
-      {/* add subject button */}
-      <button
-        style={{
-          fontSize: "var(--dashboard-today-plan-button-size)",
-          color: "var(--day-bar-color)",
-          background: "var(--day-bar-background)",
-        }}
-        className="px-10 py-1 rounded-2xl m-2 font-bold"
-      >
-        + Add Subject
-      </button>
     </div>
   );
 }

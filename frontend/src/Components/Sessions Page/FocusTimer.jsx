@@ -185,7 +185,7 @@ export default function FocusTimer() {
   };
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-8 sm:mt-12 px-3 sm:px-6 md:px-10 py-6 sm:py-10">
+    <div style={{ background: "var(--card-color-2)" }} className="min-h-screen flex flex-col mt-0 px-3 sm:px-6 md:px-10 py-6 sm:py-10">
       {/* main heading */}
       <h2
         style={{
@@ -198,7 +198,7 @@ export default function FocusTimer() {
       </h2>
       <div
         style={{ background: "var(--card-color-1)" }}
-        className="text-center w-full max-w-3xl mx-auto rounded-3xl px-3 sm:px-6"
+        className="text-center max-w-sm sm:max-w-md md:max-w-2xl mx-auto rounded-3xl px-4 sm:px-4 py-3 sm:py-4"
       >
         {/* topics and heading */}
         <p
@@ -231,21 +231,21 @@ export default function FocusTimer() {
         {/* timer card */}
         <div
           style={{ background: "var(--feature-icons-background)" }}
-          className="mx-2 sm:mx-6 md:mx-10 mb-6 mt-4 rounded-3xl"
+          className="mx-1 sm:mx-4 md:mx-6 mb-6 mt-4 rounded-3xl"
         >
           <h1
             style={{
               fontSize: "var(--timer-font-size)",
               color: "var(--timer-font-color)",
             }}
-            className="font-bold px-4 sm:px-8 md:px-12 py-6 sm:py-8"
+            className="font-bold px-4 sm:px-8 py-6 sm:py-8 text-xl sm:text-3xl md:text-4xl"
           >
             {formatTime(isBreakRunning ? breakTime : time)}
           </h1>
         </div>
 
         {/* buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 mx-2 sm:mx-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 px-2 sm:px-6">
           <button
             onClick={handleStart}
             disabled={isSessionRunning}
@@ -254,7 +254,7 @@ export default function FocusTimer() {
               color: "var(--timer-font-color)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
             }}
-            className="px-8 py-1 rounded-3xl font-bold m-2"
+            className="px-4 sm:px-6 py-2 w-full rounded-3xl font-bold"
           >
             Start
           </button>
@@ -279,14 +279,14 @@ export default function FocusTimer() {
               color: "var(--timer-font-color)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
             }}
-            className="px-8 py-1 rounded-3xl font-bold m-2"
+            className="px-4 sm:px-6 py-2 w-full rounded-3xl font-bold"
           >
             {isBreakRunning ? "End Break" : "Break Time"}
           </button>
         </div>
 
         {/* duration and break related text */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 px-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 px-2 sm:px-6 text-center">
           <p
             style={{
               color: "var(--dashboard-hero-paragraph-color)",
@@ -324,7 +324,7 @@ export default function FocusTimer() {
             color: "var(--dashboard-hero-heading-color)",
             fontSize: "var(--dashboard-hero-subheading-size)",
           }}
-          className="font-bold p-10"
+          className="font-bold px-3 sm:px-6 py-6 text-center"
         >
           Session Completed :{" "}
           {((time / 60 / session?.duration) * 100).toFixed(1)}%

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getUserDetails, editProfile } from "../../api/auth";
 
+import image from "../../images/settings page/profile.png";
+
 export default function Profile() {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -46,16 +48,19 @@ export default function Profile() {
   };
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-12 p-10">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-6 sm:mt-10 px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10">
+      <div className="max-w-5xl mx-auto">
       {/* profile image */}
-      <div></div>
+      <div>
+        <img src={image} alt='profile_image' className="mb-4 sm:mb-6 md:mb-8 mx-auto w-32 sm:w-40 md:w-52 lg:w-60 h-auto object-contain"></img>
+      </div>
 
       {/* user details */}
       <div>
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 items-stretch">
           <div
             style={{ background: "var(--card-color-1)" }}
-            className="px-10 py-4 m-4 rounded-3xl"
+            className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
           >
             <h2
               style={{
@@ -78,7 +83,7 @@ export default function Profile() {
                   name="fullname"
                   value={form.fullname}
                   onChange={handleChange}
-                  className="bg-transparent border-b outline-none"
+                  className="bg-transparent border-b outline-none w-full"
                 />
               ) : (
                 userData?.name
@@ -87,7 +92,7 @@ export default function Profile() {
           </div>
           <div
             style={{ background: "var(--card-color-1)" }}
-            className="px-10 py-4 m-4 rounded-3xl"
+            className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
           >
             <h2
               style={{
@@ -112,7 +117,7 @@ export default function Profile() {
 
         <div
           style={{ background: "var(--card-color-1)" }}
-          className="px-10 py-4 m-4 rounded-3xl"
+          className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
         >
           <h2
             style={{
@@ -145,7 +150,7 @@ export default function Profile() {
       </div>
 
       {/* edit profile button */}
-      <div className="text-center m-14">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
         {!isEditing ? (
           <button
             onClick={() => setIsEditing(true)}
@@ -154,7 +159,7 @@ export default function Profile() {
               color: "var(--login-button-text-color)",
               fontSize: "var(--dashboard-today-plan-button-size)",
             }}
-            className="px-14 py-2 rounded-3xl font-bold"
+            className="px-6 sm:px-10 py-2 rounded-2xl font-bold text-sm sm:text-base"
           >
             Edit Profile
           </button>
@@ -167,7 +172,7 @@ export default function Profile() {
                 color: "var(--login-button-text-color)",
                 fontSize: "var(--dashboard-today-plan-button-size)",
               }}
-              className="px-14 py-2 rounded-3xl font-bold m-4"
+              className="px-6 sm:px-10 py-2 rounded-2xl font-bold m-2 sm:m-3"
             >
               Save
             </button>
@@ -179,12 +184,13 @@ export default function Profile() {
                 color: "var(--login-button-text-color)",
                 fontSize: "var(--dashboard-today-plan-button-size)",
               }}
-              className="px-14 py-2 rounded-3xl font-bold m-4"
+              className="px-6 sm:px-10 py-2 rounded-2xl font-bold m-2 sm:m-3"
             >
               Cancel
             </button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

@@ -6,6 +6,8 @@ import {
   deleteAccount,
 } from "../../api/auth";
 
+import image from "../../images/settings page/security.png";
+
 export default function SecurityComponent() {
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [maxHours, setMaxHours] = useState(0);
@@ -113,20 +115,20 @@ export default function SecurityComponent() {
 };
 
   return (
-    <div style={{ background: "var(--card-color-1)" }} className="p-10">
+    <div style={{ background: "var(--card-color-1)" }} className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen">
       <h1
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
         }}
-        className="text-center p-4 font-bold"
+        className="text-center pt-6 sm:pt-10 pb-2 font-bold px-2"
       >
         STUDY PREFERENCES AND SECURITY
       </h1>
 
-      <div className="grid grid-cols-[40%_60%]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         {/* content */}
-        <div className="mx-10">
+        <div className="order-2 md:order-1 w-full max-w-xl mx-auto md:mx-0">
           <div className="my-4">
             <h2
               style={{
@@ -137,8 +139,8 @@ export default function SecurityComponent() {
             >
               Max Study Hours Per Day (hours)
             </h2>
-            <div className="grid grid-cols-[70%_30%] gap-10">
-              <div className="grid grid-cols-[70%_30%] gap-4 items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 {isEditingHours ? (
                   <input
                     type="number"
@@ -210,7 +212,7 @@ export default function SecurityComponent() {
                 fontSize: "var(--dashboard-hero-paragraph-size)",
                 background: "var(--card-color-2)",
               }}
-              className="font-semibold w-full"
+              className="font-semibold w-full p-2 rounded-md"
             ></input>
           </div>
 
@@ -234,7 +236,7 @@ export default function SecurityComponent() {
                 fontSize: "var(--dashboard-hero-paragraph-size)",
                 background: "var(--card-color-2)",
               }}
-              className="font-semibold w-full"
+              className="font-semibold w-full p-2 rounded-md"
             ></input>
           </div>
 
@@ -244,7 +246,7 @@ export default function SecurityComponent() {
               style={{
                 fontSize: "var(--login-text-size)",
               }}
-              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
+              className="font-semibold text-red-600 flex flex-col justify-center items-center mt-3 text-center"
             >
               {error}
             </p>
@@ -258,7 +260,7 @@ export default function SecurityComponent() {
                 color: "var(--login-button-text-color)",
                 fontSize: "var(--dashboard-today-plan-button-size)",
               }}
-              className="px-10 py-2 rounded-3xl font-bold"
+              className="px-6 sm:px-10 py-2 rounded-2xl font-bold text-sm sm:text-base"
             >
               Change Password
             </button>
@@ -272,7 +274,7 @@ export default function SecurityComponent() {
                 color: "var(--login-button-text-color)",
                 fontSize: "var(--dashboard-today-plan-button-size)",
               }}
-              className="px-10 py-2 rounded-3xl font-bold"
+              className="px-6 sm:px-10 py-2 rounded-2xl font-bold text-sm sm:text-base"
             >
               Delete Account
             </button>
@@ -280,7 +282,13 @@ export default function SecurityComponent() {
         </div>
 
         {/* image */}
-        <div></div>
+        <div className="order-1 md:order-2 flex items-center justify-center w-full min-h-[200px] sm:min-h-[250px] md:min-h-[350px] p-2">
+                  <img
+                    src={image}
+                    alt="weekly-summary"
+                    className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain drop-shadow-xl"
+                  ></img>
+                </div>
       </div>
     </div>
   );
