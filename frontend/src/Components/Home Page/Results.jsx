@@ -49,7 +49,7 @@ export default function Results() {
       <div className="grid grid-cols-1 sm:grid-cols-2">
         <div
           style={{ background: "var(--card-color-1)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh] order-1"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
         >
           <h1
             style={{
@@ -73,7 +73,7 @@ export default function Results() {
 
         <div
           style={{ background: "var(--card-color-2)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh] order-2"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-2"
         >
           <h1
             style={{
@@ -98,7 +98,7 @@ export default function Results() {
 
         <div
           style={{ background: "var(--card-color-2)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh] order-4 md:order-3"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-4 md:order-3"
         >
           <h1
             style={{
@@ -123,7 +123,7 @@ export default function Results() {
 
         <div
           style={{ background: "var(--card-color-1)" }}
-          className="flex flex-col justify-center items-center mx-auto p-5 min-h-[50vh] order-3 md:order-4"
+          className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-3 md:order-4"
         >
           <h1
             style={{

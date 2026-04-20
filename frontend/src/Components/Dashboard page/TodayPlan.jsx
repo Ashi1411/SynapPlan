@@ -48,7 +48,7 @@ export default function TodayPlan() {
                 }}
                 className="text-center m-2 sm:m-3  font-semibold"
               >
-                {elem.subjectId.subjectName} 
+                {elem?.subjectId?.subjectName} 
               </h2>
               <div
                 style={{ background: "var(--decision-engine-paragraph)" }}
@@ -61,7 +61,7 @@ export default function TodayPlan() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration : {elem.duration} min
+                  Duration : {elem?.duration} min
                 </p>
 
                 <p
@@ -71,7 +71,7 @@ export default function TodayPlan() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration Completed : {elem.durationCompleted} min
+                  Duration Completed : {elem?.durationCompleted} min
                 </p>
 
                 <p
@@ -81,7 +81,7 @@ export default function TodayPlan() {
                   }}
                   className="font-semibold m-1"
                 >
-                    Intensity : {elem.subjectId.intensity}
+                    Intensity : {elem?.subjectId?.intensity}
                 </p>
 
                 <p
@@ -91,7 +91,7 @@ export default function TodayPlan() {
                   }}
                   className="font-semibold m-2 mt-4"
                 >
-                    Topics : {elem.topics?.map((ele, idx) => {
+                    Topics : {elem?.topics?.map((ele, idx) => {
                       return(
                         <div key={idx}>{ele}</div>
                       )

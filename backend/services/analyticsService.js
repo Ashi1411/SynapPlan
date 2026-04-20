@@ -1,6 +1,8 @@
 const Subject = require("../models/subject");
 const Session = require("../models/session");
 
+const mongoose = require("mongoose");
+
 //! get current week sessions
 async function getWeeklySession(userId) {
   const today = new Date();
@@ -79,15 +81,20 @@ function getFocusEfficiency(weeklySessions) {
 //! find weekly productivity (study time) day by day for weekly productivity graph
 async function getWeeklyStudyTime(userId) {
   const today = new Date();
-  const startOfWeek = new Date(today);
 
-  startOfWeek.setDate(today.getDate() - today.getDay());
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - today.getDay() + (today.getDay() == 0 ? -6 : 1));
+  startOfWeek.setHours(0, 0, 0, 0);
+
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
 
   const sessions = await Session.aggregate([
     {
       $match: {
-        userId,
-        date: { $gte: startOfWeek },
+        userId: new mongoose.Types.ObjectId(userId),
+        date: { $gte: startOfWeek, $lte: endOfWeek },
       },
     },
     {
@@ -109,15 +116,20 @@ async function getWeeklyStudyTime(userId) {
 //! find weekly productivity (focus efficiency) day by day for weekly productivity graph
 async function getWeeklyFocusEfficiency(userId) {
   const today = new Date();
+  
   const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - today.getDay() + (today.getDay() == 0 ? -6 : 1));
+  startOfWeek.setHours(0, 0, 0, 0);
 
-  startOfWeek.setDate(today.getDate() - today.getDay());
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
 
   const sessions = await Session.aggregate([
     {
       $match: {
-        userId,
-        date: { $gte: startOfWeek },
+        userId: new mongoose.Types.ObjectId(userId),
+        date: { $gte: startOfWeek, $lte: endOfWeek },
       },
     },
     {
@@ -157,11 +169,12 @@ async function getWeeklyFocusEfficiency(userId) {
 async function getMonthlyStudyTime(userId) {
   const today = new Date();
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  startOfMonth.setHours(0, 0, 0, 0);
 
   const sessions = await Session.aggregate([
     {
       $match: {
-        userId,
+        userId: new mongoose.Types.ObjectId(userId),
         date: { $gte: startOfMonth },
       },
     },
@@ -185,11 +198,13 @@ async function getMonthlyStudyTime(userId) {
 async function getMonthlyFocusEfficiency(userId) {
   const today = new Date();
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  startOfMonth.setHours(0, 0, 0, 0);
+
 
   const sessions = await Session.aggregate([
     {
       $match: {
-        userId,
+        userId: new mongoose.Types.ObjectId(userId),
         date: { $gte: startOfMonth },
       },
     },

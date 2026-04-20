@@ -123,7 +123,7 @@ export default function PlannerCard() {
                 }}
                 className="text-center m-3 font-semibold"
               >
-                {elem.subjectId.subjectName}
+                {elem?.subjectId?.subjectName}
               </h2>
               <div
                 style={{ background: "var(--decision-engine-paragraph)" }}
@@ -136,7 +136,7 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration : {elem.duration} min
+                  Duration : {elem?.duration} min
                 </p>
 
                 <p
@@ -146,7 +146,7 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration Completed : {elem.durationCompleted} min
+                  Duration Completed : {elem?.durationCompleted} min
                 </p>
 
                 <p
@@ -156,7 +156,7 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Intensity : {elem.subjectId.intensity}
+                  Intensity : {elem?.subjectId?.intensity}
                 </p>
 
                 <div
@@ -167,7 +167,7 @@ export default function PlannerCard() {
                   className="font-semibold m-2 mt-4"
                 >
                   Topics :{" "}
-                  {elem.topics?.map((ele, idx) => {
+                  {elem?.topics?.map((ele, idx) => {
                     return <div key={idx}>{ele}</div>;
                   })}
                 </div>
