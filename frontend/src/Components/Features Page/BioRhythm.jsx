@@ -3,20 +3,24 @@ import bio_rhythm from "../../images/feature page/bio_rhythm.png";
 
 export default function BioRhythm() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-[180vh] md:h-[90vh]">
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       {/* image */}
-      <div style={{
-                backgroundImage: `url(${bio_rhythm})`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-              }}
-              className="flex flex-col justify-center p-6 md:p-10 min-h-[90vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)]"></div>
+      <div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:min-h-screen overflow-hidden">
+        <img
+          src={bio_rhythm}
+          alt="Bio Rhythm"
+          className="
+            w-full 
+            h-full 
+            object-cover
+          "
+        />
+      </div>
 
       {/* content */}
       <div
         style={{ background: "var(--card-color-1)" }}
-        className="flex flex-col justify-center p-20 h-[90vh]"
+        className="flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen"
       >
         <h1
           style={{

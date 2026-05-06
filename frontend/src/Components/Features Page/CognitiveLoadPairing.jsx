@@ -3,11 +3,11 @@ import cognitive_load_pairing from "../../images/feature page/cognitive_load_pai
 
 export default function CognitiveLoadPairing() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 h-[180vh] md:h-[90vh]">
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       {/* content */}
       <div
         style={{ background: "var(--card-color-2)" }}
-        className="flex flex-col justify-center p-20 order-2 md:order-1 h-[90vh]"
+        className="flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen order-2 md:order-1"
       >
         <h1
           style={{
@@ -41,15 +41,16 @@ export default function CognitiveLoadPairing() {
       </div>
 
       {/* image */}
-      <div
-        style={{
-          backgroundImage: `url(${cognitive_load_pairing})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-        className="flex flex-col justify-center p-6 md:p-10 min-h-[90vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"
-      ></div>
+      <div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"
+      >
+        <img
+        src={cognitive_load_pairing}
+        alt="Cognitive Load Pairing"
+        className="
+        w-full
+        h-full
+        object-cover"/>
+      </div>
     </div>
   );
 }

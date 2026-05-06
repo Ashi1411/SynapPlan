@@ -7,10 +7,10 @@ export default function AddSubject() {
   return (
     <div>
         <AfterLoginNavbar></AfterLoginNavbar>
-        <div className='flex'>
+        <div className='relative h-full`'>
             <Sidebar></Sidebar>
 
-            <div className='flex-1'>
+            <div className='ml-12 h-full overflow-y-auto'>
                 <AddSubjectFrom></AddSubjectFrom>
             </div>
         </div>

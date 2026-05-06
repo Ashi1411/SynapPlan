@@ -218,18 +218,23 @@ html{
 }
 
 .collapseSidebar {
-  width: 3rem;      
-  margin-top: 3rem;  
-  height: 100vh;     
-  position: fixed;  
+  width: 3rem;
+  margin-top: 3rem;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index:49;
+  transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .sidebarContainer{
-  width: 15rem;
+  width: 0rem;
 }
 
 .collapseSidebarContainer{
-  width: 3rem;
+  width: 0rem;
 }
 
 

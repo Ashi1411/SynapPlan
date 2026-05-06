@@ -46,7 +46,7 @@ export default function HeroSection() {
               fontSize: "var(--dashboard-hero-heading-size)",
               color: "var(--dashboard-hero-heading-color)",
             }}
-            className="font-bold mb-4 md:mb-6"
+            className="font-bold mt-12 md:mt-6"
           >
             Today's Study Mode
           </h1>

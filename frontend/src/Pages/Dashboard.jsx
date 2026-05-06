@@ -10,10 +10,10 @@ export default function Dashboard() {
   return (
     <div className="h-screen overflow-hidden">
         <AfterLoginNavbar></AfterLoginNavbar>
-        <div className='flex h-full'>
+        <div className='relative h-full'>
           <Sidebar></Sidebar>
 
-          <div className="flex-1 overflow-y-auto">
+          <div className="ml-12 h-full overflow-y-auto z-0">
             <HeroSection></HeroSection>
             <TodayPlan></TodayPlan>
             <Performance></Performance>

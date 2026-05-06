@@ -52,11 +52,11 @@ export default function LoginCard() {
   return (
     <div
       style={{ background: "var(--login-page)" }}
-      className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-10 flex items-center justify-center"
+      className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-10 flex items-center justify-center flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen order-2 md:order-1"
     >
       <div
         style={{ background: "var(--login-page-card)" }}
-        className="rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-10 md:mt-20 items-stretch"
+        className="rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-10 md:mt-20 min-h-screen"
       >
         {/* content */}
         <div className="order-2 md:order-1 p-6 sm:p-8 md:p-10 lg:px-20">
@@ -167,12 +167,15 @@ export default function LoginCard() {
         </div>
 
         {/* image */}
-        <div className="md:h-full w-full overflow-hidden rounded-2xl order-1 md:order-2">
+        <div className="rounded-2xl order-1 md:order-2 flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
           <img
-            src={loginImage}
-            alt="signup"
-            className="w-full h-full object-cover"
-          />
+                  src={loginImage}
+                  alt="Cognitive Load Pairing"
+                  className="
+                  w-full
+                  h-full
+                  object-cover
+                  rounded-2xl"/>
         </div>
       </div>
     </div>

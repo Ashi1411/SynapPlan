@@ -31,7 +31,7 @@ export default function Sidebar() {
         <div className="flex flex-col items-end">
           <div
             style={{ background: "var(--sidebar-collapse-background)" }}
-            className="rounded-full m-1 mt-8 w-10 p-2 z-[10]"
+            className="rounded-full m-1 mt-12 w-10 p-2"
           >
             <p
               className="text-center cursor-pointer font-bold"
