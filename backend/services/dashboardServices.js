@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 //! type of day today -> focus, normal/balanced, light
 function calculateDayType(todaySessions) {
   const totalDuration = todaySessions.reduce((sum, s) => {
-    return sum + s.durationCompleted;
+    return sum + s.duration;
   }, 0);
 
   if (totalDuration > 240) return "Focus Day";

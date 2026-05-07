@@ -46,12 +46,12 @@ export default function AfterLoginNavbar() {
           }}
         >
           <ul className="flex items-center gap-2 sm:gap-4 md:gap-6">
-            <p className="font-semibold">Hi {userData?.name}👋</p>
+            <p className="hidden sm:block font-semibold">Hi {userData?.name}👋</p>
             <p className="hidden sm:block font-semibold">
               {new Date().toLocaleDateString()}
             </p>
-            <p className="cursor-pointer"> 🔔 </p>
-            <p className="cursor-pointer"> 👤 </p>
+            <Link to="/settings#notifications" className="cursor-pointer">🔔</Link>
+            <Link to={"/settings"} className="cursor-pointer">👤</Link>
           </ul>
         </nav>
       </div>

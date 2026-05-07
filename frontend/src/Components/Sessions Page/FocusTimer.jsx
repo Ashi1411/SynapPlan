@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import { getTodaySessions } from "../../api/auth";
@@ -8,6 +8,7 @@ import { startBreak } from "../../api/auth";
 import { endBreak } from "../../api/auth";
 import { completeSession } from "../../api/auth";
 import { getSession } from "../../api/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function FocusTimer() {
   const { id } = useParams();
@@ -22,6 +23,8 @@ export default function FocusTimer() {
 
   const [isSessionRunning, setIsSessionRunning] = useState(false);
   const [isBreakRunning, setIsBreakRunning] = useState(false);
+
+  const toastShown = useRef(false);
 
   //! get correct session
   useEffect(() => {
@@ -38,7 +41,11 @@ export default function FocusTimer() {
           res = await getTodaySessions();
 
           if (!res.data.defaultSession) {
-            alert("No sessions for today");
+            if (!toastShown.current) {
+              toast.error("No sessions for today");
+              toastShown.current = true;
+            }
+
             return;
           }
 
@@ -96,15 +103,11 @@ export default function FocusTimer() {
   //! complete session
   useEffect(() => {
     const complete = async () => {
-      if (
-        session &&
-        time >= session.duration * 60 &&
-        !isCompleted
-      ) {
+      if (session && time >= session.duration * 60 && !isCompleted) {
         setIsCompleted(true);
         try {
           await completeSession(session._id);
-          alert("Session Completed!!");
+          toast.success("Session Completed!!");
         } catch (err) {
           console.error(err);
         }
@@ -140,7 +143,7 @@ export default function FocusTimer() {
     if (!session) return;
 
     if (!isSessionRunning) {
-      alert("Start session first");
+      toast.info("Start session first");
       return;
     }
 
@@ -159,7 +162,7 @@ export default function FocusTimer() {
     let res;
 
     if (!isSessionRunning && !isBreakRunning) {
-      alert("No session is active");
+      toast.info("No session is active");
       return;
     }
 
@@ -185,7 +188,10 @@ export default function FocusTimer() {
   };
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="min-h-screen flex flex-col mt-0 px-3 sm:px-6 md:px-10 py-6 sm:py-10">
+    <div
+      style={{ background: "var(--card-color-2)" }}
+      className="min-h-screen flex flex-col mt-10 px-3 sm:px-6 md:px-10 py-6 sm:py-10"
+    >
       {/* main heading */}
       <h2
         style={{
@@ -330,6 +336,15 @@ export default function FocusTimer() {
           {((time / 60 / session?.duration) * 100).toFixed(1)}%
         </p>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

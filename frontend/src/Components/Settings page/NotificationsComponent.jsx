@@ -17,6 +17,7 @@ export default function NotificationsComponent() {
 
   return (
     <div
+    id="notifications"
       style={{ background: "var(--card-color-2)" }}
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >

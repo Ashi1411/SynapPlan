@@ -48,7 +48,7 @@ export default function Profile() {
   };
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-6 sm:mt-10 px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-16 px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10">
       <div className="max-w-5xl mx-auto">
       {/* profile image */}
       <div>

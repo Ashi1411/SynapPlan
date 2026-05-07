@@ -4,6 +4,10 @@ import loginImage from "../../images/login and signup pages/login_page_image.png
 
 import { login } from "../../api/auth";
 
+//! react toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function LoginCard() {
   const navigate = useNavigate();
 
@@ -37,15 +41,19 @@ export default function LoginCard() {
       const res = await login(formData);
 
       console.log(res.data);
-      alert("Login successful");
+      toast.success("Login successful");
 
       if (res.data.success) {
-        navigate("/dashboard");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 4000);
       }
     } catch (err) {
       console.log(err);
-      alert("Invalid email or password");
-      navigate("/signup");
+      toast.error(err.response?.data?.message || "Login failed");
+      setTimeout(() => {
+        navigate("/signup");
+      }, 4000);
     }
   };
 
@@ -169,15 +177,25 @@ export default function LoginCard() {
         {/* image */}
         <div className="rounded-2xl order-1 md:order-2 flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
           <img
-                  src={loginImage}
-                  alt="Cognitive Load Pairing"
-                  className="
+            src={loginImage}
+            alt="Cognitive Load Pairing"
+            className="
                   w-full
                   h-full
                   object-cover
-                  rounded-2xl"/>
+                  rounded-2xl"
+          />
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

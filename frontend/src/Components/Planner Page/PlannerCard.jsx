@@ -20,7 +20,7 @@ export default function PlannerCard() {
   }, []);
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-14 min-h-screen">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-16 min-h-screen">
       {/* date bar */}
       <div
         style={{

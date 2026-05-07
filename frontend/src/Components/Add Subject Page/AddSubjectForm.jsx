@@ -3,6 +3,10 @@ import { addSubject } from "../../api/auth";
 
 import image from "../../images/add subject page/add_subject.png";
 
+//! react toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function AddSubjectFrom() {
   let [formData, setFormData] = useState({
     subjectName: "",
@@ -56,7 +60,7 @@ export default function AddSubjectFrom() {
       const res = await addSubject(formData);
 
       console.log(res.data);
-      alert("Subject added successfully");
+      toast.success("Subject added successfully");
     } catch (err) {
       console.log(err);
       setError(err.response?.data?.message || "Something went wrong");
@@ -66,7 +70,7 @@ export default function AddSubjectFrom() {
   return (
     <div
       style={{ background: "var(--login-page)" }}
-      className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
+      className="px-3 mt-12 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
       <h1
         style={{
@@ -251,6 +255,15 @@ export default function AddSubjectFrom() {
           ></img>
         </div>
       </div>
+      <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick
+              pauseOnHover
+              theme="colored"
+            />
     </div>
   );
 }

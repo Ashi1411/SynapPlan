@@ -4,6 +4,10 @@ import signupImage from "../../images/login and signup pages/signup_page_image.p
 
 import { signup } from "../../api/auth";
 
+//! react toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function SignupCard() {
   const navigate = useNavigate();
 
@@ -53,10 +57,12 @@ export default function SignupCard() {
       const res = await signup({ fullname, email, password });
 
       console.log(res.data);
-      alert("Account Created Successfully");
+      toast.success("Account Created Successfully");
 
       if (res.data.success) {
-        navigate("/dashboard");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 4000);
       }
     } catch (err) {
       console.log(err);
@@ -249,6 +255,15 @@ export default function SignupCard() {
           </p>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

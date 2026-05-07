@@ -282,12 +282,23 @@ export default function SecurityComponent() {
         </div>
 
         {/* image */}
-        <div className="order-1 md:order-2 flex items-center justify-center w-full min-h-[200px] sm:min-h-[250px] md:min-h-[350px] p-2">
-                  <img
-                    src={image}
-                    alt="weekly-summary"
-                    className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain drop-shadow-xl"
-                  ></img>
+        <div style={{backgroundImage: `url(${image})`}} className="
+                  order-1
+                  md:order-2
+                  flex
+                  items-center
+                  justify-center
+                  w-full
+                  min-h-[300px]
+                  sm:min-h-[400px]
+                  md:min-h-[600px]
+                  p-2
+                  bg-contain
+                  bg-center
+                  bg-no-repeat
+                  rounded-2xl
+                  overflow-hidden
+                ">
                 </div>
       </div>
     </div>
