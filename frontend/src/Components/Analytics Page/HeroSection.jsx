@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAnalytics } from "../../api/auth";
 
+import { formatDuration } from "../../utils/formatDuration"; //  to use our second based backend data 
+
 export default function HeroSection() {
   const [data, setData] = useState(null);
 
@@ -51,7 +53,7 @@ export default function HeroSection() {
               }}
               className="font-semibold"
             >
-              {data?.durationCompleted} min
+              {formatDuration(data?.durationCompleted)}
             </p>
           </div>
 

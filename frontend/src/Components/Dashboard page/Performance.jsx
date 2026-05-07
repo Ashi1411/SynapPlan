@@ -10,6 +10,8 @@ import {
   CartesianGrid,
 } from "recharts";
 
+import { formatDuration } from "../../utils/formatDuration"; // to integrate with second based backend
+
 export default function Performance() {
   const [data, setData] = useState(null);
 
@@ -31,7 +33,7 @@ export default function Performance() {
       const d = new Date(item._id);
       const dayIndex = d.getDay() === 0 ? 6 : d.getDay() - 1;
       const day = days[dayIndex];
-      map[day] = item.totalStudy;
+      map[day] = Math.round(item.totalStudy / 60);
     });
 
     return days.map((day) => ({
@@ -81,8 +83,9 @@ export default function Performance() {
                     <LineChart data={chartData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                       <XAxis dataKey="day" />
-                      <YAxis />
+                      <YAxis tick={{ fontSize: 12 }} />
                       <Tooltip
+                        formatter={(value) => formatDuration(value * 60)}
                         contentStyle={{
                           borderRadius: "12px",
                           border: "2px solid #e5e7eb", // thicker border

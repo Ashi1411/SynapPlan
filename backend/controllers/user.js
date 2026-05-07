@@ -40,16 +40,15 @@ async function handleUserSignup(req, res) {
 //! login a user
 async function handleUserLogin(req, res) {
     const {email, password} = req.body;
-    const isPasswordValid = await comparePassword(email, password);
+    const user = await comparePassword(email, password);
 
-    if (!isPasswordValid) {
+    if (!user) {
         return res.status(401).json({
             success: false,
             message: "Invalid email or password"
         });
     }
 
-    const user = await User.findOne({email});
     console.log(user);
 
     const token = setUser(user);

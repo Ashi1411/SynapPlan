@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getCompletedSessions } from "../../api/auth";
 import { getSessionEfficiency } from "../../api/auth";
 
+import { formatDuration } from "../../utils/formatDuration"; // to integrate with seconds based backend
+
 import excellentIcon from "../../images/sessions page/excellent.png";
 import goodIcon from "../../images/sessions page/good.png";
 import averageIcon from "../../images/sessions page/average.png";
@@ -157,7 +159,7 @@ export default function SessionDetail() {
                     }}
                     className="font-semibold"
                   >
-                    <span className="font-bold">Duration:</span> {ele?.duration}
+                    <span className="font-bold">Duration:</span> {formatDuration(ele?.duration)}
                   </p>
                   <p
                     style={{
@@ -167,7 +169,7 @@ export default function SessionDetail() {
                     className="font-semibold"
                   >
                     <span className="font-bold">Duration Completed:</span>{" "}
-                    {ele?.durationCompleted}
+                    {formatDuration(ele?.durationCompleted)}
                   </p>
                   <p
                     style={{
@@ -177,7 +179,7 @@ export default function SessionDetail() {
                     className="font-semibold"
                   >
                     <span className="font-bold">Break Duration:</span>{" "}
-                    {ele?.breakDuration}
+                    {formatDuration(ele?.breakDuration)}
                   </p>
                   <p
                     style={{
@@ -197,7 +199,7 @@ export default function SessionDetail() {
                     className="font-semibold"
                   >
                     <span className="font-bold">Efficiency:</span>{" "}
-                    {ele?.efficiency}%
+                    {Number(ele?.efficiency || 0).toFixed(1)}%
                   </p>
                 </div>
               </div>

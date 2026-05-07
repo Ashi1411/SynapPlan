@@ -10,9 +10,8 @@ function checkForAuthentication(req, res, next) {
     }
 
     let user = null;
-    let token = tokenCookie;
     try {
-        user = getUser(token);
+        user = getUser(tokenCookie);
     }
     catch(err) {
         console.error("Invalid Token", err);

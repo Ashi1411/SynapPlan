@@ -2,6 +2,10 @@ const Session = require("../models/session");
 const Subject = require("../models/subject");
 const User = require("../models/user");
 
+const SECOND = 1;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+
 //! get the range of this week
 function getWeekDate() {
   const today = new Date();
@@ -48,8 +52,8 @@ function getTodayDay(days) {
 function calculateDayType(todaySessions) {
   const totalDuration = todaySessions.reduce((sum, s) => sum + s.duration, 0);
 
-  if (totalDuration > 240) return "Focus Day";
-  if (totalDuration > 120) return "Balanced Day";
+  if (totalDuration > 4 * HOUR) return "Focus Day";
+  if (totalDuration > 2 * HOUR) return "Balanced Day";
   return "Light Day";
 }
 
@@ -59,7 +63,7 @@ async function calculateDailyLoad(userId, todaySession) {
 
   const planned = todaySession.reduce((sum, s) => sum + s.duration, 0);
   const user = await User.findOne({ _id: userId });
-  const dailyCapacity = user.maxStudyHoursPerDay * 60; // 8 hours
+  const dailyCapacity = user.maxStudyHoursPerDay * HOUR; // 8 hours
 
   return Math.round((planned / dailyCapacity) * 100);
 }

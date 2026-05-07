@@ -5,9 +5,6 @@ const Session = require("../models/session");
 //todo for password hashing
 const bcrypt = require("bcrypt");
 
-//todo for transactional data
-const mongoose = require("mongoose");
-
 //! get the details of current user
 async function getUserDetails(userId) {
   const user = await User.findOne({ _id: userId });
@@ -18,7 +15,7 @@ async function getUserDetails(userId) {
     name: user.fullname,
     email: user.email,
     interests: user.interests,
-    maxStudyHoursPerDay: user.maxStudyHoursPerDay,
+    maxStudyHoursPerDay: user.maxStudyHoursPerDay, // stored in hours
   };
 }
 
@@ -53,7 +50,7 @@ async function editProfile(userId, data) {
 async function editStudyHours(userId, maxStudyHours) {
   const user = await User.findByIdAndUpdate(
     userId,
-    { maxStudyHoursPerDay: maxStudyHours },
+    { maxStudyHoursPerDay: Number(maxStudyHours) },
     {
       new: true,
     },

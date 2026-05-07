@@ -17,7 +17,6 @@ export default function AddSubjectFrom() {
     topics: "",
   });
 
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -47,23 +46,27 @@ export default function AddSubjectFrom() {
       !dailyStudyHours ||
       !topics.trim()
     ) {
-      setError("All the fields are required");
+      toast.error("All fields are required");
       return;
     }
 
     if (new Date(examDate) <= new Date()) {
-      setError("Exam date must be in future");
+      toast.error("Exam date must be in future");
       return;
     }
 
     try {
-      const res = await addSubject(formData);
+      const payload = {
+        ...formData,
+        dailyStudyHours: Number(formData.dailyStudyHours),
+      };
+      const res = await addSubject(payload);
 
       console.log(res.data);
       toast.success("Subject added successfully");
     } catch (err) {
       console.log(err);
-      setError(err.response?.data?.message || "Something went wrong");
+      toast.error(err.response?.data?.message || "Something went wrong");
     }
   };
 
@@ -192,6 +195,9 @@ export default function AddSubjectFrom() {
                 onChange={handleChange}
                 type="number"
                 name="dailyStudyHours"
+                placeholder="Enter hours (e.g. 2)"
+                min="1"
+                max="24"
                 style={{ background: "var(--login-input-background)" }}
                 className="w-full p-2 rounded-md"
               ></input>
@@ -232,18 +238,6 @@ export default function AddSubjectFrom() {
               </button>
             </div>
           </form>
-
-          {/* displaying the error mssg */}
-          {
-            <p
-              style={{
-                fontSize: "var(--login-text-size)",
-              }}
-              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
-            >
-              {error}
-            </p>
-          }
         </div>
 
         {/* image */}

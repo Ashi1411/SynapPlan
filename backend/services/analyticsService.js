@@ -287,7 +287,7 @@ async function getInsights(userId) {
     timeBuckets[slot].push(eff);
 
     //? to analyze that short sessions are more efficient or short sessions are more efficient
-    if (s.durationCompleted < 90) shortSessions.push(eff);
+    if (s.durationCompleted < 90 * 60)  shortSessions.push(eff); // multiplied to convert min to sec
     else longSessions.push(eff);
 
     //? to analyze efficiency of each session of each subject
@@ -406,7 +406,7 @@ async function getInsights(userId) {
   let streak = 0;
 
   for (let i = 0; i < sortedDays.length; i++) {
-    if (sortedDays[i][1] > 300) {
+    if (sortedDays[i][1] > 300 * 60) { // to convert min to sec
       streak++;
       if (streak >= 2) {
         insights.push("⚠️ Productivity drops after consecutive heavy days.");

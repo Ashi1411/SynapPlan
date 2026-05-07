@@ -8,6 +8,9 @@ import {
 
 import image from "../../images/settings page/security.png";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function SecurityComponent() {
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [maxHours, setMaxHours] = useState(0);
@@ -15,7 +18,6 @@ export default function SecurityComponent() {
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
 
   //! for getting max study hours
   useEffect(() => {
@@ -60,19 +62,19 @@ export default function SecurityComponent() {
 
     //? required fields
     if (!password || !confirmPassword) {
-      setError("All the fields are required");
+      toast.error("All the fields are required");
       return;
     }
 
     //? password match
     if (password !== confirmPassword) {
-      setError("Password and Confirm Password are not same");
+      toast.error("Password and Confirm Password are not same");
       return;
     }
 
     //? password length
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      toast.error("Password must be at least 6 characters");
       return;
     }
 
@@ -83,39 +85,41 @@ export default function SecurityComponent() {
       });
 
       console.log(res.data);
-      alert("Password changed successfully");
+      toast.success("Password changed successfully");
       setFormData({
         password: "",
         confirmPassword: "",
       });
-      setError("");
     } catch (err) {
       console.log(err);
-      setError(err.response?.data?.message || "Signup Failed");
+      toast.error(err.response?.data?.message || "Signup Failed");
     }
   };
 
   //! delete account
   const handleDeleteAccount = async () => {
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete your account?"
-  );
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete your account?",
+    );
 
-  if (!confirmDelete) return;
+    if (!confirmDelete) return;
 
-  try {
-    await deleteAccount();
+    try {
+      await deleteAccount();
 
-    alert("Account deleted successfully");
+      toast.success("Account deleted successfully");
 
-    window.location.href = "/login"; // redirect
-  } catch (err) {
-    alert(err.response?.data?.message);
-  }
-};
+      window.location.href = "/login"; // redirect
+    } catch (err) {
+      toast.error(err.response?.data?.message);
+    }
+  };
 
   return (
-    <div style={{ background: "var(--card-color-1)" }} className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen">
+    <div
+      style={{ background: "var(--card-color-1)" }}
+      className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
+    >
       <h1
         style={{
           color: "var(--hero-paragraph-color)",
@@ -240,18 +244,6 @@ export default function SecurityComponent() {
             ></input>
           </div>
 
-          {/* displaying the error mssg */}
-          {
-            <p
-              style={{
-                fontSize: "var(--login-text-size)",
-              }}
-              className="font-semibold text-red-600 flex flex-col justify-center items-center mt-3 text-center"
-            >
-              {error}
-            </p>
-          }
-
           <div className="my-6 text-center">
             <button
               onClick={handleSubmit}
@@ -282,7 +274,9 @@ export default function SecurityComponent() {
         </div>
 
         {/* image */}
-        <div style={{backgroundImage: `url(${image})`}} className="
+        <div
+          style={{ backgroundImage: `url(${image})` }}
+          className="
                   order-1
                   md:order-2
                   flex
@@ -298,9 +292,11 @@ export default function SecurityComponent() {
                   bg-no-repeat
                   rounded-2xl
                   overflow-hidden
-                ">
-                </div>
+                "
+        ></div>
       </div>
+
+      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
     </div>
   );
 }

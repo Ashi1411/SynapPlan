@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// const {checkForAuthentication} = require("../middlewares/auth");
+const {checkForAuthentication} = require("../middlewares/auth");
+
+//todo middlewares
+router.use(checkForAuthentication);
 
 const {
   getTodaySessionsController,
@@ -15,8 +18,6 @@ const {
   calculateSessionEfficiency
 } = require("../controllers/sessionController");
 
-//todo middlewares
-// router.use(checkForAuthentication);
 
 //todo routes
 //! get todays session

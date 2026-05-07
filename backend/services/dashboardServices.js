@@ -2,14 +2,18 @@ const Session = require("../models/session");
 const Subject = require("../models/subject");
 const mongoose = require("mongoose");
 
+const SECOND = 1;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+
 //! type of day today -> focus, normal/balanced, light
 function calculateDayType(todaySessions) {
   const totalDuration = todaySessions.reduce((sum, s) => {
     return sum + s.duration;
   }, 0);
 
-  if (totalDuration > 240) return "Focus Day";
-  if (totalDuration > 120) return "Balanced Day";
+  if (totalDuration > 4 * HOUR) return "Focus Day";
+  if (totalDuration > 2 * HOUR) return "Balanced Day";
   return "Light Day";
 }
 
@@ -21,7 +25,7 @@ function calculateCognitiveCapacity(todaySessions) {
   const completed = todaySessions.reduce(
     (sum, s) => sum + s.durationCompleted, 0);
 
-  const dailyCapacity = 360;
+  const dailyCapacity = 6 * HOUR;
   const remaining = Math.max(dailyCapacity - completed, 0);
 
 
@@ -131,14 +135,16 @@ async function getUpcomingDeadlines(userId) {
 function generateRecommendations({todaySessions, upcomingDeadlines, weeklyProductivity}) {
     const recommendations = [];
 
-    const totalToday = todaySessions.reduce((sum, s) => 
-    {sum + s.durationCompleted}, 0);
+    const totalToday = todaySessions.reduce(
+  (sum, s) => sum + s.durationCompleted,
+  0
+);
 
     //? recommendation related to type of day tomorrow on the basis of work done today
-    if (totalToday > 360) {
+    if (totalToday > 6 * HOUR) {
         recommendations.push("You studied a lot today. Make sure to rest.");
     }
-    else if (totalToday > 120) {
+    else if (totalToday > 2 * HOUR) {
         recommendations.push("Tomorrow could be a balanced day.");
     }
     else {
@@ -196,7 +202,7 @@ function generateRecommendations({todaySessions, upcomingDeadlines, weeklyProduc
   (sum, d) => sum + d.totalStudy, 0
 );
 
-if (totalWeekly < 180) {
+if (totalWeekly < 3 * HOUR) {
   recommendations.push("Your weekly consistency is low...");
 }
 

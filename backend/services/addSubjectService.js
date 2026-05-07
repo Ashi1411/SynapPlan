@@ -74,7 +74,7 @@ async function createSubjectWithSessions(data, userId) {
   };
 
   const baseHours = Number(dailyStudyHours);
-  const adjustedHours = getAdjustedHours(baseHours, priority, intensity);
+  const adjustedHours = getAdjustedHours(baseHours, priority, intensity); // in hours
 
   //* group the topics -> keep related topics together
   function groupTopics(topics, groupSize = 2) {
@@ -141,7 +141,7 @@ async function createSubjectWithSessions(data, userId) {
       userId,
       subjectId: subject._id,
       date: sessionDate,
-      duration: adjustedHours * 60,
+      duration: adjustedHours * 3600, // to convert hours into seconds
       topics: topicPlan[i],
       durationCompleted: 0,
       breakDuration: 0,

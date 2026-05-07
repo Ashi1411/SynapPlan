@@ -45,7 +45,7 @@ const subjectSchema = new mongoose.Schema({
     topics: [topicSchema],
 
     dailyStudyHours: {
-        type: Number,
+        type: Number, // stored in hours
         default: 2
     }
 }, {timestamps: true});

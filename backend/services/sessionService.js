@@ -1,6 +1,10 @@
 const Session = require("../models/session");
 const Subject = require("../models/subject");
 
+const SECOND = 1;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+
 //! populate function -> to add the subject data also along with session data
 async function populateSession(session) {
   return await session.populate("subjectId", "subjectName intensity");
@@ -58,7 +62,7 @@ async function startSession(sessionId, userId) {
   for (const s of activeSessions) {
     if (s.startTime) {
       const elapsed = Math.floor((Date.now() - s.startTime) / 1000);
-      s.durationCompleted += Math.floor(elapsed / 60);
+      s.durationCompleted += elapsed;
     }
 
     s.startTime = null;
@@ -89,7 +93,7 @@ async function pauseSession(sessionId, userId) {
 
   const elapsed = Math.floor((Date.now() - session.startTime) / 1000);
 
-  session.durationCompleted += Math.floor(elapsed / 60);
+  session.durationCompleted += elapsed;
   session.startTime = null;
   session.status = "pending";
 
@@ -107,7 +111,7 @@ async function startBreak(sessionId, userId) {
 
   const elapsed = Math.floor((Date.now() - session.startTime) / 1000);
 
-  session.durationCompleted += Math.floor(elapsed / 60);
+  session.durationCompleted += elapsed;
 
   session.startTime = null;
   session.status = "break";
@@ -127,7 +131,7 @@ async function endBreak(sessionId, userId) {
 
   const breakTime = Math.floor((Date.now() - session.breakStartTime) / 1000);
 
-  session.breakDuration += Math.floor(breakTime / 60);
+  session.breakDuration += breakTime;
   session.breakCount += 1;
 
   session.breakStartTime = null;
@@ -148,7 +152,7 @@ async function completeSession(sessionId, userId) {
 
   if (session.status === "active" && session.startTime) {
     const elapsed = Math.floor((Date.now() - session.startTime) / 1000);
-    session.durationCompleted += Math.floor(elapsed / 60);
+    session.durationCompleted += elapsed;
   }
 
   session.startTime = null;
@@ -179,12 +183,12 @@ async function getSession(sessionId, userId) {
 
   if (session.status === "active" && session.startTime) {
     const elapsed = Math.floor((Date.now() - session.startTime) / 1000);
-    currentDuration += Math.floor(elapsed / 60);
+    currentDuration += elapsed;
   }
 
   if (session.status === "break" && session.breakStartTime) {
     const elapsed = Math.floor((Date.now() - session.breakStartTime) / 1000);
-    currentBreak += Math.floor(elapsed / 60);
+    currentBreak += elapsed;
   }
 
   return {

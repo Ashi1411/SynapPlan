@@ -10,6 +10,9 @@ import { completeSession } from "../../api/auth";
 import { getSession } from "../../api/auth";
 import { ToastContainer, toast } from "react-toastify";
 
+import { formatTimer } from "../../utils/formatTimer";
+import { formatDuration } from "../../utils/formatDuration";
+
 export default function FocusTimer() {
   const { id } = useParams();
 
@@ -64,8 +67,8 @@ export default function FocusTimer() {
   //! for setting the correct time even after reloading the page
   useEffect(() => {
     if (session) {
-      setBaseTime((session.durationCompleted || 0) * 60);
-      setBaseBreak((session.breakDuration || 0) * 60);
+      setBaseTime(session.durationCompleted || 0);
+      setBaseBreak(session.breakDuration || 0);
     }
   }, [session]);
 
@@ -103,7 +106,7 @@ export default function FocusTimer() {
   //! complete session
   useEffect(() => {
     const complete = async () => {
-      if (session && time >= session.duration * 60 && !isCompleted) {
+      if (session && time >= session.duration && !isCompleted) {
         setIsCompleted(true);
         try {
           await completeSession(session._id);
@@ -117,21 +120,12 @@ export default function FocusTimer() {
     complete();
   }, [time, session, isCompleted]);
 
-  //! formatting minutes in correct format
-  const formatTime = (seconds) => {
-    const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
-    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-    const sec = String(seconds % 60).padStart(2, "0");
-
-    return `${hrs}:${mins}:${sec}`;
-  };
-
   //! handle buttons
   //? start button
   const handleStart = async () => {
     if (!session) return;
     const res = await startSession(session._id);
-    setBaseTime((res.data.durationCompleted || 0) * 60);
+    setBaseTime(res.data.durationCompleted || 0);
     setSession(res.data);
 
     setIsSessionRunning(true);
@@ -149,7 +143,7 @@ export default function FocusTimer() {
 
     const res = await pauseSession(session._id);
 
-    setBaseTime((res.data.durationCompleted || 0) * 60);
+    setBaseTime(res.data.durationCompleted || 0);
     setSession(res.data);
 
     setIsSessionRunning(false);
@@ -169,7 +163,7 @@ export default function FocusTimer() {
     if (isBreakRunning) {
       // end break now
       res = await endBreak(session._id);
-      setBaseBreak((res.data.breakDuration || 0) * 60);
+      setBaseBreak(res.data.breakDuration || 0);
 
       setSession(res.data);
 
@@ -179,7 +173,7 @@ export default function FocusTimer() {
       // start break now
       res = await startBreak(session._id);
 
-      setBaseTime((res.data.durationCompleted || 0) * 60);
+      setBaseTime(res.data.durationCompleted || 0);
       setSession(res.data);
 
       setIsBreakRunning(true);
@@ -246,7 +240,7 @@ export default function FocusTimer() {
             }}
             className="font-bold px-4 sm:px-8 py-6 sm:py-8 text-xl sm:text-3xl md:text-4xl"
           >
-            {formatTime(isBreakRunning ? breakTime : time)}
+            {formatTimer(isBreakRunning ? breakTime : time)}
           </h1>
         </div>
 
@@ -300,7 +294,7 @@ export default function FocusTimer() {
             }}
             className="font-semibold mb-6"
           >
-            Duration Completed: {Math.floor(time / 60)} mins
+            Duration Completed: {formatDuration(time)}
           </p>
           <p
             style={{
@@ -309,7 +303,7 @@ export default function FocusTimer() {
             }}
             className="font-semibold mb-6"
           >
-            Break Duration: {Math.floor(breakTime / 60)} mins
+            Break Duration: {formatDuration(breakTime)}
           </p>
           <p
             style={{
@@ -333,7 +327,7 @@ export default function FocusTimer() {
           className="font-bold px-3 sm:px-6 py-6 text-center"
         >
           Session Completed :{" "}
-          {((time / 60 / session?.duration) * 100).toFixed(1)}%
+          {((time / session?.duration) * 100).toFixed(1)}%
         </p>
       </div>
       <ToastContainer

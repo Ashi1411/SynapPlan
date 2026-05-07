@@ -36,7 +36,14 @@ async function hashPassword(password) {
 //! for validating user password for login
 async function comparePassword(email, password) {
     const user = await User.findOne({email});
-    return bcrypt.compare(password, user.password); //? plain-text password, hashed password
+
+    if (!user) return false;
+
+    const isValid = await bcrypt.compare(password, user.password); //? plain-text password, hashed password
+
+    if (!isValid) return null;
+
+    return user;
 }
 
 module.exports = {setUser, getUser, hashPassword, comparePassword}

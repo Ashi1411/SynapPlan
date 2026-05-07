@@ -20,17 +20,17 @@ const sessionSchema = new mongoose.Schema({
 
     topics: [String],
 
-    duration: {
+    duration: { // stored in seconds
         type: Number,
         required: true
     },
 
-    durationCompleted: {
+    durationCompleted: { // stored in seconds
         type: Number,
         default: 0
     },
 
-    breakDuration: {
+    breakDuration: { // stored in seconds
         type: Number,
         default: 0
     },

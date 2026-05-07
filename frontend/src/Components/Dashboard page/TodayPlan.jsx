@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getDashboard } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
+import { formatDuration } from "../../utils/formatDuration"; // to integrate with second based backend
+
 
 export default function TodayPlan() {
   const navigate = useNavigate();
@@ -38,7 +40,7 @@ export default function TodayPlan() {
           return(
             <div
               style={{ background: "var(--decision-engine-heading)" }}
-              className="rounded-2xl"
+              className="rounded-2xl h-full flex flex-col"
               key={i}
             >
               <h2
@@ -46,13 +48,13 @@ export default function TodayPlan() {
                   color: "var(--section-subheading-color)",
                   fontSize: "var(--feature-heading-size)",
                 }}
-                className="text-center m-2 sm:m-3  font-semibold"
+                className="text-center m-2 sm:m-3 font-semibold"
               >
                 {elem?.subjectId?.subjectName} 
               </h2>
               <div
                 style={{ background: "var(--decision-engine-paragraph)" }}
-                className="rounded-2xl text-center p-3 sm:p-4"
+                className="rounded-2xl text-center p-3 sm:p-4 flex flex-col justify-between h-full"
               >
                 <p
                   style={{
@@ -61,7 +63,7 @@ export default function TodayPlan() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration : {elem?.duration} min
+                  Duration : {formatDuration(elem?.duration)}
                 </p>
 
                 <p
@@ -71,7 +73,7 @@ export default function TodayPlan() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration Completed : {elem?.durationCompleted} min
+                  Duration Completed : {formatDuration(elem?.durationCompleted)}
                 </p>
 
                 <p
@@ -84,7 +86,7 @@ export default function TodayPlan() {
                     Intensity : {elem?.subjectId?.intensity}
                 </p>
 
-                <p
+                <div
                   style={{
                     color: "var(--section-heading-color)",
                     fontSize: "var(--feature-paragraph-size)",
@@ -96,7 +98,7 @@ export default function TodayPlan() {
                         <div key={idx}>{ele}</div>
                       )
                     })}
-                </p>
+                </div>
 
                 <button
                 onClick={() => navigate(`/session/${elem._id}`)}

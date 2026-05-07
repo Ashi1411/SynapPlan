@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getUserDetails, editProfile } from "../../api/auth";
+//! react toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import image from "../../images/settings page/profile.png";
 
@@ -42,22 +45,87 @@ export default function Profile() {
       setUserData(updated.data);
 
       setIsEditing(false);
+      toast.success("Profile updated successfully");
     } catch (err) {
-      alert(err.response?.data?.message);
+      toast.error(err.response?.data?.message);
     }
   };
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-16 px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10">
+    <div
+      style={{ background: "var(--card-color-2)" }}
+      className="mt-16 px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10"
+    >
       <div className="max-w-5xl mx-auto">
-      {/* profile image */}
-      <div>
-        <img src={image} alt='profile_image' className="mb-4 sm:mb-6 md:mb-8 mx-auto w-32 sm:w-40 md:w-52 lg:w-60 h-auto object-contain"></img>
-      </div>
+        {/* profile image */}
+        <div>
+          <img
+            src={image}
+            alt="profile_image"
+            className="mb-4 sm:mb-6 md:mb-8 mx-auto w-32 sm:w-40 md:w-52 lg:w-60 h-auto object-contain"
+          ></img>
+        </div>
 
-      {/* user details */}
-      <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 items-stretch">
+        {/* user details */}
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 items-stretch">
+            <div
+              style={{ background: "var(--card-color-1)" }}
+              className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
+            >
+              <h2
+                style={{
+                  color: "var(--dashboard-hero-heading-color)",
+                  fontSize: "var(--dashboard-hero-subheading-size)",
+                }}
+                className="font-bold"
+              >
+                Name
+              </h2>
+              <p
+                style={{
+                  color: "var(--dashboard-hero-paragraph-color)",
+                  fontSize: "var(--dashboard-hero-paragraph-size)",
+                }}
+                className="font-semibold"
+              >
+                {isEditing ? (
+                  <input
+                    name="fullname"
+                    value={form.fullname}
+                    onChange={handleChange}
+                    className="bg-transparent border-b outline-none w-full"
+                  />
+                ) : (
+                  userData?.name
+                )}
+              </p>
+            </div>
+            <div
+              style={{ background: "var(--card-color-1)" }}
+              className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
+            >
+              <h2
+                style={{
+                  color: "var(--dashboard-hero-heading-color)",
+                  fontSize: "var(--dashboard-hero-subheading-size)",
+                }}
+                className="font-bold"
+              >
+                Email
+              </h2>
+              <p
+                style={{
+                  color: "var(--dashboard-hero-paragraph-color)",
+                  fontSize: "var(--dashboard-hero-paragraph-size)",
+                }}
+                className="font-semibold"
+              >
+                {userData?.email}
+              </p>
+            </div>
+          </div>
+
           <div
             style={{ background: "var(--card-color-1)" }}
             className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
@@ -69,7 +137,7 @@ export default function Profile() {
               }}
               className="font-bold"
             >
-              Name
+              Interests
             </h2>
             <p
               style={{
@@ -80,118 +148,69 @@ export default function Profile() {
             >
               {isEditing ? (
                 <input
-                  name="fullname"
-                  value={form.fullname}
+                  name="interests"
+                  value={form.interests}
                   onChange={handleChange}
                   className="bg-transparent border-b outline-none w-full"
                 />
               ) : (
-                userData?.name
+                userData?.interests || "No interests added"
               )}
             </p>
           </div>
-          <div
-            style={{ background: "var(--card-color-1)" }}
-            className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
-          >
-            <h2
-              style={{
-                color: "var(--dashboard-hero-heading-color)",
-                fontSize: "var(--dashboard-hero-subheading-size)",
-              }}
-              className="font-bold"
-            >
-              Email
-            </h2>
-            <p
-              style={{
-                color: "var(--dashboard-hero-paragraph-color)",
-                fontSize: "var(--dashboard-hero-paragraph-size)",
-              }}
-              className="font-semibold"
-            >
-              {userData?.email}
-            </p>
-          </div>
         </div>
 
-        <div
-          style={{ background: "var(--card-color-1)" }}
-          className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
-        >
-          <h2
-            style={{
-              color: "var(--dashboard-hero-heading-color)",
-              fontSize: "var(--dashboard-hero-subheading-size)",
-            }}
-            className="font-bold"
-          >
-            Interests
-          </h2>
-          <p
-            style={{
-              color: "var(--dashboard-hero-paragraph-color)",
-              fontSize: "var(--dashboard-hero-paragraph-size)",
-            }}
-            className="font-semibold"
-          >
-            {isEditing ? (
-              <input
-                name="interests"
-                value={form.interests}
-                onChange={handleChange}
-                className="bg-transparent border-b outline-none w-full"
-              />
-            ) : (
-              userData?.interests || "No interests added"
-            )}
-          </p>
-        </div>
-      </div>
-
-      {/* edit profile button */}
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
-        {!isEditing ? (
-          <button
-            onClick={() => setIsEditing(true)}
-            style={{
-              background: "var(--login-button-background)",
-              color: "var(--login-button-text-color)",
-              fontSize: "var(--dashboard-today-plan-button-size)",
-            }}
-            className="px-6 sm:px-10 py-2 rounded-2xl font-bold text-sm sm:text-base"
-          >
-            Edit Profile
-          </button>
-        ) : (
-          <div>
+        {/* edit profile button */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
+          {!isEditing ? (
             <button
-              onClick={handleSave}
+              onClick={() => setIsEditing(true)}
               style={{
                 background: "var(--login-button-background)",
                 color: "var(--login-button-text-color)",
                 fontSize: "var(--dashboard-today-plan-button-size)",
               }}
-              className="px-6 sm:px-10 py-2 rounded-2xl font-bold m-2 sm:m-3"
+              className="px-6 sm:px-10 py-2 rounded-2xl font-bold text-sm sm:text-base"
             >
-              Save
+              Edit Profile
             </button>
+          ) : (
+            <div>
+              <button
+                onClick={handleSave}
+                style={{
+                  background: "var(--login-button-background)",
+                  color: "var(--login-button-text-color)",
+                  fontSize: "var(--dashboard-today-plan-button-size)",
+                }}
+                className="px-6 sm:px-10 py-2 rounded-2xl font-bold m-2 sm:m-3"
+              >
+                Save
+              </button>
 
-            <button
-              onClick={() => setIsEditing(false)}
-              style={{
-                background: "var(--login-button-background)",
-                color: "var(--login-button-text-color)",
-                fontSize: "var(--dashboard-today-plan-button-size)",
-              }}
-              className="px-6 sm:px-10 py-2 rounded-2xl font-bold m-2 sm:m-3"
-            >
-              Cancel
-            </button>
-          </div>
-        )}
+              <button
+                onClick={() => {
+                  setForm({
+                    fullname: userData?.name || "",
+                    interests: userData?.interests || "",
+                  });
+
+                  setIsEditing(false);
+                }}
+                style={{
+                  background: "var(--login-button-background)",
+                  color: "var(--login-button-text-color)",
+                  fontSize: "var(--dashboard-today-plan-button-size)",
+                }}
+                className="px-6 sm:px-10 py-2 rounded-2xl font-bold m-2 sm:m-3"
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-      </div>
+      {/* <ToastContainer position="top-right" autoClose={3000} theme="colored" /> */}
     </div>
   );
 }

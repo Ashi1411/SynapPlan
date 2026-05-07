@@ -10,6 +10,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { formatDuration } from "../../utils/formatDuration";
 
 export default function ProductivityTrend() {
   const [data, setData] = useState(null);
@@ -35,7 +36,7 @@ export default function ProductivityTrend() {
       }),
       value: isEfficiency
         ? Math.round((item.focusEfficiency || 0) * 100)
-        : item.totalStudy || 0,
+        : Math.round((item.totalStudy || 0) / 60),
     }));
   };
 
@@ -49,56 +50,55 @@ export default function ProductivityTrend() {
 
   const monthlyEfficiencyData = formatData(data?.monthlyFocusEfficiency, true);
 
-
-
   //! reusable chart
   const renderChart = (chartData, color, unit) => {
-  if (!chartData.length)
-    return <p className="text-center p-4">No data available</p>;
+    if (!chartData.length)
+      return <p className="text-center p-4">No data available</p>;
 
-  return (
-    <ResponsiveContainer width="100%" height={window.innerWidth < 640 ? 250 : 320}>
-      <LineChart
-        data={chartData}
-        style={{
-          background: "#ffffff",
-          borderRadius: "12px",
-          padding: "10px",
-        }}
+    return (
+      <ResponsiveContainer
+        width="100%"
+        height="100%"
       >
-        <CartesianGrid stroke="#e0e0e0" strokeDasharray="5 5" />
-        
-        <XAxis dataKey="date" stroke="#555" tick={{ fontSize: 12 }} />
-        <YAxis stroke="#555" />
+        <LineChart data={chartData}>
+          <CartesianGrid stroke="#e0e0e0" strokeDasharray="5 5" />
 
-        <Tooltip
-          contentStyle={{
-            backgroundColor: "#fff",
-            borderRadius: "8px",
-            border: "1px solid #ddd",
-          }}
-          formatter={(value) => `${value} ${unit}`}
-        />
+          <XAxis dataKey="date" stroke="#555" tick={{ fontSize: 12 }} />
+          <YAxis stroke="#555" tick={{ fontSize: 12 }} />
 
-        <Line
-          type="monotone"
-          dataKey="value"
-          stroke={color}
-          strokeWidth={3}
-          dot={{ r: 4 }}
-          animationDuration={800}
-        />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-};
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#fff",
+              borderRadius: "8px",
+              border: "1px solid #ddd",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.1)", // shadow
+            }}
+            formatter={(value) =>
+              unit === "min" ? formatDuration(value * 60) : `${value}%`
+            }
+          />
+
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke={color}
+            strokeWidth={3}
+            dot={{ r: 4 }}
+            animationDuration={800}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    );
+  };
 
   //! loading state
-  if (!data)
-    return <p className="text-center p-10">Loading analytics...</p>;
+  if (!data) return <p className="text-center p-10">Loading analytics...</p>;
 
   return (
-    <div style={{ background: "var(--card-color-1)" }} className="p-4 md:p-8 lg:p-10">
+    <div
+      style={{ background: "var(--card-color-1)" }}
+      className="p-4 md:p-8 lg:p-10"
+    >
       <h1
         style={{
           color: "var(--hero-paragraph-color)",
@@ -138,7 +138,9 @@ export default function ProductivityTrend() {
       </div>
 
       {/* Weekly */}
-      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4 md:m-10 ${weekly ? "" : "hidden"}`}>
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4 md:m-10 ${weekly ? "" : "hidden"}`}
+      >
         {/* weekly productivity - first graph */}
         <div
           style={{ background: "var(--card-color-2)" }}
@@ -154,7 +156,11 @@ export default function ProductivityTrend() {
             Weekly Productivity
           </h2>
 
-          {renderChart(weeklyProductivityData, "#4CAF50", "min")}
+          <div className="w-full h-[280px] p-3">
+            <div className="w-full h-full bg-white rounded-xl p-2">
+              {renderChart(weeklyProductivityData, "#4CAF50", "min")}
+            </div>
+          </div>
         </div>
 
         {/* weekly focus efficiency - second graph */}
@@ -172,7 +178,11 @@ export default function ProductivityTrend() {
             Weekly Focus Efficiency
           </h2>
 
-          {renderChart(weeklyEfficiencyData, "#2196F3", "%")}
+          <div className="w-full h-[280px] p-3">
+            <div className="w-full h-full bg-white rounded-xl p-2">
+              {renderChart(weeklyEfficiencyData, "#2196F3", "%")}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -194,8 +204,12 @@ export default function ProductivityTrend() {
           >
             Monthly Productivity
           </h2>
-
-          {renderChart(monthlyProductivityData, "#FF9800", "min")}
+            
+            <div className="w-full h-[280px] p-3">
+            <div className="w-full h-full bg-white rounded-xl p-2">
+              {renderChart(monthlyProductivityData, "#FF9800", "min")}
+            </div>
+          </div>
         </div>
 
         {/* second graph */}
@@ -212,8 +226,12 @@ export default function ProductivityTrend() {
           >
             Monthly Focus Efficiency
           </h2>
-
-          {renderChart(monthlyEfficiencyData, "#9C27B0", "%")}
+            
+            <div className="w-full h-[280px] p-3">
+            <div className="w-full h-full bg-white rounded-xl p-2">
+              {renderChart(monthlyEfficiencyData, "#9C27B0", "%")}
+            </div>
+          </div>
         </div>
       </div>
     </div>

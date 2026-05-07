@@ -37,7 +37,7 @@ export default function InsightPanel() {
       >
         {!data?.insights?.insights?.length && (
           <p className="text-center py-6 text-sm sm:text-base">
-            No insights available yet 📊
+            No study insights available yet 📊
           </p>
         )}
 

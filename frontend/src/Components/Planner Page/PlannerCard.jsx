@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getPlanner } from "../../api/auth";
 import { useNavigate } from "react-router-dom";
 
+import { formatDuration } from "../../utils/formatDuration"; // to integrate with seconds based backend
+
 export default function PlannerCard() {
   const navigate = useNavigate();
 
@@ -20,7 +22,7 @@ export default function PlannerCard() {
   }, []);
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-16 min-h-screen">
+    <div style={{ background: "var(--card-color-2)" }} className="mt-16 pb-6">
       {/* date bar */}
       <div
         style={{
@@ -30,7 +32,17 @@ export default function PlannerCard() {
         }}
         className="text-center p-2 font-bold"
       >
-        <p>Mar 18 - Mar 24</p>
+        <p>
+  {new Date(data?.startOfWeek).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  })}{" "}
+  -{" "}
+  {new Date(data?.endOfWeek).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  })}
+</p>
       </div>
 
       {/* Day bar */}
@@ -107,13 +119,26 @@ export default function PlannerCard() {
       </div>
 
       {/* Today's Plan */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-10 px-2 sm:px-4 md:px-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-4 md:px-8 mb-6">
         {/* cards */}
-        {data?.weeklySessions?.[day]?.map((elem, i) => {
+        {day &&
+  data?.weeklySessions?.[day]?.length === 0 && (
+    <p
+      className="text-center col-span-full font-bold"
+      style={{
+        color: "var(--dashboard-hero-heading-color)",
+        fontSize: "var(--dashboard-today-plan-button-size)"
+      }}
+    >
+      No sessions planned for this day 📅
+    </p>
+)}
+
+        {day && data?.weeklySessions?.[day]?.map((elem, i) => {
           return (
             <div
               style={{ background: "var(--how-it-works-color)" }}
-              className="rounded-2xl h-full"
+              className="rounded-2xl h-full flex flex-col"
               key={i}
             >
               <h2
@@ -127,7 +152,7 @@ export default function PlannerCard() {
               </h2>
               <div
                 style={{ background: "var(--decision-engine-paragraph)" }}
-                className="rounded-2xl text-center p-2"
+                className="rounded-2xl text-center p-2 flex flex-col justify-between h-full"
               >
                 <p
                   style={{
@@ -136,7 +161,7 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration : {elem?.duration} min
+                  Duration : {formatDuration(elem?.duration)}
                 </p>
 
                 <p
@@ -146,7 +171,7 @@ export default function PlannerCard() {
                   }}
                   className="font-semibold m-1"
                 >
-                  Duration Completed : {elem?.durationCompleted} min
+                  Duration Completed : {formatDuration(elem?.durationCompleted)}
                 </p>
 
                 <p
@@ -174,14 +199,14 @@ export default function PlannerCard() {
 
                 <button
                   onClick={() =>
-                    navigate(`/session/${elem._id._id || elem._id}`)
+                    navigate(`/session/${elem?._id}`)
                   }
                   style={{
                     fontSize: "var(--dashboard-today-plan-button-size)",
                     color: "var(--hero-button-color)",
                     background: "var(--how-it-works-color)",
                   }}
-                  className="px-4 sm:px-6 py-1 w-full sm:w-auto rounded-2xl m-2 font-bold"
+                  className="px-4 sm:px-6 py-1 w-full sm:w-auto rounded-2xl my-2 font-bold"
                 >
                   Start Session
                 </button>

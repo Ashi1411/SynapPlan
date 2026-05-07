@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAnalytics } from "../../api/auth";
 
+import { formatDuration } from "../../utils/formatDuration"; // to integrate with seconds based backend
+
 import image from "../../images/sessions page/weekly_summary.png";
 
 export default function WeeklySummary() {
@@ -44,7 +46,7 @@ export default function WeeklySummary() {
             }}
             className="p-2 rounded-2xl text-center font-bold my-2 sm:my-3"
           >
-            Total Study Hours: {data?.durationCompleted} mins
+            Total Study Hours: {formatDuration(data?.durationCompleted)}
           </p>
           <p
             style={{

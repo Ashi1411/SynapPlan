@@ -15,7 +15,7 @@ router.post("/signup", handleUserSignup);
 router.post("/login", handleUserLogin);
 
 //! checking if the user is logged in or not
-router.get("/me", handleGetCurrentUser)
+router.get("/me", checkForAuthentication, handleGetCurrentUser)
 
 //! dashboard page
 router.get("/dashboard", checkForAuthentication, getDashboard);
@@ -31,7 +31,11 @@ router.get("/analytics", checkForAuthentication, getAnalytics);
 
 //! logout code
 router.post("/logout", (req, res) => {
-  res.clearCookie("token"); // same cookie used in login
+  res.clearCookie("token", {
+  httpOnly: true,
+  sameSite: "lax",
+  secure: false
+}); // same cookie used in login
 
   res.json({ message: "Logged out successfully" });
 });
