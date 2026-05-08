@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import insights from "../../images/demo page/insights.png"
 import weeklySummary from "../../images/demo page/weekly_summary.png"
 

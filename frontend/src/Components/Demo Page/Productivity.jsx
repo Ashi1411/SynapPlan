@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import productivity from "../../images/demo page/productivity_trend.png"
 import performance from "../../images/demo page/performance.png"
 

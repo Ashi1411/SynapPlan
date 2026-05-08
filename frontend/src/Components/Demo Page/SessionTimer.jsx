@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import image from "../../images/demo page/focus_timer.png"
 
 export default function SessionTimer() {
