@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { formatDuration } from "../../utils/formatDuration"; // to integrate with seconds based backend
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function PlannerCard() {
   const navigate = useNavigate();
 
@@ -123,7 +126,7 @@ export default function PlannerCard() {
         {/* cards */}
         {day &&
   data?.weeklySessions?.[day]?.length === 0 && (
-    <p
+    <motion.p
       className="text-center col-span-full font-bold"
       style={{
         color: "var(--dashboard-hero-heading-color)",
@@ -131,7 +134,7 @@ export default function PlannerCard() {
       }}
     >
       No sessions planned for this day 📅
-    </p>
+    </motion.p>
 )}
 
         {day && data?.weeklySessions?.[day]?.map((elem, i) => {

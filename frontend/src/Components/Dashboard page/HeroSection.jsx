@@ -6,6 +6,9 @@ import good from "../../images/dashboard page/good.png";
 import moderate from "../../images/dashboard page/moderate.png";
 import poor from "../../images/dashboard page/poor.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function HeroSection() {
   const [data, setData] = useState(null);
 
@@ -41,7 +44,9 @@ export default function HeroSection() {
         }}
       >
         <div className="flex flex-col justify-center items-center mx-auto text-center min-h-[40vh] sm:min-h-[50vh] md:h-[90vh] w-full max-w-2xl px-2 sm:px-4">
-          <h1
+          <motion.h1
+            {...fadeUp}
+            transition={{ delay: 0.1 }}
             style={{
               fontSize: "var(--dashboard-hero-heading-size)",
               color: "var(--dashboard-hero-heading-color)",
@@ -49,8 +54,10 @@ export default function HeroSection() {
             className="font-bold mt-12 md:mt-6"
           >
             Today's Study Mode
-          </h1>
-          <p
+          </motion.h1>
+          <motion.p
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               fontSize: "var(--dashboard-hero-subheading-size)",
               color: "var(--dashboard-hero-subheading-color)",
@@ -58,8 +65,10 @@ export default function HeroSection() {
             className="font-bold mb-6 md:mb-10"
           >
             🔵{data?.dayType || "Loading..."}
-          </p>
-          <p
+          </motion.p>
+          <motion.p
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               fontSize: "var(--dashboard-hero-paragraph-size)",
               color: "var(--dashboard-hero-paragraph-color)",
@@ -67,14 +76,14 @@ export default function HeroSection() {
             className="font-bold"
           >
             Based on your recent productivity trends, today is {data?.dayType}.
-          </p>
+          </motion.p>
         </div>
       </div>
 
       {/* second grid */}
       <div className="flex flex-col justify-center items-center text-center px-4 min-h-[150px] md:min-h-0 gap-4">
         {/* image of battery */}
-        <div>
+        <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
           {data?.cognitive !== undefined && (
             <img
               src={getBatteryImage(data.cognitive)}
@@ -82,10 +91,12 @@ export default function HeroSection() {
               className="w-60 md:w-80 object-contain"
             />
           )}
-        </div>
+        </motion.div>
         {/* battery percentage */}
         <div>
-          <p
+          <motion.p
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               color: "var(--dashboard-hero-heading-color)",
               fontSize: "var(--dashboard-battery-percent-size)",
@@ -93,7 +104,7 @@ export default function HeroSection() {
             className="font-bold"
           >
             {data?.cognitive ?? "--"}% Cognitive Capacity Remaining
-          </p>
+          </motion.p>
         </div>
       </div>
     </div>

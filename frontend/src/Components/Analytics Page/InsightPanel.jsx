@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { getAnalytics } from "../../api/auth";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function InsightPanel() {
   const [data, setData] = useState(null);
   const [weekly, setWeekly] = useState(true); //? true when the selected button is week
@@ -20,7 +23,9 @@ export default function InsightPanel() {
       style={{ background: "var(--card-color-2)" }}
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
-      <h1
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -28,7 +33,7 @@ export default function InsightPanel() {
         className="text-center pt-6 sm:pt-10 pb-2 font-bold px-2"
       >
         INTELLIGENCE INSIGHTS PANEL
-      </h1>
+      </motion.h1>
 
       {/* intelligence insights */}
       <div
@@ -36,14 +41,18 @@ export default function InsightPanel() {
         className="p-3 sm:p-4 md:p-6 rounded-2xl max-w-4xl mx-auto"
       >
         {!data?.insights?.insights?.length && (
-          <p className="text-center py-6 text-sm sm:text-base">
+          <motion.p
+            {...fadeUp}
+            transition={{ delay: 0.1 }}
+            className="text-center py-6 text-sm sm:text-base"
+          >
             No study insights available yet 📊
-          </p>
+          </motion.p>
         )}
 
         {data?.insights?.insights?.map((ele, i) => {
           return (
-            <div key={i}>
+            <motion.div {...fadeUp} transition={{ delay: 0.1 }} key={i}>
               <p
                 style={{
                   background: "var(--card-color-2)",
@@ -54,7 +63,7 @@ export default function InsightPanel() {
               >
                 {ele}
               </p>
-            </div>
+            </motion.div>
           );
         })}
       </div>

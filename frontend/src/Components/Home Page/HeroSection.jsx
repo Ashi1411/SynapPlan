@@ -3,6 +3,9 @@ import "../../styles/global.css";
 import hero_section from "../../images/home page/home_page_hero_section.png";
 import { Link } from "react-router-dom";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function HeroSection() {
   return (
     <div
@@ -17,7 +20,9 @@ export default function HeroSection() {
         style={{ width: "var(--width-of-section)" }}
         className="flex flex-col justify-center items-center mx-auto text-center h-screen"
       >
-        <h1
+        <motion.h1
+          {...fadeUp}
+          transition={{ delay: 0.1 }}
           style={{
             fontSize: "var(--hero-section-heading)",
             color: "var(--hero-heading-color)",
@@ -25,8 +30,10 @@ export default function HeroSection() {
           className="font-bold mb-4"
         >
           The Planner That Adapts to You
-        </h1>
-        <p
+        </motion.h1>
+        <motion.p
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{
             fontSize: "var(--hero-section-subheading)",
             color: "var(--hero-subheading-color)",
@@ -35,8 +42,10 @@ export default function HeroSection() {
         >
           A smart system that analyzes your study behavior and generates the
           most effective daily plan automatically.
-        </p>
-        <p
+        </motion.p>
+        <motion.p
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{
             fontSize: "var(--hero-section-paragraph)",
             color: "var(--hero-paragraph-color)",
@@ -46,9 +55,13 @@ export default function HeroSection() {
           Monitor productivity, balance cognitive load, recover missed work, and
           stay consistent with intelligent recommendations designed to maximize
           results without burnout.
-        </p>
+        </motion.p>
 
-        <div className="flex gap-10 m-10">
+        <motion.div
+          className="flex gap-10 m-10"
+          {...fadeUp}
+          transition={{ delay: 0.4 }}
+        >
           <Link to="/demo">
             <button
               style={{
@@ -72,7 +85,7 @@ export default function HeroSection() {
               Get Started
             </button>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

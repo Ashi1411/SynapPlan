@@ -1,12 +1,16 @@
 import React from "react";
 import academic_debt from "../../images/feature page/academic_debt.png";
 
+import { motion } from "framer-motion";
+import { fadeLeft, fadeRight } from "../../animations";
 
 export default function AcademicDebtRecovery() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       {/* image */}
-            <div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:min-h-screen overflow-hidden">
+            <motion.div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] md:min-h-screen overflow-hidden"
+            {...fadeLeft}
+                    viewport={{ once: false, amount: 0.3 }}>
                     <img
                       src={academic_debt}
                       alt="Academic Debt"
@@ -16,10 +20,12 @@ export default function AcademicDebtRecovery() {
                         object-cover
                       "
                     />
-                  </div>
+                  </motion.div>
 
       {/* content */}
-      <div
+      <motion.div
+      {...fadeRight}
+              viewport={{ once: false, amount: 0.3 }}
         style={{ background: "var(--card-color-1)" }}
         className="flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen"
       >
@@ -52,7 +58,7 @@ export default function AcademicDebtRecovery() {
           was missed and automatically selects a recovery strategy — compressing
           sessions, redistributing tasks, or prioritizing essential topics.
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }

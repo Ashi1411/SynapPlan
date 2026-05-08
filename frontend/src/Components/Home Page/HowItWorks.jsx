@@ -4,10 +4,15 @@ import image2 from "../../images/home page/home_page_how_it_works_2.png";
 import image3 from "../../images/home page/home_page_how_it_works_3.png";
 import image4 from "../../images/home page/home_page_how_it_works_4.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function HowItWorks() {
   return (
     <div style={{ backgroundColor: "var(--how-it-works-color)" }}>
-      <h1
+      <motion.h1
+      {...fadeUp}
+                transition={{ delay: 0.1 }}
         style={{
           color: "var(--section-heading-color)",
           fontSize: "var(--section-heading-size)",
@@ -15,8 +20,10 @@ export default function HowItWorks() {
         className="pt-16 px-4 md:px-10 text-center flex flex-col justify-center items-center font-bold"
       >
         How It Works?
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-10">
+      </motion.h1>
+      <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-10"
+      {...fadeUp}
+                transition={{ delay: 0.3 }}>
         {/* card - 1 */}
         <div
           style={{
@@ -196,7 +203,7 @@ export default function HowItWorks() {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -1,11 +1,16 @@
 import React from "react";
 import context_aware from "../../images/feature page/context_aware.png";
 
+import { motion } from "framer-motion";
+import { fadeLeft, fadeRight } from "../../animations";
+
 export default function ContextAwarePlanning() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       {/* content */}
-      <div
+      <motion.div
+      {...fadeLeft}
+              viewport={{ once: false, amount: 0.3 }}
         style={{ background: "var(--card-color-2)" }}
         className="flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen order-2 md:order-1"
       >
@@ -38,10 +43,11 @@ export default function ContextAwarePlanning() {
           considered when generating plans. Busy days get lighter schedules,
           while free days are optimized for deeper study sessions.
         </p>
-      </div>
+      </motion.div>
 
-            <div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"
-                  >
+            <motion.div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"
+                  {...fadeRight}
+                          viewport={{ once: false, amount: 0.3 }}>
                     <img
                     src={context_aware}
                     alt="Cognitive Load Pairing"
@@ -49,7 +55,7 @@ export default function ContextAwarePlanning() {
                     w-full
                     h-full
                     object-cover"/>
-                  </div>
+                  </motion.div>
     </div>
   );
 }

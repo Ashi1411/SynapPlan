@@ -7,6 +7,9 @@ import feature_4 from "../../images/feature page/feature_4.png";
 import feature_5 from "../../images/feature page/feature_5.png";
 import feature_6 from "../../images/feature page/feature_6.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function FeatureExplanation() {
   const imageMap = {
     feature_1,
@@ -22,7 +25,9 @@ export default function FeatureExplanation() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 px-4 sm:px-8 md:px-16 lg:px-24 mb-16 md:mb-24 mt-10 md:mt-20">
         {features.map((item, i) => {
           return (
-            <div
+            <motion.div
+            {...fadeUp}
+                      transition={{ delay: 0.1 }}
               key={i}
               style={{ background: item.background }}
               className="flex flex-col items-center justify-start p-6 sm:p-7 md:p-8 rounded-3xl text-center 
@@ -63,7 +68,7 @@ export default function FeatureExplanation() {
                   {item.paragraph}{" "}
                 </p>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>

@@ -13,6 +13,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { formatTimer } from "../../utils/formatTimer";
 import { formatDuration } from "../../utils/formatDuration";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function FocusTimer() {
   const { id } = useParams();
 
@@ -187,7 +190,9 @@ export default function FocusTimer() {
       className="min-h-screen flex flex-col mt-10 px-3 sm:px-6 md:px-10 py-6 sm:py-10"
     >
       {/* main heading */}
-      <h2
+      <motion.h2 
+      {...fadeUp}
+                transition={{ delay: 0.1 }}
         style={{
           color: "var(--dashboard-hero-paragraph-color)",
           fontSize: "var(--login-heading-size)",
@@ -195,8 +200,10 @@ export default function FocusTimer() {
         className="font-bold text-center py-6 sm:py-10 px-2"
       >
         FOCUS TIMER
-      </h2>
-      <div
+      </motion.h2>
+      <motion.div
+      {...fadeUp}
+                transition={{ delay: 0.3 }}
         style={{ background: "var(--card-color-1)" }}
         className="text-center max-w-sm sm:max-w-md md:max-w-2xl mx-auto rounded-3xl px-4 sm:px-4 py-3 sm:py-4"
       >
@@ -315,11 +322,13 @@ export default function FocusTimer() {
             Break Count: {session?.breakCount}
           </p>
         </div>
-      </div>
+      </motion.div>
 
       {/* progress bar of current session */}
       <div>
-        <p
+        <motion.p
+        {...fadeUp}
+                  transition={{ delay: 0.5 }}
           style={{
             color: "var(--dashboard-hero-heading-color)",
             fontSize: "var(--dashboard-hero-subheading-size)",
@@ -328,7 +337,7 @@ export default function FocusTimer() {
         >
           Session Completed :{" "}
           {((time / session?.duration) * 100).toFixed(1)}%
-        </p>
+        </motion.p>
       </div>
       <ToastContainer
         position="top-right"

@@ -5,13 +5,18 @@ import step_3 from "../../images/how it works page/step_3.png";
 import step_4 from "../../images/how it works page/step_4.png";
 import step_5 from "../../images/how it works page/step_5.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function SystemProcess() {
   return (
     <div
       style={{ background: "var(--system-process-color)" }}
       className="pb-20"
     >
-      <h1
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           fontSize: "var(--section-heading-size)",
           color: "var(--hero-heading-color)",
@@ -19,9 +24,11 @@ export default function SystemProcess() {
         className="text-center font-bold pt-8 md:pt-10 px-4"
       >
         SYSTEM PROCESS
-      </h1>
+      </motion.h1>
 
-      <p
+      <motion.p
+        {...fadeUp}
+        transition={{ delay: 0.3 }}
         style={{
           fontSize: "var(--section-paragraph-size)",
           color: "var(--hero-subheading-color)",
@@ -30,11 +37,15 @@ export default function SystemProcess() {
       >
         Every recommendation is created through a structured decision pipeline
         that processes your real study behavior.
-      </p>
+      </motion.p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 sm:gap-8 md:gap-10 px-4 sm:px-8 md:px-12 py-10">
         {/* card - 1 */}
-        <div className="px-4 sm:px-4">
+        <motion.div
+          className="px-4 sm:px-4"
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+        >
           <div>
             <img src={step_1}></img>
           </div>
@@ -60,10 +71,14 @@ export default function SystemProcess() {
               time. This defines your learning scope and constraints.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* card - 2 */}
-        <div className="px-2 sm:px-4">
+        <motion.div
+          className="px-2 sm:px-4"
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+        >
           <div>
             <img src={step_2}></img>
           </div>
@@ -89,10 +104,14 @@ export default function SystemProcess() {
               real-time data reflects your actual performance.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* card - 3 */}
-        <div className="px-2 sm:px-4">
+        <motion.div
+          className="px-2 sm:px-4"
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+        >
           <div>
             <img src={step_3}></img>
           </div>
@@ -118,10 +137,14 @@ export default function SystemProcess() {
               This helps the system understand how you learn best.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* card - 4 */}
-        <div className="px-2 sm:px-4">
+        <motion.div
+          className="px-2 sm:px-4"
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+        >
           <div>
             <img src={step_4}></img>
           </div>
@@ -147,10 +170,14 @@ export default function SystemProcess() {
               next study session.
             </p>
           </div>
-        </div>
+        </motion.div>
 
         {/* card - 5 */}
-        <div className="px-2 sm:px-4">
+        <motion.div
+          className="px-2 sm:px-4"
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+        >
           <div>
             <img src={step_5}></img>
           </div>
@@ -176,7 +203,7 @@ export default function SystemProcess() {
               maximizes productivity.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

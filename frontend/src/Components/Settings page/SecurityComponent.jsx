@@ -11,6 +11,9 @@ import image from "../../images/settings page/security.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function SecurityComponent() {
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [maxHours, setMaxHours] = useState(0);
@@ -120,7 +123,9 @@ export default function SecurityComponent() {
       style={{ background: "var(--card-color-1)" }}
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
-      <h1
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -128,12 +133,12 @@ export default function SecurityComponent() {
         className="text-center pt-6 sm:pt-10 pb-2 font-bold px-2"
       >
         STUDY PREFERENCES AND SECURITY
-      </h1>
+      </motion.h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         {/* content */}
         <div className="order-2 md:order-1 w-full max-w-xl mx-auto md:mx-0">
-          <div className="my-4">
+          <motion.div {...fadeUp} transition={{ delay: 0.3 }} className="my-4">
             <h2
               style={{
                 color: "var(--dashboard-hero-heading-color)",
@@ -143,7 +148,11 @@ export default function SecurityComponent() {
             >
               Max Study Hours Per Day (hours)
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.3 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 {isEditingHours ? (
                   <input
@@ -193,10 +202,10 @@ export default function SecurityComponent() {
                   </button>
                 )}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="my-4">
+          <motion.div {...fadeUp} transition={{ delay: 0.3 }} className="my-4">
             <h2
               style={{
                 color: "var(--dashboard-hero-heading-color)",
@@ -218,9 +227,9 @@ export default function SecurityComponent() {
               }}
               className="font-semibold w-full p-2 rounded-md"
             ></input>
-          </div>
+          </motion.div>
 
-          <div className="my-4">
+          <motion.div {...fadeUp} transition={{ delay: 0.3 }} className="my-4">
             <h2
               style={{
                 color: "var(--dashboard-hero-heading-color)",
@@ -242,9 +251,13 @@ export default function SecurityComponent() {
               }}
               className="font-semibold w-full p-2 rounded-md"
             ></input>
-          </div>
+          </motion.div>
 
-          <div className="my-6 text-center">
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.5 }}
+            className="my-6 text-center"
+          >
             <button
               onClick={handleSubmit}
               style={{
@@ -256,9 +269,13 @@ export default function SecurityComponent() {
             >
               Change Password
             </button>
-          </div>
+          </motion.div>
 
-          <div className="my-6 text-center">
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.5 }}
+            className="my-6 text-center"
+          >
             <button
               onClick={handleDeleteAccount}
               style={{
@@ -270,11 +287,13 @@ export default function SecurityComponent() {
             >
               Delete Account
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* image */}
-        <div
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{ backgroundImage: `url(${image})` }}
           className="
                   order-1
@@ -293,7 +312,7 @@ export default function SecurityComponent() {
                   rounded-2xl
                   overflow-hidden
                 "
-        ></div>
+        ></motion.div>
       </div>
 
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />

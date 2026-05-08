@@ -9,6 +9,9 @@ import goodIcon from "../../images/sessions page/good.png";
 import averageIcon from "../../images/sessions page/average.png";
 import poorIcon from "../../images/sessions page/poor.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function SessionDetail() {
   const [completedSessions, setCompletedSessions] = useState([]);
   const [analytics, setAnalytics] = useState([]);
@@ -75,7 +78,9 @@ export default function SessionDetail() {
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10"
     >
       <div className="max-w-6xl mx-auto">
-        <h1
+        <motion.h1
+        {...fadeUp}
+                  transition={{ delay: 0.1 }}
           style={{
             color: "var(--hero-paragraph-color)",
             fontSize: "var(--section-heading-size)",
@@ -83,12 +88,14 @@ export default function SessionDetail() {
           className="text-center pt-6 sm:pt-10 px-2 font-bold"
         >
           SESSION DETAILS PANEL
-        </h1>
+        </motion.h1>
 
         <div>
           {analytics?.map((ele, i) => {
             return (
-              <div
+              <motion.div
+              {...fadeUp}
+                        transition={{ delay: 0.1 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 my-6 sm:my-8"
                 key={i}
               >
@@ -202,7 +209,7 @@ export default function SessionDetail() {
                     {Number(ele?.efficiency || 0).toFixed(1)}%
                   </p>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

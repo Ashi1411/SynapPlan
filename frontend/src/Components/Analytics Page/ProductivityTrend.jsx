@@ -12,6 +12,9 @@ import {
 } from "recharts";
 import { formatDuration } from "../../utils/formatDuration";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function ProductivityTrend() {
   const [data, setData] = useState(null);
   const [weekly, setWeekly] = useState(true); //? true when the selected button is week
@@ -56,10 +59,7 @@ export default function ProductivityTrend() {
       return <p className="text-center p-4">No data available</p>;
 
     return (
-      <ResponsiveContainer
-        width="100%"
-        height="100%"
-      >
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={chartData}>
           <CartesianGrid stroke="#e0e0e0" strokeDasharray="5 5" />
 
@@ -99,7 +99,9 @@ export default function ProductivityTrend() {
       style={{ background: "var(--card-color-1)" }}
       className="p-4 md:p-8 lg:p-10"
     >
-      <h1
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -107,9 +109,11 @@ export default function ProductivityTrend() {
         className="text-center p-4 font-bold"
       >
         PRODUCTIVITY TREND
-      </h1>
+      </motion.h1>
 
-      <p
+      <motion.p
+        {...fadeUp}
+        transition={{ delay: 0.3 }}
         style={{
           fontSize: "var(--dashboard-hero-paragraph-size)",
           color: "var(--dashboard-hero-paragraph-color)",
@@ -117,10 +121,14 @@ export default function ProductivityTrend() {
         className="font-semibold px-4 md:px-10 pb-10 md:pb-20"
       >
         Track how your focus and completion rates evolve over time.
-      </p>
+      </motion.p>
 
       {/* buttons */}
-      <div className="text-center flex flex-col sm:flex-row justify-center">
+      <motion.div
+        className="text-center flex flex-col sm:flex-row justify-center"
+        {...fadeUp}
+        transition={{ delay: 0.3 }}
+      >
         <button
           style={{ fontSize: "var(--dashboard-hero-paragraph-size)" }}
           className={`py-1 px-4 rounded-lg font-bold ${weekly ? "activeBtn" : "nonActiveBtn"}`}
@@ -135,14 +143,16 @@ export default function ProductivityTrend() {
         >
           Monthly View
         </button>
-      </div>
+      </motion.div>
 
       {/* Weekly */}
       <div
         className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4 md:m-10 ${weekly ? "" : "hidden"}`}
       >
         {/* weekly productivity - first graph */}
-        <div
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
           style={{ background: "var(--card-color-2)" }}
           className="rounded-2xl p-4"
         >
@@ -161,10 +171,12 @@ export default function ProductivityTrend() {
               {renderChart(weeklyProductivityData, "#4CAF50", "min")}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* weekly focus efficiency - second graph */}
-        <div
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
           style={{ background: "var(--card-color-2)" }}
           className="rounded-2xl p-4"
         >
@@ -183,11 +195,13 @@ export default function ProductivityTrend() {
               {renderChart(weeklyEfficiencyData, "#2196F3", "%")}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* Monthly */}
-      <div
+      <motion.div
+        {...fadeUp}
+        transition={{ delay: 0.5 }}
         className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4 md:m-10 ${!weekly ? "" : "hidden"}`}
       >
         {/* first graph */}
@@ -204,8 +218,8 @@ export default function ProductivityTrend() {
           >
             Monthly Productivity
           </h2>
-            
-            <div className="w-full h-[280px] p-3">
+
+          <div className="w-full h-[280px] p-3">
             <div className="w-full h-full bg-white rounded-xl p-2">
               {renderChart(monthlyProductivityData, "#FF9800", "min")}
             </div>
@@ -213,7 +227,9 @@ export default function ProductivityTrend() {
         </div>
 
         {/* second graph */}
-        <div
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
           style={{ background: "var(--card-color-2)" }}
           className="rounded-2xl p-4"
         >
@@ -226,14 +242,14 @@ export default function ProductivityTrend() {
           >
             Monthly Focus Efficiency
           </h2>
-            
-            <div className="w-full h-[280px] p-3">
+
+          <div className="w-full h-[280px] p-3">
             <div className="w-full h-full bg-white rounded-xl p-2">
               {renderChart(monthlyEfficiencyData, "#9C27B0", "%")}
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

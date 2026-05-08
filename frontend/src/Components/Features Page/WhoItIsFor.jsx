@@ -4,13 +4,18 @@ import image2 from "../../images/feature page/exam_aspirants.png";
 import image3 from "../../images/feature page/self_learners.png";
 import image4 from "../../images/feature page/working_professional.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function WhoItIsFor() {
   return (
     <div
       style={{ background: "var(--who-it-is-for-background)" }}
       className="px-4 sm:px-8 md:px-16 lg:px-24 py-20"
     >
-      <h1
+      <motion.h1
+      {...fadeUp}
+                transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -18,11 +23,13 @@ export default function WhoItIsFor() {
         className="text-center mb-10 font-bold"
       >
         WHO IT'S FOR
-      </h1>
+      </motion.h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* Students */}
-        <div
+        <motion.div
+        {...fadeUp}
+                  transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-1)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-1 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -57,10 +64,12 @@ export default function WhoItIsFor() {
               className="h-32 sm:h-36 md:h-40 lg:h-60 object-contain"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Exam Aspirants */}
-        <div
+        <motion.div
+        {...fadeUp}
+                  transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-2)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-2 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -95,10 +104,12 @@ export default function WhoItIsFor() {
               className="h-32 sm:h-36 md:h-40 lg:h-60 object-contain"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Self Learners */}
-        <div
+        <motion.div
+        {...fadeUp}
+                  transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-2)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-4 md:order-3 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -133,10 +144,12 @@ export default function WhoItIsFor() {
               className="h-32 sm:h-36 md:h-40 lg:h-60 object-contain"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Working Professionals */}
-        <div
+        <motion.div
+        {...fadeUp}
+                  transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-1)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-3 md:order-4 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -171,7 +184,7 @@ export default function WhoItIsFor() {
               className="h-32 sm:h-36 md:h-40 lg:h-60 object-contain"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

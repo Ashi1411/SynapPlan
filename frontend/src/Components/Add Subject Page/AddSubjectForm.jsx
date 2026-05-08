@@ -3,6 +3,9 @@ import { addSubject } from "../../api/auth";
 
 import image from "../../images/add subject page/add_subject.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 //! react toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -75,7 +78,9 @@ export default function AddSubjectFrom() {
       style={{ background: "var(--login-page)" }}
       className="px-3 mt-12 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
-      <h1
+      <motion.h1 
+      {...fadeUp}
+                    transition={{ delay: 0.1 }}
         style={{
           color: "var(--dashboard-hero-paragraph-color)",
           fontSize: "var(--login-heading-size)",
@@ -83,9 +88,11 @@ export default function AddSubjectFrom() {
         className="font-bold text-center mt-6 sm:mt-10 mb-4"
       >
         Add Subject
-      </h1>
+      </motion.h1>
 
-      <div
+      <motion.div 
+      {...fadeUp}
+                    transition={{ delay: 0.3 }}
         style={{ background: "var(--login-page-card)" }}
         className="p-4 sm:p-6 md:p-10 rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-5xl mx-auto"
       >
@@ -248,7 +255,7 @@ export default function AddSubjectFrom() {
             className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain drop-shadow-xl"
           ></img>
         </div>
-      </div>
+      </motion.div>
       <ToastContainer
               position="top-right"
               autoClose={3000}

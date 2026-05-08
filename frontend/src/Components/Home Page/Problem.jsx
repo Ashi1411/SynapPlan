@@ -1,11 +1,16 @@
 import React from "react";
 import problem_section from "../../images/home page/home_page_problem_section.png";
 
+import { motion } from "framer-motion";
+import { fadeLeft, fadeRight } from "../../animations";
+
 export default function Problem() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[40%_60%]">
       {/* image part */}
-      <div
+      <motion.div
+        {...fadeLeft}
+        viewport={{ once: false, amount: 0.3 }}
         style={{
           backgroundImage: `url(${problem_section})`,
           backgroundSize: "cover",
@@ -41,10 +46,14 @@ export default function Problem() {
         >
           Real learning isn't linear. Your planner should understand that.
         </p>
-      </div>
+      </motion.div>
 
       {/* card part */}
-      <div className="grid grid-cols-1 sm:grid-cols-2">
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2"
+        {...fadeRight}
+        viewport={{ once: false, amount: 0.3 }}
+      >
         <div
           style={{ background: "var(--card-color-1)" }}
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
@@ -140,7 +149,7 @@ export default function Problem() {
             Generic schedules ignore how you actually learn best.
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

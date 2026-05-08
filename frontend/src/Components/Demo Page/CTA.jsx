@@ -3,6 +3,9 @@ import "../../styles/global.css";
 import cta_section from "../../images/home page/home_page_cta_section.png";
 import { Link } from "react-router-dom";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function CTA() {
   return (
     <div>
@@ -10,7 +13,9 @@ export default function CTA() {
         style={{ background: "var(--cta-section-color)" }}
         className="px-4 sm:px-8 md:px-16 py-16 md:py-24"
       >
-        <div
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.1 }}
           style={{
             backgroundImage: `url(${cta_section})`,
             backgroundSize: "cover",
@@ -64,7 +69,7 @@ export default function CTA() {
               </button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { faqs } from "../../Data/faqs";
 import "../../styles/global.css";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function Faq() {
   let [currentFaq, setCurrentFaq] = useState(faqs[0].id);
 
@@ -16,7 +19,9 @@ export default function Faq() {
       style={{ background: "var(--faq-section-color)" }}
       className="flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 py-12 md:py-20"
     >
-      <h1
+      <motion.h1
+      {...fadeUp}
+                transition={{ delay: 0.1 }}
         style={{
           color: "var(--section-heading-color)",
           fontSize: "var(--section-heading-size)",
@@ -24,7 +29,7 @@ export default function Faq() {
         className="font-bold text-center"
       >
         Frequently Asked Questions
-      </h1>
+      </motion.h1>
 
       <div className="w-full mt-8">{ques}</div>
     </div>
@@ -35,7 +40,9 @@ export function FaqItems({ details }) {
   let { items, currentFaq, setCurrentFaq } = details;
 
   return (
-    <div className="mb-4">
+    <motion.div className="mb-4"
+    {...fadeUp}
+              transition={{ delay: 0.3 }}>
       <h2
         style={{
           background: "var(--faq-question-background)",
@@ -54,6 +61,6 @@ export function FaqItems({ details }) {
       >
         {items.answer}
       </p>
-    </div>
+    </motion.div>
   );
 }

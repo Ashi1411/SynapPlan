@@ -8,6 +8,9 @@ import { signup } from "../../api/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function SignupCard() {
   const navigate = useNavigate();
 
@@ -75,7 +78,9 @@ export default function SignupCard() {
       style={{ background: "var(--login-page)" }}
       className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-6 sm:py-8 md:py-10 flex items-center justify-center"
     >
-      <div
+      <motion.div
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{ background: "var(--login-page-card)" }}
         className="rounded-3xl grid grid-cols-1 md:grid-cols-2 mt-20 gap-8 md:gap-10 items-stretch overflow-hidden"
       >
@@ -254,7 +259,7 @@ export default function SignupCard() {
             Don't have an account? Sign up
           </p>
         </div>
-      </div>
+      </motion.div>
       <ToastContainer
         position="top-right"
         autoClose={3000}

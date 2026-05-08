@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getAnalytics } from "../../api/auth";
 
-import { formatDuration } from "../../utils/formatDuration"; //  to use our second based backend data 
+import { formatDuration } from "../../utils/formatDuration"; //  to use our second based backend data
+
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
 
 export default function HeroSection() {
   const [data, setData] = useState(null);
@@ -22,7 +25,9 @@ export default function HeroSection() {
       className="mt-12 px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10"
     >
       <div className="max-w-5xl mx-auto">
-        <h1
+        <motion.h1
+          {...fadeUp}
+          transition={{ delay: 0.1 }}
           style={{
             color: "var(--hero-paragraph-color)",
             fontSize: "var(--section-heading-size)",
@@ -30,10 +35,12 @@ export default function HeroSection() {
           className="text-center pt-6 sm:pt-10 px-2 font-bold mb-4 sm:mb-6"
         >
           OVERVIEW STATS
-        </h1>
+        </motion.h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-10 mt-6 sm:mt-10">
-          <div
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{ background: "var(--card-color-1)" }}
             className="p-3 sm:p-4 md:p-5 rounded-xl sm:rounded-2xl w-full"
           >
@@ -55,9 +62,11 @@ export default function HeroSection() {
             >
               {formatDuration(data?.durationCompleted)}
             </p>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{ background: "var(--card-color-1)" }}
             className="p-4 rounded-2xl"
           >
@@ -79,9 +88,11 @@ export default function HeroSection() {
             >
               {data?.completionRate}%
             </p>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{ background: "var(--card-color-1)" }}
             className="p-4 rounded-2xl"
           >
@@ -103,9 +114,11 @@ export default function HeroSection() {
             >
               {data?.weeklyConsistency}%
             </p>
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{ background: "var(--card-color-1)" }}
             className="p-4 rounded-2xl"
           >
@@ -127,7 +140,7 @@ export default function HeroSection() {
             >
               {data?.focusEfficiency}%
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

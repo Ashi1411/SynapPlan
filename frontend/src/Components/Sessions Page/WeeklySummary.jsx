@@ -5,6 +5,9 @@ import { formatDuration } from "../../utils/formatDuration"; // to integrate wit
 
 import image from "../../images/sessions page/weekly_summary.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function WeeklySummary() {
   const [data, setData] = useState(null);
 
@@ -23,7 +26,9 @@ export default function WeeklySummary() {
       style={{ background: "var(--card-color-2)" }}
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10"
     >
-      <h1
+      <motion.h1
+      {...fadeUp}
+                transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -31,14 +36,16 @@ export default function WeeklySummary() {
         className="text-center pt-6 sm:pt-10 px-2 font-bold"
       >
         WEEKLY SUMMARY
-      </h1>
+      </motion.h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 mt-6 sm:mt-10">
         <div
           style={{ background: "var(--recommendation-card-background)" }}
           className="order-2 md:order-1 p-3 sm:p-4 md:p-6 rounded-2xl w-full"
         >
-          <p
+          <motion.p
+          {...fadeUp}
+                    transition={{ delay: 0.3 }}
             style={{
               background: "var(--card-color-1)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -47,8 +54,10 @@ export default function WeeklySummary() {
             className="p-2 rounded-2xl text-center font-bold my-2 sm:my-3"
           >
             Total Study Hours: {formatDuration(data?.durationCompleted)}
-          </p>
-          <p
+          </motion.p>
+          <motion.p
+          {...fadeUp}
+                    transition={{ delay: 0.3 }}
             style={{
               background: "var(--card-color-1)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -57,8 +66,10 @@ export default function WeeklySummary() {
             className="p-1 rounded-2xl text-center font-bold my-4"
           >
             Average Completion Rate: {data?.completionRate}%
-          </p>
-          <p
+          </motion.p>
+          <motion.p
+          {...fadeUp}
+                    transition={{ delay: 0.3 }}
             style={{
               background: "var(--card-color-1)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -67,11 +78,13 @@ export default function WeeklySummary() {
             className="p-1 rounded-2xl text-center font-bold my-4"
           >
             Consistency Score: {data?.weeklyConsistency}%
-          </p>
+          </motion.p>
           {data?.insights?.insights?.map((ele, i) => {
             return (
               <div key={i}>
-                <p
+                <motion.p
+                {...fadeUp}
+                    transition={{ delay: 0.3 }}
                   style={{
                     background: "var(--card-color-1)",
                     fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -80,14 +93,14 @@ export default function WeeklySummary() {
                   className="p-1 rounded-2xl text-center font-bold my-4"
                 >
                   {ele}
-                </p>
+                </motion.p>
               </div>
             );
           })}
         </div>
 
         {/* image */}
-        <div style={{backgroundImage: `url(${image})`}} className="
+        <motion.div style={{backgroundImage: `url(${image})`}} className="
           order-1
           md:order-2
           flex
@@ -103,8 +116,10 @@ export default function WeeklySummary() {
           bg-no-repeat
           rounded-2xl
           overflow-hidden
-        ">
-        </div>
+        "
+        {...fadeUp}
+                    transition={{ delay: 0.3 }}>
+        </motion.div>
       </div>
     </div>
   );

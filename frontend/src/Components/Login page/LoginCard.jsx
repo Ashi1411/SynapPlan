@@ -4,6 +4,9 @@ import loginImage from "../../images/login and signup pages/login_page_image.png
 
 import { login } from "../../api/auth";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 //! react toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -62,7 +65,9 @@ export default function LoginCard() {
       style={{ background: "var(--login-page)" }}
       className="min-h-screen px-4 sm:px-8 md:px-16 lg:px-24 py-10 flex items-center justify-center flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen order-2 md:order-1"
     >
-      <div
+      <motion.div
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{ background: "var(--login-page-card)" }}
         className="rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 mt-10 md:mt-20 min-h-screen"
       >
@@ -186,7 +191,7 @@ export default function LoginCard() {
                   rounded-2xl"
           />
         </div>
-      </div>
+      </motion.div>
       <ToastContainer
         position="top-right"
         autoClose={3000}

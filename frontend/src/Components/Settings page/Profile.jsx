@@ -6,6 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import image from "../../images/settings page/profile.png";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function Profile() {
   const [userData, setUserData] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -58,18 +61,20 @@ export default function Profile() {
     >
       <div className="max-w-5xl mx-auto">
         {/* profile image */}
-        <div>
+        <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
           <img
             src={image}
             alt="profile_image"
             className="mb-4 sm:mb-6 md:mb-8 mx-auto w-32 sm:w-40 md:w-52 lg:w-60 h-auto object-contain"
           ></img>
-        </div>
+        </motion.div>
 
         {/* user details */}
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 items-stretch">
-            <div
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.3 }}
               style={{ background: "var(--card-color-1)" }}
               className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
             >
@@ -100,8 +105,10 @@ export default function Profile() {
                   userData?.name
                 )}
               </p>
-            </div>
-            <div
+            </motion.div>
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.3 }}
               style={{ background: "var(--card-color-1)" }}
               className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
             >
@@ -123,10 +130,12 @@ export default function Profile() {
               >
                 {userData?.email}
               </p>
-            </div>
+            </motion.div>
           </div>
 
-          <div
+          <motion.div
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{ background: "var(--card-color-1)" }}
             className="px-4 sm:px-6 md:px-10 py-3 sm:py-4 m-2 sm:m-3 md:m-4 rounded-2xl"
           >
@@ -157,11 +166,15 @@ export default function Profile() {
                 userData?.interests || "No interests added"
               )}
             </p>
-          </div>
+          </motion.div>
         </div>
 
         {/* edit profile button */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4">
+        <motion.div
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+          className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4"
+        >
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
@@ -208,7 +221,7 @@ export default function Profile() {
               </button>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
       {/* <ToastContainer position="top-right" autoClose={3000} theme="colored" /> */}
     </div>

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { formatDuration } from "../../utils/formatDuration"; // to integrate with second based backend
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
 
 export default function TodayPlan() {
   const navigate = useNavigate();
@@ -24,7 +26,9 @@ export default function TodayPlan() {
       style={{ background: "var(--design-engine-background)" }}
       className="py-8 md:py-10 px-4 sm:px-8 md:px-16 lg:px-24"
     >
-      <h1
+      <motion.h1 
+      {...fadeUp}
+                transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -32,13 +36,15 @@ export default function TodayPlan() {
         className="text-center pt-10 font-bold"
       >
         TODAY'S PLAN
-      </h1>
+      </motion.h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 mb-12 md:mb-20 mt-6 md:mt-10">
         {/* card - 1 */}
         {data?.map((elem, i) => {
           return(
-            <div
+            <motion.div
+            {...fadeUp}
+                      transition={{ delay: 0.3 }}
               style={{ background: "var(--decision-engine-heading)" }}
               className="rounded-2xl h-full flex flex-col"
               key={i}
@@ -112,7 +118,7 @@ export default function TodayPlan() {
                 Start Session
               </button>
               </div>
-            </div>
+            </motion.div>
           )
         })}
         

@@ -269,6 +269,22 @@ html {
 
 
 
+/* todo Smooth floating design */
+
+/*? Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/*? Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+}
+
+/*? Smooth transitions */
+* {
+  transition: all 0.3s ease;
+}
 
 
 

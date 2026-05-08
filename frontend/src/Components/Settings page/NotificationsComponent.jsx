@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { todayNotifications } from "../../api/auth";
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../../animations";
+
 export default function NotificationsComponent() {
   const [notifications, setNotifications] = useState(null);
 
@@ -21,7 +24,9 @@ export default function NotificationsComponent() {
       style={{ background: "var(--card-color-2)" }}
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
-      <h1
+      <motion.h1 
+      {...fadeUp}
+                      transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -29,7 +34,7 @@ export default function NotificationsComponent() {
         className="text-center pt-6 sm:pt-10 pb-2 font-bold px-2"
       >
         NOTIFICATIONS
-      </h1>
+      </motion.h1>
 
       {/* notifications */}
       <div
@@ -39,13 +44,16 @@ export default function NotificationsComponent() {
         {notifications === null ? (
           <p className="text-center py-6">Loading notifications...</p>
         ) : notifications.length === 0 ? (
-          <p className="text-center text-sm sm:text-base py-6">
+          <motion.p {...fadeUp}
+                      transition={{ delay: 0.3 }} className="text-center text-sm sm:text-base py-6">
             No notifications for today 🎉
-          </p>
+          </motion.p>
         ) : (
           notifications?.map((ele, i) => {
             return (
-              <div key={i}>
+              <motion.div 
+              {...fadeUp}
+                      transition={{ delay: 0.3 }} key={i}>
                 <p
                   style={{
                     background: "var(--card-color-1)",
@@ -56,7 +64,7 @@ export default function NotificationsComponent() {
                 >
                   {ele}
                 </p>
-              </div>
+              </motion.div>
             );
           })
         )}
