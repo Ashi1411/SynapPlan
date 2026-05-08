@@ -19,7 +19,7 @@ export default function HeroSection() {
             fontSize: "var(--hero-section-heading)",
             color: "var(--hero-heading-color)",
           }}
-          className="font-bold leading-tight"
+          className="font-bold leading-tight mb-4"
         >
           Inside the Adaptive Study Engine
         </h1>

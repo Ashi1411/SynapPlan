@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/global.css";
-import hero_section from "../../images/feature page/feature_page_hero_section.png";
+import hero_section from "../../images/demo page/hero_section.png";
 import { Link } from "react-router-dom";
 
 export default function HeroSection() {
@@ -23,7 +23,7 @@ export default function HeroSection() {
           }}
           className="font-bold leading-tight mb-4"
         >
-          Powerful Tools Designed Around Your Study Behavior
+          Your AI-Powered Study Companion
         </h1>
         <p
           style={{
@@ -32,9 +32,7 @@ export default function HeroSection() {
           }}
           className="font-bold"
         >
-          Our intelligent system combines behavioral analysis, adaptive
-          scheduling, and smart automation to create a study experience tailored
-          uniquely for you.
+          Experience how SynapPlan intelligently plans sessions, tracks productivity, and optimizes your focus in real time.
         </p>
         <p
           style={{
@@ -43,13 +41,11 @@ export default function HeroSection() {
           }}
           className="font-semibold"
         >
-          From tracking your focus sessions to predicting your optimal study
-          time, every feature is designed to help you stay consistent, reduce
-          stress, and achieve better results with less effort.
+          SynapPlan combines intelligent planning, focus tracking, and smart analytics to help students study more efficiently, stay consistent, and maximize productivity.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-8 w-full sm:w-auto">
-          <Link to="/signup">
+          <Link to="/features">
             <button
               style={{
                 fontSize: "var(--hero-section-button)",
@@ -61,7 +57,7 @@ export default function HeroSection() {
             </button>
           </Link>
 
-          <Link to="/demo">
+          <Link to="/signup">
             <button
               style={{
                 fontSize: "var(--hero-section-button)",
@@ -69,7 +65,7 @@ export default function HeroSection() {
               }}
               className="px-5 py-1 rounded-2xl hero-btn font-semibold"
             >
-              Try Live Demo
+              Get Started
             </button>
           </Link>
         </div>

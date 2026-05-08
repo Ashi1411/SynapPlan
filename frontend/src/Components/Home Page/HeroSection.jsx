@@ -31,7 +31,7 @@ export default function HeroSection() {
             fontSize: "var(--hero-section-subheading)",
             color: "var(--hero-subheading-color)",
           }}
-          className="font-bold mb-4"
+          className="font-bold"
         >
           A smart system that analyzes your study behavior and generates the
           most effective daily plan automatically.
