@@ -11,7 +11,6 @@ const {
 async function getPlanner(req, res) {
   const userId = req.user._id;
 
-  
   const todaySessions = await getTodaySessions(userId);
 
   const { startOfWeek, endOfWeek } = getWeekDate();

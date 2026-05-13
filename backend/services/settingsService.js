@@ -115,7 +115,7 @@ async function deleteAccount(userId) {
 //! get today's session notifications
 async function getTodayNotification(userId) {
   const today = new Date();
-  
+
   today.setHours(0, 0, 0, 0);
 
   const tomorrow = new Date(today);
@@ -123,28 +123,33 @@ async function getTodayNotification(userId) {
 
   const sessions = await Session.find({
     userId,
-    date: {$gte: today, $lt: tomorrow}
-  })
+    date: { $gte: today, $lt: tomorrow },
+  });
 
   if (sessions.length === 0) {
-    return ["Today is a Free Day.", "Enjoy by watching some movies or playing some sports :)"]
+    return [
+      "Today is a Free Day.",
+      "Enjoy by watching some movies or playing some sports :)",
+    ];
   }
 
   const notifications = [];
 
-  const hasPending = sessions.some(s => s.status === "pending");
-  const hasActive = sessions.some(s => s.status === "active");
-  const hasBreak = sessions.some(s => s.status === "break");
-  const hasCompleted = sessions.some(s => s.status === "completed");
+  const hasPending = sessions.some((s) => s.status === "pending");
+  const hasActive = sessions.some((s) => s.status === "active");
+  const hasBreak = sessions.some((s) => s.status === "break");
+  const hasCompleted = sessions.some((s) => s.status === "completed");
 
-  const allCompleted = sessions.every(s => s.status === "completed");
+  const allCompleted = sessions.every((s) => s.status === "completed");
 
   if (hasPending) {
-    notifications.push("Some Sessions are pending. Let's go! Stay focused 💪")
+    notifications.push("Some Sessions are pending. Let's go! Stay focused 💪");
   }
 
   if (hasActive) {
-    notifications.push("Some Sessions are active. You're doing great — keep going 🚀");
+    notifications.push(
+      "Some Sessions are active. You're doing great — keep going 🚀",
+    );
   }
 
   if (hasBreak) {
@@ -159,10 +164,8 @@ async function getTodayNotification(userId) {
     notifications.push("Daily goal achieved! Amazing work 🎯");
   }
 
-
   return notifications;
 }
-
 
 module.exports = {
   getUserDetails,
@@ -170,5 +173,5 @@ module.exports = {
   editStudyHours,
   changePassword,
   deleteAccount,
-  getTodayNotification
+  getTodayNotification,
 };

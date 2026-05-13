@@ -14,8 +14,8 @@ export default function CTA() {
         className="px-4 sm:px-8 md:px-16 py-16 md:py-24"
       >
         <motion.div
-        {...fadeUp}
-                          transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{
             backgroundImage: `url(${cta_section})`,
             backgroundSize: "cover",

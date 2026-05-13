@@ -19,15 +19,15 @@ function calculateDayType(todaySessions) {
 
 //! Cognitive Capacity Remaining -> on an avg max capacity to study of a person is 6 hours
 function calculateCognitiveCapacity(todaySessions) {
-  
   if (todaySessions.length === 0) return 100;
 
   const completed = todaySessions.reduce(
-    (sum, s) => sum + s.durationCompleted, 0);
+    (sum, s) => sum + s.durationCompleted,
+    0,
+  );
 
   const dailyCapacity = 6 * HOUR;
   const remaining = Math.max(dailyCapacity - completed, 0);
-
 
   return Math.round((remaining / dailyCapacity) * 100);
 }
@@ -96,14 +96,14 @@ async function getWeeklyProductivity(userId) {
         date: {
           $gte: startOfWeek,
           $lt: endOfWeek, // ✅ limit to current week
-        }
+        },
       },
     },
     {
       $group: {
         _id: {
-  $dateToString: { format: "%Y-%m-%d", date: "$date" }
-},
+          $dateToString: { format: "%Y-%m-%d", date: "$date" },
+        },
         totalStudy: { $sum: "$durationCompleted" },
       },
     },
@@ -130,134 +130,129 @@ async function getUpcomingDeadlines(userId) {
   return deadlines;
 }
 
-
 //! generation smart recommendations
-function generateRecommendations({todaySessions, upcomingDeadlines, weeklyProductivity}) {
-    const recommendations = [];
+function generateRecommendations({
+  todaySessions,
+  upcomingDeadlines,
+  weeklyProductivity,
+}) {
+  const recommendations = [];
 
-    const totalToday = todaySessions.reduce(
-  (sum, s) => sum + s.durationCompleted,
-  0
-);
+  const totalToday = todaySessions.reduce(
+    (sum, s) => sum + s.durationCompleted,
+    0,
+  );
 
-    //? recommendation related to type of day tomorrow on the basis of work done today
-    if (totalToday > 6 * HOUR) {
-        recommendations.push("You studied a lot today. Make sure to rest.");
-    }
-    else if (totalToday > 2 * HOUR) {
-        recommendations.push("Tomorrow could be a balanced day.");
-    }
-    else {
-        recommendations.push("Consider focused study tomorrow.");
-    }
+  //? recommendation related to type of day tomorrow on the basis of work done today
+  if (totalToday > 6 * HOUR) {
+    recommendations.push("You studied a lot today. Make sure to rest.");
+  } else if (totalToday > 2 * HOUR) {
+    recommendations.push("Tomorrow could be a balanced day.");
+  } else {
+    recommendations.push("Consider focused study tomorrow.");
+  }
 
-    //? recommendation of the upcoming deadline
-    if (upcomingDeadlines.length > 0) {
-        recommendations.push(`${upcomingDeadlines[0].subjectName} requires more attention before exam`);
-    };
+  //? recommendation of the upcoming deadline
+  if (upcomingDeadlines.length > 0) {
+    recommendations.push(
+      `${upcomingDeadlines[0].subjectName} requires more attention before exam`,
+    );
+  }
 
-
-    //? which time is best for the user to study
-    const buckets = {
-        morning: 0,
-        afternoon: 0,
-        evening: 0,
-        night: 0
-    };
-
-    todaySessions.forEach((s) => {
-        if (!s.startTime) return;
-
-        const hour = new Date(s.startTime).getHours();
-
-        if (hour >= 5 && hour < 12) {
-            buckets.morning += s.durationCompleted || 0;
-        }
-        else if(hour >= 12 && hour < 17){
-            buckets.afternoon += s.durationCompleted || 0;
-        }
-        else if(hour >= 17 && hour < 21){
-            buckets.evening += s.durationCompleted || 0;
-        }
-        else{
-            buckets.night += s.durationCompleted || 0;
-        }
-    });
-
-    const bestPeriod = Object.entries(buckets).sort((a, b) => b[1] - a[1])[0][0];
-
-    const messages = {
-        morning: "You are most productive in the morning. Schedule difficult topics early.",
-        afternoon: "Your afternoon sessions are strong. Use this time for deep work.",
-        evening: "Evening seems productive for you. Plan important sessions then.",
-        night: "You performed better during night sessions. Schedule difficult topics at this time."
+  //? which time is best for the user to study
+  const buckets = {
+    morning: 0,
+    afternoon: 0,
+    evening: 0,
+    night: 0,
   };
 
-    if (buckets[bestPeriod] > 0) {
-        recommendations.push(messages[bestPeriod]);
+  todaySessions.forEach((s) => {
+    if (!s.startTime) return;
+
+    const hour = new Date(s.startTime).getHours();
+
+    if (hour >= 5 && hour < 12) {
+      buckets.morning += s.durationCompleted || 0;
+    } else if (hour >= 12 && hour < 17) {
+      buckets.afternoon += s.durationCompleted || 0;
+    } else if (hour >= 17 && hour < 21) {
+      buckets.evening += s.durationCompleted || 0;
+    } else {
+      buckets.night += s.durationCompleted || 0;
     }
+  });
 
-    //? recommendation related to weekly productivity
-    const totalWeekly = weeklyProductivity.reduce(
-  (sum, d) => sum + d.totalStudy, 0
-);
+  const bestPeriod = Object.entries(buckets).sort((a, b) => b[1] - a[1])[0][0];
 
-if (totalWeekly < 3 * HOUR) {
-  recommendations.push("Your weekly consistency is low...");
+  const messages = {
+    morning:
+      "You are most productive in the morning. Schedule difficult topics early.",
+    afternoon:
+      "Your afternoon sessions are strong. Use this time for deep work.",
+    evening: "Evening seems productive for you. Plan important sessions then.",
+    night:
+      "You performed better during night sessions. Schedule difficult topics at this time.",
+  };
+
+  if (buckets[bestPeriod] > 0) {
+    recommendations.push(messages[bestPeriod]);
+  }
+
+  //? recommendation related to weekly productivity
+  const totalWeekly = weeklyProductivity.reduce(
+    (sum, d) => sum + d.totalStudy,
+    0,
+  );
+
+  if (totalWeekly < 3 * HOUR) {
+    recommendations.push("Your weekly consistency is low...");
+  }
+
+  return recommendations;
 }
-
-    return recommendations
-}
-
 
 //! ***************** read ****************
-async function calculateStreak(userId){
-
+async function calculateStreak(userId) {
   const sessions = await Session.find({
     userId,
-    durationCompleted: { $gt: 0 }
+    durationCompleted: { $gt: 0 },
   })
-  .select("date")
-  .sort({ date: -1 });
+    .select("date")
+    .sort({ date: -1 });
 
   const studyDays = new Set();
 
-  sessions.forEach(s => {
+  sessions.forEach((s) => {
     const day = new Date(s.date).toDateString();
     studyDays.add(day);
   });
 
   const sortedDays = [...studyDays]
-    .map(d => new Date(d))
-    .sort((a,b) => b - a);
+    .map((d) => new Date(d))
+    .sort((a, b) => b - a);
 
   let streak = 0;
   let currentDate = new Date();
 
-  currentDate.setHours(0,0,0,0);
+  currentDate.setHours(0, 0, 0, 0);
 
-  for(const day of sortedDays){
+  for (const day of sortedDays) {
+    const diff = Math.floor((currentDate - day) / (1000 * 60 * 60 * 24));
 
-    const diff = Math.floor(
-      (currentDate - day) / (1000 * 60 * 60 * 24)
-    );
-
-    if(diff === 0){
+    if (diff === 0) {
       streak++;
       currentDate.setDate(currentDate.getDate() - 1);
-    }
-    else if(diff === 1){
+    } else if (diff === 1) {
       streak++;
       currentDate.setDate(currentDate.getDate() - 1);
-    }
-    else{
+    } else {
       break;
     }
   }
 
   return streak;
 }
-
 
 module.exports = {
   calculateDayType,
@@ -266,5 +261,5 @@ module.exports = {
   calculateWeeklyCompletionRate,
   getWeeklyProductivity,
   getUpcomingDeadlines,
-  generateRecommendations
+  generateRecommendations,
 };

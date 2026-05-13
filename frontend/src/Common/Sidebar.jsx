@@ -3,23 +3,29 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/global.css";
 import { logout } from "../api/auth";
 
+//! react toastify
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Sidebar() {
   const navigate = useNavigate();
-  let [sidebar, toggleSidebar] = useState(true); //* true if sidebar is visible and false when it is collapsed.
+  let [sidebar, toggleSidebar] = useState(false); //* true if sidebar is visible and false when it is collapsed.
 
   const handleLogout = async () => {
     try {
       await logout();
 
       localStorage.clear();
+      toast.success("Logout Successful");
 
-      navigate("/");
-    }
-    catch(err) {
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
+    } catch (err) {
       console.log(err);
-      alert("Logout failed");
+      toast.error("Logout failed");
     }
-  }
+  };
 
   return (
     // outer container (participates in flex layout) -> so that other components will get the remaining workspace
@@ -69,11 +75,20 @@ export default function Sidebar() {
               <Link to={"/settings"}> Settings </Link>
             </li>
             <li>
-              <Link to={"/logout"} onClick={handleLogout}> Logout </Link>
+              <button onClick={handleLogout}> Logout </button>
             </li>
           </ul>
         </nav>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

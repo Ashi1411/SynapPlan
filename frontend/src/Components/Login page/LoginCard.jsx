@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImage from "../../images/login and signup pages/login_page_image.png";
 
 import { login } from "../../api/auth";
@@ -19,8 +19,6 @@ export default function LoginCard() {
     password: "",
   });
 
-  const [error, setError] = useState("");
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -36,7 +34,7 @@ export default function LoginCard() {
     const { email, password } = formData;
 
     if (!email || !password) {
-      setError("All the fields are required");
+      toast.error("All the fields are required");
       return;
     }
 
@@ -131,16 +129,6 @@ export default function LoginCard() {
               ></input>
             </div>
 
-            <p
-              style={{
-                color: "var(--login-subheading-color)",
-                fontSize: "var(--login-subheading-size)",
-              }}
-              className="font-semibold"
-            >
-              Forgot password?
-            </p>
-
             <div className="flex flex-col justify-center items-center ">
               <button
                 type="submit"
@@ -149,33 +137,24 @@ export default function LoginCard() {
                   fontSize: "var(--login-button-text-size)",
                   background: "var(--login-button-background)",
                 }}
-                className="font-semibold p-1 px-10 rounded-2xl mt-8 md:mt-12 mb-2"
+                className="font-semibold p-1 px-10 rounded-2xl mt-8 md:mt-12"
               >
                 Log In
               </button>
             </div>
           </form>
 
-          {/* displaying the error mssg */}
-          {
-            <p
-              style={{
-                fontSize: "var(--login-text-size)",
-              }}
-              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
-            >
-              {error}
-            </p>
-          }
-
           <p
             style={{
               color: "var(--login-text-color)",
               fontSize: "var(--login-text-size)",
             }}
-            className="font-semibold"
+            className="font-semibold mt-2"
           >
-            Don't have an account? Sign up
+            Don't have an account?{" "}
+            <Link to={"/signup"} className="font-bold">
+              Sign Up
+            </Link>
           </p>
         </div>
 

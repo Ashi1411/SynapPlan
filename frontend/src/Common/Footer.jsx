@@ -180,8 +180,8 @@ export default function Footer() {
         >
           <ul className="flex flex-col gap-2 mt-2">
             <li> mail: support@adaptiveplanner.com</li>
-            <li> GitHub: github.com/project</li>
-            <li> LinkedIn: profile</li>
+            <li> GitHub: https://github.com/Ashi1411/SynapPlan</li>
+            <li> LinkedIn: https://www.linkedin.com/in/ashi-jain-787798282/</li>
           </ul>
         </nav>
       </div>

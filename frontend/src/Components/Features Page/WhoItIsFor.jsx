@@ -14,8 +14,8 @@ export default function WhoItIsFor() {
       className="px-4 sm:px-8 md:px-16 lg:px-24 py-20"
     >
       <motion.h1
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -28,8 +28,8 @@ export default function WhoItIsFor() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {/* Students */}
         <motion.div
-        {...fadeUp}
-                  transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-1)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-1 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -68,8 +68,8 @@ export default function WhoItIsFor() {
 
         {/* Exam Aspirants */}
         <motion.div
-        {...fadeUp}
-                  transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-2)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-2 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -108,8 +108,8 @@ export default function WhoItIsFor() {
 
         {/* Self Learners */}
         <motion.div
-        {...fadeUp}
-                  transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-2)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-4 md:order-3 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"
@@ -148,8 +148,8 @@ export default function WhoItIsFor() {
 
         {/* Working Professionals */}
         <motion.div
-        {...fadeUp}
-                  transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{ background: "var(--who-card-color-1)" }}
           className="grid grid-cols-[60%_40%] p-4 rounded-2xl order-3 md:order-4 transition-all duration-300 ease-in-out 
   hover:scale-[1.03] hover:shadow-xl"

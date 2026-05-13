@@ -11,8 +11,8 @@ export default function HowItWorks() {
   return (
     <div style={{ backgroundColor: "var(--how-it-works-color)" }}>
       <motion.h1
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--section-heading-color)",
           fontSize: "var(--section-heading-size)",
@@ -21,9 +21,11 @@ export default function HowItWorks() {
       >
         How It Works?
       </motion.h1>
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-10"
-      {...fadeUp}
-                transition={{ delay: 0.3 }}>
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-[95%] mx-auto py-10"
+        {...fadeUp}
+        transition={{ delay: 0.3 }}
+      >
         {/* card - 1 */}
         <div
           style={{

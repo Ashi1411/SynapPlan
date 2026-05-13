@@ -10,7 +10,6 @@ const {
 
 async function getDashboard(req, res) {
   const userId = req.user._id;
-  
 
   const todaySessions = await getTodaySessions(userId);
 
@@ -41,4 +40,4 @@ async function getDashboard(req, res) {
   });
 }
 
-module.exports = {getDashboard}
+module.exports = { getDashboard };

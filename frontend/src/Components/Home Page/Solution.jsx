@@ -8,9 +8,11 @@ export default function Solution() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-[60%_40%]">
       {/* card part */}
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2 order-2 md:order-1"
-      {...fadeLeft}
-              viewport={{ once: false, amount: 0.3 }}>
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 order-2 md:order-1"
+        {...fadeLeft}
+        viewport={{ once: false, amount: 0.3 }}
+      >
         <div
           style={{ background: "var(--card-color-1)" }}
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
@@ -114,8 +116,8 @@ export default function Solution() {
 
       {/* image part */}
       <motion.div
-      {...fadeRight}
-              viewport={{ once: false, amount: 0.3 }}
+        {...fadeRight}
+        viewport={{ once: false, amount: 0.3 }}
         style={{
           backgroundImage: `url(${solution_section})`,
           backgroundSize: "cover",

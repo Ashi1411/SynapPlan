@@ -79,8 +79,8 @@ export default function SessionDetail() {
     >
       <div className="max-w-6xl mx-auto">
         <motion.h1
-        {...fadeUp}
-                  transition={{ delay: 0.1 }}
+          {...fadeUp}
+          transition={{ delay: 0.1 }}
           style={{
             color: "var(--hero-paragraph-color)",
             fontSize: "var(--section-heading-size)",
@@ -94,8 +94,8 @@ export default function SessionDetail() {
           {analytics?.map((ele, i) => {
             return (
               <motion.div
-              {...fadeUp}
-                        transition={{ delay: 0.1 }}
+                {...fadeUp}
+                transition={{ delay: 0.1 }}
                 className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-10 my-6 sm:my-8"
                 key={i}
               >
@@ -166,7 +166,8 @@ export default function SessionDetail() {
                     }}
                     className="font-semibold"
                   >
-                    <span className="font-bold">Duration:</span> {formatDuration(ele?.duration)}
+                    <span className="font-bold">Duration:</span>{" "}
+                    {formatDuration(ele?.duration)}
                   </p>
                   <p
                     style={{

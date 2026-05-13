@@ -38,7 +38,7 @@ export default function MobileResponsive() {
         you everywhere.
       </motion.p>
 
-      <div className="grid grid-cols-1 gap-0 md:grid-cols-3 sm:grid-cols-2 md:gap-10 sm:gap-6">
+      <div className="grid grid-cols-1 gap-0 lg:grid-cols-4 md:grid-cols-2 md:gap-10 sm:gap-6">
         <motion.div className="mx-auto" {...fadeUp} transition={{ delay: 0.5 }}>
           <img
             src={dashboard}

@@ -24,9 +24,9 @@ export default function NotificationsComponent() {
       style={{ background: "var(--card-color-2)" }}
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
-      <motion.h1 
-      {...fadeUp}
-                      transition={{ delay: 0.1 }}
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -44,16 +44,17 @@ export default function NotificationsComponent() {
         {notifications === null ? (
           <p className="text-center py-6">Loading notifications...</p>
         ) : notifications.length === 0 ? (
-          <motion.p {...fadeUp}
-                      transition={{ delay: 0.3 }} className="text-center text-sm sm:text-base py-6">
+          <motion.p
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
+            className="text-center text-sm sm:text-base py-6"
+          >
             No notifications for today 🎉
           </motion.p>
         ) : (
           notifications?.map((ele, i) => {
             return (
-              <motion.div 
-              {...fadeUp}
-                      transition={{ delay: 0.3 }} key={i}>
+              <motion.div {...fadeUp} transition={{ delay: 0.3 }} key={i}>
                 <p
                   style={{
                     background: "var(--card-color-1)",

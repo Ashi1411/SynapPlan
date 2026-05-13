@@ -50,7 +50,7 @@ export default function CTA() {
                   fontSize: "var(--hero-section-button)",
                   color: "var(--hero-button-color)",
                 }}
-                className="px-5 py-1 rounded-2xl hero-btn"
+                className="px-5 py-1 rounded-2xl hero-btn font-semibold"
               >
                 Try Live Demo
               </button>
@@ -62,7 +62,7 @@ export default function CTA() {
                   fontSize: "var(--hero-section-button)",
                   color: "var(--hero-button-color)",
                 }}
-                className="px-5 py-1 rounded-2xl hero-btn"
+                className="px-5 py-1 rounded-2xl hero-btn font-semibold"
               >
                 Create Free Account
               </button>

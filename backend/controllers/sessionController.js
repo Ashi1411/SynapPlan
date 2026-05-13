@@ -10,7 +10,7 @@ const {
   getCompletedSessions,
   getCurrentSession,
   getSessionEfficiency,
-  getEfficiencyLabel
+  getEfficiencyLabel,
 } = require("../services/sessionService");
 
 //! to get default session
@@ -137,7 +137,7 @@ async function getTodayCompletedSession(req, res) {
 
 //! get session efficiency
 async function calculateSessionEfficiency(req, res) {
-  try{
+  try {
     const userId = req.user._id;
     const sessionId = req.params.id;
 
@@ -150,10 +150,9 @@ async function calculateSessionEfficiency(req, res) {
     res.json({
       session: currentSession,
       efficiency,
-      efficiencyLabel
-    })
-  }
-  catch (err) {
+      efficiencyLabel,
+    });
+  } catch (err) {
     console.log("Error:", err.message);
     res.status(400).json({ message: err.message });
   }
@@ -168,5 +167,5 @@ module.exports = {
   completeSessionController,
   getSessionController,
   getTodayCompletedSession,
-  calculateSessionEfficiency
+  calculateSessionEfficiency,
 };

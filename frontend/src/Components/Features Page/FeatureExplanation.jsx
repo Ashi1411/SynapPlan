@@ -26,8 +26,8 @@ export default function FeatureExplanation() {
         {features.map((item, i) => {
           return (
             <motion.div
-            {...fadeUp}
-                      transition={{ delay: 0.1 }}
+              {...fadeUp}
+              transition={{ delay: 0.1 }}
               key={i}
               style={{ background: item.background }}
               className="flex flex-col items-center justify-start p-6 sm:p-7 md:p-8 rounded-3xl text-center 

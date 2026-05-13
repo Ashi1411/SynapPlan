@@ -7,43 +7,44 @@ const secret = process.env.JWT_SECRET;
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
-
 //! payload generation
 function setUser(user) {
-    return jwt.sign({
-        _id: user._id,
-        email: user.email
-    }, secret)
-};
+  return jwt.sign(
+    {
+      _id: user._id,
+      email: user.email,
+    },
+    secret,
+  );
+}
 
 //! validating user
 function getUser(token) {
-    if (!token) return null;
-    try{
-        return jwt.verify(token, secret); //* will return valid user if exists
-    }
-    catch(error) {
-        return null;
-    }
+  if (!token) return null;
+  try {
+    return jwt.verify(token, secret); //* will return valid user if exists
+  } catch (error) {
+    return null;
+  }
 }
 
 //! for hashing password
 async function hashPassword(password) {
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(password, salt);
 }
 
 //! for validating user password for login
 async function comparePassword(email, password) {
-    const user = await User.findOne({email});
+  const user = await User.findOne({ email });
 
-    if (!user) return false;
+  if (!user) return false;
 
-    const isValid = await bcrypt.compare(password, user.password); //? plain-text password, hashed password
+  const isValid = await bcrypt.compare(password, user.password); //? plain-text password, hashed password
 
-    if (!isValid) return null;
+  if (!isValid) return null;
 
-    return user;
+  return user;
 }
 
-module.exports = {setUser, getUser, hashPassword, comparePassword}
+module.exports = { setUser, getUser, hashPassword, comparePassword };

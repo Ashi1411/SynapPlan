@@ -25,7 +25,10 @@ export default function PlannerCard() {
   }, []);
 
   return (
-    <div style={{ background: "var(--card-color-2)" }} className="mt-16 pb-6">
+    <div
+      style={{ background: "var(--card-color-2)" }}
+      className="mt-16 pb-6 min-h-[100vh]"
+    >
       {/* date bar */}
       <div
         style={{
@@ -36,16 +39,16 @@ export default function PlannerCard() {
         className="text-center p-2 font-bold"
       >
         <p>
-  {new Date(data?.startOfWeek).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  })}{" "}
-  -{" "}
-  {new Date(data?.endOfWeek).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  })}
-</p>
+          {new Date(data?.startOfWeek).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          })}{" "}
+          -{" "}
+          {new Date(data?.endOfWeek).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          })}
+        </p>
       </div>
 
       {/* Day bar */}
@@ -64,8 +67,8 @@ export default function PlannerCard() {
                 <li key={i}>
                   <p
                     className={`cursor-pointer px-2 sm:px-3 py-1 rounded-lg ${
-              day === ele.label ? "text-[#FFDE59]" : ""
-            }`}
+                      day === ele.label ? "text-[#FFDE59]" : ""
+                    }`}
                     onClick={() => setDay(ele.label)}
                   >
                     {ele.label}
@@ -78,7 +81,11 @@ export default function PlannerCard() {
       </div>
 
       {/* today's info */}
-      <div className="m-2 p-1">
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.3 }}
+        className="m-2 p-1"
+      >
         <p
           style={{
             color: "var(--dashboard-hero-subheading-color)",
@@ -106,10 +113,14 @@ export default function PlannerCard() {
         >
           🔵 {data?.dayType}
         </p>
-      </div>
+      </motion.div>
 
       {/* progress bar */}
-      <div className="m-2 p-1">
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.3 }}
+        className="m-2 p-1"
+      >
         <p
           style={{
             color: "var(--dashboard-hero-heading-color)",
@@ -119,105 +130,108 @@ export default function PlannerCard() {
         >
           Today's Load: {data?.dailyLoad}%
         </p>
-      </div>
+      </motion.div>
 
       {/* Today's Plan */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-4 md:px-8 mb-6">
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.5 }}
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 px-2 sm:px-4 md:px-8 my-6"
+      >
         {/* cards */}
+        {day && data?.weeklySessions?.[day]?.length === 0 && (
+          <motion.p
+            className="text-center col-span-full font-bold"
+            style={{
+              color: "var(--dashboard-hero-heading-color)",
+              fontSize: "var(--dashboard-today-plan-button-size)",
+            }}
+          >
+            No sessions planned for this day 📅
+          </motion.p>
+        )}
+
         {day &&
-  data?.weeklySessions?.[day]?.length === 0 && (
-    <motion.p
-      className="text-center col-span-full font-bold"
-      style={{
-        color: "var(--dashboard-hero-heading-color)",
-        fontSize: "var(--dashboard-today-plan-button-size)"
-      }}
-    >
-      No sessions planned for this day 📅
-    </motion.p>
-)}
-
-        {day && data?.weeklySessions?.[day]?.map((elem, i) => {
-          return (
-            <div
-              style={{ background: "var(--how-it-works-color)" }}
-              className="rounded-2xl h-full flex flex-col"
-              key={i}
-            >
-              <h2
-                style={{
-                  color: "var(--section-subheading-color)",
-                  fontSize: "var(--feature-heading-size)",
-                }}
-                className="text-center m-3 font-semibold"
-              >
-                {elem?.subjectId?.subjectName}
-              </h2>
+          data?.weeklySessions?.[day]?.map((elem, i) => {
+            return (
               <div
-                style={{ background: "var(--decision-engine-paragraph)" }}
-                className="rounded-2xl text-center p-2 flex flex-col justify-between h-full"
+                style={{ background: "var(--how-it-works-color)" }}
+                className="rounded-2xl h-full flex flex-col"
+                key={i}
               >
-                <p
+                <h2
                   style={{
-                    color: "var(--section-heading-color)",
-                    fontSize: "var(--feature-paragraph-size)",
+                    color: "var(--section-subheading-color)",
+                    fontSize: "var(--feature-heading-size)",
                   }}
-                  className="font-semibold m-1"
+                  className="text-center m-3 font-semibold"
                 >
-                  Duration : {formatDuration(elem?.duration)}
-                </p>
-
-                <p
-                  style={{
-                    color: "var(--section-heading-color)",
-                    fontSize: "var(--feature-paragraph-size)",
-                  }}
-                  className="font-semibold m-1"
-                >
-                  Duration Completed : {formatDuration(elem?.durationCompleted)}
-                </p>
-
-                <p
-                  style={{
-                    color: "var(--section-heading-color)",
-                    fontSize: "var(--feature-paragraph-size)",
-                  }}
-                  className="font-semibold m-1"
-                >
-                  Intensity : {elem?.subjectId?.intensity}
-                </p>
-
+                  {elem?.subjectId?.subjectName}
+                </h2>
                 <div
-                  style={{
-                    color: "var(--section-heading-color)",
-                    fontSize: "var(--feature-paragraph-size)",
-                  }}
-                  className="font-semibold m-2 mt-4"
+                  style={{ background: "var(--decision-engine-paragraph)" }}
+                  className="rounded-2xl text-center p-2 flex flex-col justify-between h-full"
                 >
-                  Topics :{" "}
-                  {elem?.topics?.map((ele, idx) => {
-                    return <div key={idx}>{ele}</div>;
-                  })}
-                </div>
+                  <p
+                    style={{
+                      color: "var(--section-heading-color)",
+                      fontSize: "var(--feature-paragraph-size)",
+                    }}
+                    className="font-semibold m-1"
+                  >
+                    Duration : {formatDuration(elem?.duration)}
+                  </p>
 
-                <button
-                  onClick={() =>
-                    navigate(`/session/${elem?._id}`)
-                  }
-                  style={{
-                    fontSize: "var(--dashboard-today-plan-button-size)",
-                    color: "var(--hero-button-color)",
-                    background: "var(--how-it-works-color)",
-                  }}
-                  className="px-4 sm:px-6 py-1 w-full sm:w-auto rounded-2xl my-2 font-bold"
-                >
-                  Start Session
-                </button>
+                  <p
+                    style={{
+                      color: "var(--section-heading-color)",
+                      fontSize: "var(--feature-paragraph-size)",
+                    }}
+                    className="font-semibold m-1"
+                  >
+                    Duration Completed :{" "}
+                    {formatDuration(elem?.durationCompleted)}
+                  </p>
+
+                  <p
+                    style={{
+                      color: "var(--section-heading-color)",
+                      fontSize: "var(--feature-paragraph-size)",
+                    }}
+                    className="font-semibold m-1"
+                  >
+                    Intensity : {elem?.subjectId?.intensity}
+                  </p>
+
+                  <div
+                    style={{
+                      color: "var(--section-heading-color)",
+                      fontSize: "var(--feature-paragraph-size)",
+                    }}
+                    className="font-semibold m-2 mt-4"
+                  >
+                    Topics :{" "}
+                    {elem?.topics?.map((ele, idx) => {
+                      return <div key={idx}>{ele}</div>;
+                    })}
+                  </div>
+
+                  <button
+                    onClick={() => navigate(`/session/${elem?._id}`)}
+                    style={{
+                      fontSize: "var(--dashboard-today-plan-button-size)",
+                      color: "var(--hero-button-color)",
+                      background: "var(--how-it-works-color)",
+                    }}
+                    className="px-4 sm:px-6 py-1 w-full sm:w-auto rounded-2xl my-2 font-bold"
+                  >
+                    Start Session
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+      </motion.div>
     </div>
   );
 }

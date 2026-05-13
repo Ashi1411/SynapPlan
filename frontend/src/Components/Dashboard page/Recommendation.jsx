@@ -22,8 +22,8 @@ export default function Recommendation() {
       className="py-8 md:py-10 px-4 sm:px-8 md:px-16 lg:px-24"
     >
       <motion.h1
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -39,9 +39,9 @@ export default function Recommendation() {
       >
         {data?.map((elem, i) => {
           return (
-            <motion.div 
-            {...fadeUp}
-                      transition={{ delay: 0.3 }}
+            <motion.div
+              {...fadeUp}
+              transition={{ delay: 0.3 }}
               key={i}
               style={{
                 background: "var(--design-engine-background)",

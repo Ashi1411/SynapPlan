@@ -83,7 +83,9 @@ async function getWeeklyStudyTime(userId) {
   const today = new Date();
 
   const startOfWeek = new Date(today);
-  startOfWeek.setDate(today.getDate() - today.getDay() + (today.getDay() == 0 ? -6 : 1));
+  startOfWeek.setDate(
+    today.getDate() - today.getDay() + (today.getDay() == 0 ? -6 : 1),
+  );
   startOfWeek.setHours(0, 0, 0, 0);
 
   const endOfWeek = new Date(startOfWeek);
@@ -116,9 +118,11 @@ async function getWeeklyStudyTime(userId) {
 //! find weekly productivity (focus efficiency) day by day for weekly productivity graph
 async function getWeeklyFocusEfficiency(userId) {
   const today = new Date();
-  
+
   const startOfWeek = new Date(today);
-  startOfWeek.setDate(today.getDate() - today.getDay() + (today.getDay() == 0 ? -6 : 1));
+  startOfWeek.setDate(
+    today.getDate() - today.getDay() + (today.getDay() == 0 ? -6 : 1),
+  );
   startOfWeek.setHours(0, 0, 0, 0);
 
   const endOfWeek = new Date(startOfWeek);
@@ -199,7 +203,6 @@ async function getMonthlyFocusEfficiency(userId) {
   const today = new Date();
   const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
   startOfMonth.setHours(0, 0, 0, 0);
-
 
   const sessions = await Session.aggregate([
     {
@@ -287,7 +290,8 @@ async function getInsights(userId) {
     timeBuckets[slot].push(eff);
 
     //? to analyze that short sessions are more efficient or short sessions are more efficient
-    if (s.durationCompleted < 90 * 60)  shortSessions.push(eff); // multiplied to convert min to sec
+    if (s.durationCompleted < 90 * 60)
+      shortSessions.push(eff); // multiplied to convert min to sec
     else longSessions.push(eff);
 
     //? to analyze efficiency of each session of each subject
@@ -406,7 +410,8 @@ async function getInsights(userId) {
   let streak = 0;
 
   for (let i = 0; i < sortedDays.length; i++) {
-    if (sortedDays[i][1] > 300 * 60) { // to convert min to sec
+    if (sortedDays[i][1] > 300 * 60) {
+      // to convert min to sec
       streak++;
       if (streak >= 2) {
         insights.push("⚠️ Productivity drops after consecutive heavy days.");

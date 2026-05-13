@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { faqs } from "../../Data/faqs";
 import "../../styles/global.css";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { fadeUp } from "../../animations";
 
 export default function Faq() {
@@ -20,8 +20,8 @@ export default function Faq() {
       className="flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 py-12 md:py-20"
     >
       <motion.h1
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--section-heading-color)",
           fontSize: "var(--section-heading-size)",
@@ -40,9 +40,7 @@ export function FaqItems({ details }) {
   let { items, currentFaq, setCurrentFaq } = details;
 
   return (
-    <motion.div className="mb-4"
-    {...fadeUp}
-              transition={{ delay: 0.3 }}>
+    <motion.div className="mb-4" {...fadeUp} transition={{ delay: 0.3 }}>
       <h2
         style={{
           background: "var(--faq-question-background)",
@@ -54,13 +52,43 @@ export function FaqItems({ details }) {
       >
         {items.question}
       </h2>
-      <p
-        className={`transition-all duration-300 ease-in-out ${
-          currentFaq === items.id ? "activeAns" : "notActiveAns"
-        }`}
-      >
-        {items.answer}
-      </p>
+      <AnimatePresence>
+        {currentFaq === items.id && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              maxHeight: 0,
+              y: -10,
+            }}
+            animate={{
+              opacity: 1,
+              maxHeight: 200,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              maxHeight: 0,
+              y: -10,
+            }}
+            transition={{
+              duration: 0.4,
+              ease: "easeInOut",
+            }}
+            style={{
+              overflow: "hidden",
+              background: "var(--faq-answer-background)",
+              color: "var(--faq-answer-color)",
+              fontWeight: 600,
+              fontSize: "var(--faq-answer-size)",
+              borderBottomLeftRadius: "20px",
+              borderBottomRightRadius: "20px",
+              padding: "12px",
+            }}
+          >
+            {items.answer}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

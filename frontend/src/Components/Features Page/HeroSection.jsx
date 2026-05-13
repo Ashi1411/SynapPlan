@@ -16,12 +16,10 @@ export default function HeroSection() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div
-        className="flex flex-col justify-center items-center mx-auto text-center p-4 md:p-10 h-screen"
-      >
+      <div className="flex flex-col justify-center items-center mx-auto text-center p-4 md:p-10 h-screen">
         <motion.h1
-        {...fadeUp}
-                  transition={{ delay: 0.1 }}
+          {...fadeUp}
+          transition={{ delay: 0.1 }}
           style={{
             fontSize: "var(--hero-section-heading)",
             color: "var(--hero-heading-color)",
@@ -31,8 +29,8 @@ export default function HeroSection() {
           Powerful Tools Designed Around Your Study Behavior
         </motion.h1>
         <motion.p
-        {...fadeUp}
-                  transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{
             fontSize: "var(--hero-section-subheading)",
             color: "var(--hero-subheading-color)",
@@ -44,8 +42,8 @@ export default function HeroSection() {
           uniquely for you.
         </motion.p>
         <motion.p
-        {...fadeUp}
-                  transition={{ delay: 0.3 }}
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
           style={{
             fontSize: "var(--hero-section-paragraph)",
             color: "var(--hero-paragraph-color)",
@@ -57,8 +55,12 @@ export default function HeroSection() {
           stress, and achieve better results with less effort.
         </motion.p>
 
-        <motion.div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-8 w-full sm:w-auto" accordion{...fadeUp}
-                  transition={{ delay: 0.5 }}>
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 sm:gap-8 mt-8 w-full sm:w-auto"
+          accordion
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
+        >
           <Link to="/signup">
             <button
               style={{

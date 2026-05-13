@@ -190,9 +190,9 @@ export default function FocusTimer() {
       className="min-h-screen flex flex-col mt-10 px-3 sm:px-6 md:px-10 py-6 sm:py-10"
     >
       {/* main heading */}
-      <motion.h2 
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+      <motion.h2
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--dashboard-hero-paragraph-color)",
           fontSize: "var(--login-heading-size)",
@@ -202,8 +202,8 @@ export default function FocusTimer() {
         FOCUS TIMER
       </motion.h2>
       <motion.div
-      {...fadeUp}
-                transition={{ delay: 0.3 }}
+        {...fadeUp}
+        transition={{ delay: 0.3 }}
         style={{ background: "var(--card-color-1)" }}
         className="text-center max-w-sm sm:max-w-md md:max-w-2xl mx-auto rounded-3xl px-4 sm:px-4 py-3 sm:py-4"
       >
@@ -327,16 +327,15 @@ export default function FocusTimer() {
       {/* progress bar of current session */}
       <div>
         <motion.p
-        {...fadeUp}
-                  transition={{ delay: 0.5 }}
+          {...fadeUp}
+          transition={{ delay: 0.5 }}
           style={{
             color: "var(--dashboard-hero-heading-color)",
             fontSize: "var(--dashboard-hero-subheading-size)",
           }}
           className="font-bold px-3 sm:px-6 py-6 text-center"
         >
-          Session Completed :{" "}
-          {((time / session?.duration) * 100).toFixed(1)}%
+          Session Completed : {((time / session?.duration) * 100).toFixed(1)}%
         </motion.p>
       </div>
       <ToastContainer

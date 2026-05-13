@@ -27,8 +27,8 @@ export default function WeeklySummary() {
       className="px-3 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10"
     >
       <motion.h1
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -44,8 +44,8 @@ export default function WeeklySummary() {
           className="order-2 md:order-1 p-3 sm:p-4 md:p-6 rounded-2xl w-full"
         >
           <motion.p
-          {...fadeUp}
-                    transition={{ delay: 0.3 }}
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               background: "var(--card-color-1)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -56,8 +56,8 @@ export default function WeeklySummary() {
             Total Study Hours: {formatDuration(data?.durationCompleted)}
           </motion.p>
           <motion.p
-          {...fadeUp}
-                    transition={{ delay: 0.3 }}
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               background: "var(--card-color-1)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -68,8 +68,8 @@ export default function WeeklySummary() {
             Average Completion Rate: {data?.completionRate}%
           </motion.p>
           <motion.p
-          {...fadeUp}
-                    transition={{ delay: 0.3 }}
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               background: "var(--card-color-1)",
               fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -83,8 +83,8 @@ export default function WeeklySummary() {
             return (
               <div key={i}>
                 <motion.p
-                {...fadeUp}
-                    transition={{ delay: 0.3 }}
+                  {...fadeUp}
+                  transition={{ delay: 0.3 }}
                   style={{
                     background: "var(--card-color-1)",
                     fontSize: "var(--dashboard-hero-paragraph-size)",
@@ -100,7 +100,9 @@ export default function WeeklySummary() {
         </div>
 
         {/* image */}
-        <motion.div style={{backgroundImage: `url(${image})`}} className="
+        <motion.div
+          style={{ backgroundImage: `url(${image})` }}
+          className="
           order-1
           md:order-2
           flex
@@ -117,9 +119,9 @@ export default function WeeklySummary() {
           rounded-2xl
           overflow-hidden
         "
-        {...fadeUp}
-                    transition={{ delay: 0.3 }}>
-        </motion.div>
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
+        ></motion.div>
       </div>
     </div>
   );

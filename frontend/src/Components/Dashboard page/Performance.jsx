@@ -52,9 +52,9 @@ export default function Performance() {
       style={{ background: "var(--card-color-2)" }}
       className="px-4 sm:px-8 md:px-12 lg:px-20 py-8 md:py-10"
     >
-      <motion.h1 
-      {...fadeUp}
-                transition={{ delay: 0.1 }}
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--hero-paragraph-color)",
           fontSize: "var(--section-heading-size)",
@@ -67,8 +67,8 @@ export default function Performance() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
         <div className="flex flex-col items-center justify-center">
           <motion.div
-          {...fadeUp}
-                    transition={{ delay: 0.3 }}
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{ background: "var(--card-color-1)" }}
             className="rounded-2xl mx-2 sm:mx-4 md:mx-6 my-4 w-full max-w-md"
           >
@@ -121,9 +121,9 @@ export default function Performance() {
           </motion.div>
         </div>
         <div>
-          <motion.p 
-          {...fadeUp}
-                    transition={{ delay: 0.3 }}
+          <motion.p
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               color: "var(--dashboard-hero-subheading-color)",
               fontSize: "var(--dashboard-hero-subheading-size)",
@@ -133,9 +133,9 @@ export default function Performance() {
             {data?.weeklyConsistency}% Average Completion Rate This Week
           </motion.p>
 
-          <motion.h2 
-          {...fadeUp}
-                    transition={{ delay: 0.3 }}
+          <motion.h2
+            {...fadeUp}
+            transition={{ delay: 0.3 }}
             style={{
               color: "var(--dashboard-hero-subheading-color)",
               fontSize: "var(--dashboard-feature-subheading-size)",
@@ -157,9 +157,9 @@ export default function Performance() {
               {data?.upcomingDeadlines?.map((elem, i) => {
                 return (
                   <div key={i}>
-                    <motion.div 
-                    {...fadeUp}
-                              transition={{ delay: 0.5 }}
+                    <motion.div
+                      {...fadeUp}
+                      transition={{ delay: 0.5 }}
                       style={{ background: "var(--card-color-2)" }}
                       className="m-2 p-2 rounded-2xl"
                     >

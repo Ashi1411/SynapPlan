@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {checkForAuthentication} = require("../middlewares/auth");
+const { checkForAuthentication } = require("../middlewares/auth");
 
 //todo middlewares
 router.use(checkForAuthentication);
@@ -15,9 +15,8 @@ const {
   completeSessionController,
   getSessionController,
   getTodayCompletedSession,
-  calculateSessionEfficiency
+  calculateSessionEfficiency,
 } = require("../controllers/sessionController");
-
 
 //todo routes
 //! get todays session
@@ -47,6 +46,5 @@ router.get("/efficiency/:id", calculateSessionEfficiency);
 //! get session by id
 //? they are placed at last because Dynamic routes (/:id) are greedy. They capture EVERYTHING unless placed last.
 router.get("/:id", getSessionController);
-
 
 module.exports = router;

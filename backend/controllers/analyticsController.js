@@ -11,42 +11,41 @@ const {
   getInsights,
 } = require("../services/analyticsService");
 
-
 async function getAnalytics(req, res) {
-    const userId = req.user._id;
+  const userId = req.user._id;
 
-    const weeklySessions = await getWeeklySession(userId);
-    
-    const { planned, durationCompleted } = getTotalStudyHours(weeklySessions);
+  const weeklySessions = await getWeeklySession(userId);
 
-    const completionRate = averageCompletionRate(planned, durationCompleted);
+  const { planned, durationCompleted } = getTotalStudyHours(weeklySessions);
 
-    const weeklyConsistency = weeklyConsistencyScore(weeklySessions);
+  const completionRate = averageCompletionRate(planned, durationCompleted);
 
-    const focusEfficiency = getFocusEfficiency(weeklySessions);
+  const weeklyConsistency = weeklyConsistencyScore(weeklySessions);
 
-    const weeklyProductivityStudyTime = await getWeeklyStudyTime(userId);
+  const focusEfficiency = getFocusEfficiency(weeklySessions);
 
-    const weeklyFocusEfficiency = await getWeeklyFocusEfficiency(userId);
+  const weeklyProductivityStudyTime = await getWeeklyStudyTime(userId);
 
-    const monthlyProductiveStudyTime = await getMonthlyStudyTime(userId);
+  const weeklyFocusEfficiency = await getWeeklyFocusEfficiency(userId);
 
-    const monthlyFocusEfficiency = await getMonthlyFocusEfficiency(userId);
+  const monthlyProductiveStudyTime = await getMonthlyStudyTime(userId);
 
-    const insights = await getInsights(userId);
+  const monthlyFocusEfficiency = await getMonthlyFocusEfficiency(userId);
 
-    res.json({
-        weeklySessions,
-        durationCompleted,
-        completionRate,
-        weeklyConsistency,
-        focusEfficiency,
-        weeklyProductivityStudyTime,
-        weeklyFocusEfficiency,
-        monthlyProductiveStudyTime,
-        monthlyFocusEfficiency,
-        insights
-    });
-};
+  const insights = await getInsights(userId);
 
-module.exports = {getAnalytics};
+  res.json({
+    weeklySessions,
+    durationCompleted,
+    completionRate,
+    weeklyConsistency,
+    focusEfficiency,
+    weeklyProductivityStudyTime,
+    weeklyFocusEfficiency,
+    monthlyProductiveStudyTime,
+    monthlyFocusEfficiency,
+    insights,
+  });
+}
+
+module.exports = { getAnalytics };

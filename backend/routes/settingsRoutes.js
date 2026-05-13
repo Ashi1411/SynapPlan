@@ -1,16 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-
 const {
   getUserDetailsController,
   editProfileController,
   editStudyHoursController,
   changePasswordController,
   deleteAccountController,
-  getNotificationController
+  getNotificationController,
 } = require("../controllers/settingController");
-
 
 //todo routes
 //! get user details
@@ -28,8 +26,7 @@ router.put("/change-password", changePasswordController);
 //! delete account
 router.delete("/delete-account", deleteAccountController);
 
-//! today's notifications 
+//! today's notifications
 router.get("/notifications", getNotificationController);
-
 
 module.exports = router;

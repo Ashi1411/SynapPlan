@@ -9,8 +9,8 @@ export default function ContextAwarePlanning() {
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       {/* content */}
       <motion.div
-      {...fadeLeft}
-              viewport={{ once: false, amount: 0.3 }}
+        {...fadeLeft}
+        viewport={{ once: false, amount: 0.3 }}
         style={{ background: "var(--card-color-2)" }}
         className="flex flex-col justify-center px-6 py-10 md:px-16 lg:px-20 min-h-[50vh] md:min-h-screen order-2 md:order-1"
       >
@@ -45,17 +45,20 @@ export default function ContextAwarePlanning() {
         </p>
       </motion.div>
 
-            <motion.div className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"
-                  {...fadeRight}
-                          viewport={{ once: false, amount: 0.3 }}>
-                    <img
-                    src={context_aware}
-                    alt="Cognitive Load Pairing"
-                    className="
+      <motion.div
+        className="flex flex-col justify-center min-h-[30vh] shadow-[0_10px_30px_rgba(0,0,0,0.08)] order-1 md:order-2"
+        {...fadeRight}
+        viewport={{ once: false, amount: 0.3 }}
+      >
+        <img
+          src={context_aware}
+          alt="Cognitive Load Pairing"
+          className="
                     w-full
                     h-full
-                    object-cover"/>
-                  </motion.div>
+                    object-cover"
+        />
+      </motion.div>
     </div>
   );
 }

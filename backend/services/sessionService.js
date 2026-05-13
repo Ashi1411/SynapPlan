@@ -224,9 +224,8 @@ async function getCompletedSessions(userId) {
 async function getCurrentSession(userId, sessionId) {
   const session = await Session.findOne({
     _id: sessionId,
-    userId
-  })
-    .populate("subjectId", "subjectName intensity");
+    userId,
+  }).populate("subjectId", "subjectName intensity");
 
   console.log("Sessions Found:", session);
 
@@ -244,7 +243,7 @@ function getSessionEfficiency(session) {
   let efficiency = duration / (duration + breakDuration);
 
   //? penalty for break count
-  efficiency *= (1 - breakCount * 0.05);
+  efficiency *= 1 - breakCount * 0.05;
 
   //? clamp the efficiency between 0 and 1
   efficiency = Math.max(0, Math.min(1, efficiency));
@@ -262,9 +261,6 @@ function getEfficiencyLabel(efficiency) {
   return "Poor";
 }
 
-
-
-
 module.exports = {
   getPendingSession,
   defaultSession,
@@ -277,5 +273,5 @@ module.exports = {
   getCompletedSessions,
   getCurrentSession,
   getSessionEfficiency,
-  getEfficiencyLabel
+  getEfficiencyLabel,
 };

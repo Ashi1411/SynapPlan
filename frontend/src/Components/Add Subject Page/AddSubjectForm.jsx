@@ -20,7 +20,6 @@ export default function AddSubjectFrom() {
     topics: "",
   });
 
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -78,9 +77,9 @@ export default function AddSubjectFrom() {
       style={{ background: "var(--login-page)" }}
       className="px-3 mt-12 sm:px-6 md:px-10 lg:px-20 py-6 sm:py-10 min-h-screen"
     >
-      <motion.h1 
-      {...fadeUp}
-                    transition={{ delay: 0.1 }}
+      <motion.h1
+        {...fadeUp}
+        transition={{ delay: 0.1 }}
         style={{
           color: "var(--dashboard-hero-paragraph-color)",
           fontSize: "var(--login-heading-size)",
@@ -90,9 +89,9 @@ export default function AddSubjectFrom() {
         Add Subject
       </motion.h1>
 
-      <motion.div 
-      {...fadeUp}
-                    transition={{ delay: 0.3 }}
+      <motion.div
+        {...fadeUp}
+        transition={{ delay: 0.3 }}
         style={{ background: "var(--login-page-card)" }}
         className="p-4 sm:p-6 md:p-10 rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 max-w-5xl mx-auto"
       >
@@ -248,23 +247,38 @@ export default function AddSubjectFrom() {
         </div>
 
         {/* image */}
-        <div className="order-1 md:order-2 flex items-center justify-center w-full min-h-[200px] sm:min-h-[250px] md:min-h-[350px] p-2">
-          <img
-            src={image}
-            alt="weekly-summary"
-            className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain drop-shadow-xl"
-          ></img>
-        </div>
+        <motion.div
+          style={{ backgroundImage: `url(${image})` }}
+          className="
+                  order-1
+                  md:order-2
+                  flex
+                  items-center
+                  justify-center
+                  w-full
+                  min-h-[500px]
+                  sm:min-h-[600px]
+                  md:min-h-[600px]
+                  p-2
+                  bg-contain
+                  bg-center
+                  bg-no-repeat
+                  rounded-2xl
+                  overflow-hidden
+                "
+          {...fadeUp}
+          transition={{ delay: 0.3 }}
+        ></motion.div>
       </motion.div>
       <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={true}
-              closeOnClick
-              pauseOnHover
-              theme="colored"
-            />
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

@@ -4,7 +4,7 @@ const {
   editStudyHours,
   changePassword,
   deleteAccount,
-  getTodayNotification
+  getTodayNotification,
 } = require("../services/settingsService");
 
 //! get user details
@@ -41,7 +41,7 @@ async function editProfileController(req, res) {
 async function editStudyHoursController(req, res) {
   try {
     const userId = req.user._id;
-    const {maxStudyHours} = req.body;
+    const { maxStudyHours } = req.body;
 
     const updatedUser = await editStudyHours(userId, maxStudyHours);
 
@@ -62,12 +62,11 @@ async function changePasswordController(req, res) {
 
     await changePassword(userId, data);
 
-    res.json({message: "Password changed successfully"});
+    res.json({ message: "Password changed successfully" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 }
-
 
 //! delete user
 async function deleteAccountController(req, res) {
@@ -86,13 +85,12 @@ async function deleteAccountController(req, res) {
 async function getNotificationController(req, res) {
   try {
     const userId = req.user._id;
-    
+
     const notifications = await getTodayNotification(userId);
 
     res.json(notifications);
-  }
-  catch (err) {
-    res.status(400).json({message: err.message});
+  } catch (err) {
+    res.status(400).json({ message: err.message });
   }
 }
 
@@ -102,7 +100,5 @@ module.exports = {
   editStudyHoursController,
   changePasswordController,
   deleteAccountController,
-  getNotificationController
+  getNotificationController,
 };
-
-

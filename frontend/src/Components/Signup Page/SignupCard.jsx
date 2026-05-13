@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import signupImage from "../../images/login and signup pages/signup_page_image.png";
 
 import { signup } from "../../api/auth";
@@ -21,8 +21,6 @@ export default function SignupCard() {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState("");
-
   const handleChange = (e) => {
     setFromData({
       ...formData,
@@ -39,19 +37,19 @@ export default function SignupCard() {
 
     //? required fields
     if (!fullname || !email || !password || !confirmPassword) {
-      setError("All the fields are required");
+      toast.error("All the fields are required");
       return;
     }
 
     //? password match
     if (password !== confirmPassword) {
-      setError("Password and Confirm Password are not same");
+      toast.error("Password and Confirm Password are not same");
       return;
     }
 
     //? password length
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      toast.error("Password must be at least 6 characters");
       return;
     }
 
@@ -69,7 +67,7 @@ export default function SignupCard() {
       }
     } catch (err) {
       console.log(err);
-      setError(err.response?.data?.message || "Signup Failed");
+      toast.error(err.response?.data?.message || "Signup Failed");
     }
   };
 
@@ -205,58 +203,17 @@ export default function SignupCard() {
             </div>
           </form>
 
-          {/* displaying the error mssg */}
-          {
-            <p
-              style={{
-                fontSize: "var(--login-text-size)",
-              }}
-              className="font-semibold text-red-600 flex flex-col justify-center items-center m-4"
-            >
-              {error}
-            </p>
-          }
-
           <p
             style={{
               color: "var(--login-text-color)",
               fontSize: "var(--login-text-size)",
             }}
-            className="font-semibold"
+            className="font-semibold mt-2"
           >
-            Already have an account? Log in
-          </p>
-
-          <h2
-            style={{
-              color: "var(--login-heading-color)",
-            }}
-            className="font-bold text-center text-4xl mt-10"
-          >
-            OR
-          </h2>
-
-          <div className="flex flex-col justify-center items-center ">
-            <button
-              style={{
-                color: "var(--login-button-text-color)",
-                fontSize: "var(--login-button-text-size)",
-                background: "var(--login-button-background)",
-              }}
-              className="font-semibold p-1 px-10 rounded-2xl mt-8 md:mt-12 mb-2"
-            >
-              Try Demo Without Signing Up
-            </button>
-          </div>
-
-          <p
-            style={{
-              color: "var(--login-text-color)",
-              fontSize: "var(--login-text-size)",
-            }}
-            className="font-semibold"
-          >
-            Don't have an account? Sign up
+            Already have an account?{" "}
+            <Link to={"/login"} className="font-bold">
+              Log in
+            </Link>
           </p>
         </div>
       </motion.div>

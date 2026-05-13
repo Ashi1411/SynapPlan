@@ -9,8 +9,8 @@ export default function Results() {
     <div className="grid grid-cols-1 md:grid-cols-[40%_60%]">
       {/* image part */}
       <motion.div
-      {...fadeLeft}
-              viewport={{ once: false, amount: 0.3 }}
+        {...fadeLeft}
+        viewport={{ once: false, amount: 0.3 }}
         style={{
           backgroundImage: `url(${result_section})`,
           backgroundSize: "cover",
@@ -51,9 +51,11 @@ export default function Results() {
       </motion.div>
 
       {/* card part */}
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2"
-      {...fadeRight}
-              viewport={{ once: false, amount: 0.3 }}>
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2"
+        {...fadeRight}
+        viewport={{ once: false, amount: 0.3 }}
+      >
         <div
           style={{ background: "var(--card-color-1)" }}
           className="flex flex-col justify-center items-center p-5 min-h-[50vh] order-1"
