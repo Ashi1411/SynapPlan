@@ -21,7 +21,6 @@ async function getTodaySessionsController(req, res) {
     const sessions = await getPendingSession(userId);
     const defaultSess = defaultSession(sessions);
 
-    console.log("FINAL RESPONSE:", { sessions, defaultSess });
 
     res.json({
       sessions,
@@ -124,13 +123,11 @@ async function getTodayCompletedSession(req, res) {
 
     const completedSessions = await getCompletedSessions(userId);
 
-    console.log("Today's Completed Sessions:", completedSessions);
 
     res.json({
       completedSessions,
     });
   } catch (err) {
-    console.log("Error:", err.message);
     res.status(400).json({ message: err.message });
   }
 }
@@ -153,7 +150,6 @@ async function calculateSessionEfficiency(req, res) {
       efficiencyLabel,
     });
   } catch (err) {
-    console.log("Error:", err.message);
     res.status(400).json({ message: err.message });
   }
 }

@@ -45,7 +45,6 @@ export default function SessionDetail() {
         );
 
         setAnalytics(results);
-        console.log(results);
       } catch (err) {
         console.log(err);
       }

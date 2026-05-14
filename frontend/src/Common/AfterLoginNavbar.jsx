@@ -11,7 +11,6 @@ export default function AfterLoginNavbar() {
     async function fetchDetails() {
       const res = await getUserDetails();
       setUserData(res.data);
-      console.log(res.data);
     }
 
     fetchDetails();

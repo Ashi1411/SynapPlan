@@ -58,7 +58,6 @@ export default function FocusTimer() {
           setSession(res.data.defaultSession);
         }
 
-        console.log(res.data);
       } catch (err) {
         console.log(err.response?.data || err.message);
       }

@@ -29,7 +29,6 @@ export default function AddSubjectFrom() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Add subject button clicked");
 
     const {
       subjectName,
@@ -64,10 +63,8 @@ export default function AddSubjectFrom() {
       };
       const res = await addSubject(payload);
 
-      console.log(res.data);
       toast.success("Subject added successfully");
     } catch (err) {
-      console.log(err);
       toast.error(err.response?.data?.message || "Something went wrong");
     }
   };

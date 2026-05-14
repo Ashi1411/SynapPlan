@@ -52,14 +52,13 @@ async function handleUserLogin(req, res) {
     });
   }
 
-  console.log(user);
 
   const token = setUser(user);
   //? sent via cookie
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
   });
   return res.json({
     success: true,

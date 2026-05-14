@@ -26,7 +26,6 @@ async function getPendingSession(userId) {
     .populate("subjectId", "subjectName intensity")
     .sort({ date: 1 });
 
-  console.log("SESSIONS FOUND:", sessions);
 
   return sessions;
 }
@@ -41,7 +40,6 @@ function defaultSession(remSessions) {
   const result =
     active || onBreak || remSessions.find((s) => s.status === "pending");
 
-  console.log("DEFAULT SESSION:", result);
 
   return result;
 }
@@ -215,8 +213,6 @@ async function getCompletedSessions(userId) {
     .populate("subjectId", "subjectName intensity")
     .sort({ date: 1 });
 
-  console.log("Sessions Found:", sessions);
-
   return sessions;
 }
 
@@ -227,7 +223,6 @@ async function getCurrentSession(userId, sessionId) {
     userId,
   }).populate("subjectId", "subjectName intensity");
 
-  console.log("Sessions Found:", session);
 
   return session;
 }

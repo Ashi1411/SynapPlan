@@ -12,7 +12,6 @@ export default function InsightPanel() {
     async function fetchDetails() {
       const res = await getAnalytics();
       setData(res.data);
-      console.log(res.data);
     }
 
     fetchDetails();

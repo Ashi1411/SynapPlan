@@ -18,7 +18,6 @@ export default function PlannerCard() {
       const res = await getPlanner();
       setData(res.data);
       setDay(res.data.todayDay);
-      console.log(res.data);
     }
 
     fetchDetails();

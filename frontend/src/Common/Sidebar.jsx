@@ -22,7 +22,6 @@ export default function Sidebar() {
         navigate("/");
       }, 4000);
     } catch (err) {
-      console.log(err);
       toast.error("Logout failed");
     }
   };

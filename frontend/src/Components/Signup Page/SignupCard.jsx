@@ -31,7 +31,6 @@ export default function SignupCard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Signup button clicked");
 
     const { fullname, email, password, confirmPassword } = formData;
 
@@ -57,7 +56,6 @@ export default function SignupCard() {
     try {
       const res = await signup({ fullname, email, password });
 
-      console.log(res.data);
       toast.success("Account Created Successfully");
 
       if (res.data.success) {
@@ -66,7 +64,6 @@ export default function SignupCard() {
         }, 4000);
       }
     } catch (err) {
-      console.log(err);
       toast.error(err.response?.data?.message || "Signup Failed");
     }
   };

@@ -22,8 +22,7 @@ export default function Profile() {
     async function fetchDetails() {
       const res = await getUserDetails();
       setUserData(res.data);
-      console.log(res.data);
-
+      
       setForm({
         fullname: res.data.name || "",
         interests: res.data.interests || "",

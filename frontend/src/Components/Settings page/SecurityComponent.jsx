@@ -59,7 +59,6 @@ export default function SecurityComponent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Password change button clicked");
 
     const { password, confirmPassword } = formData;
 
@@ -87,14 +86,12 @@ export default function SecurityComponent() {
         confirmPassword: confirmPassword,
       });
 
-      console.log(res.data);
       toast.success("Password changed successfully");
       setFormData({
         password: "",
         confirmPassword: "",
       });
     } catch (err) {
-      console.log(err);
       toast.error(err.response?.data?.message || "Signup Failed");
     }
   };

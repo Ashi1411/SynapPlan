@@ -28,8 +28,6 @@ export default function LoginCard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login button clicked");
-    console.log("Backend URL:", process.env.REACT_APP_BACKEND_URL);
 
     const { email, password } = formData;
 
@@ -41,7 +39,6 @@ export default function LoginCard() {
     try {
       const res = await login(formData);
 
-      console.log(res.data);
       toast.success("Login successful");
 
       if (res.data.success) {
@@ -50,7 +47,6 @@ export default function LoginCard() {
         }, 4000);
       }
     } catch (err) {
-      console.log(err);
       toast.error(err.response?.data?.message || "Login failed");
       setTimeout(() => {
         navigate("/signup");

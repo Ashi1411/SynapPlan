@@ -16,7 +16,6 @@ export default function HeroSection() {
     async function fetchDashboard() {
       const res = await getDashboard();
       setData(res.data);
-      console.log(res.data);
     }
 
     fetchDashboard();

@@ -13,7 +13,6 @@ export default function HeroSection() {
     async function fetchDetails() {
       const res = await getAnalytics();
       setData(res.data);
-      console.log(res.data);
     }
 
     fetchDetails();

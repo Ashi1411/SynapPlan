@@ -23,7 +23,6 @@ export default function ProductivityTrend() {
     async function fetchDetails() {
       const res = await getAnalytics();
       setData(res.data);
-      console.log(res.data);
     }
 
     fetchDetails();

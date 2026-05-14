@@ -37,8 +37,8 @@ router.get("/analytics", checkForAuthentication, getAnalytics);
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    sameSite: "none",
+    secure: true,
   }); // same cookie used in login
 
   res.json({ message: "Logged out successfully" });

@@ -12,7 +12,6 @@ export default function NotificationsComponent() {
       const res = await todayNotifications();
 
       setNotifications(res.data);
-      console.log(res.data);
     }
 
     fetchDetails();
