@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUserDetails, editProfile } from "../../api/auth";
 //! react toastify
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import image from "../../images/settings page/profile.png";
@@ -222,7 +222,6 @@ export default function Profile() {
           )}
         </motion.div>
       </div>
-      {/* <ToastContainer position="top-right" autoClose={3000} theme="colored" /> */}
     </div>
   );
 }

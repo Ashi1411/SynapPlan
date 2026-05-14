@@ -47,7 +47,7 @@ export default function SystemProcess() {
           transition={{ delay: 0.5 }}
         >
           <div>
-            <img src={step_1}></img>
+            <img src={step_1} alt="step 1"></img>
           </div>
           <div>
             <h2
@@ -80,7 +80,7 @@ export default function SystemProcess() {
           transition={{ delay: 0.5 }}
         >
           <div>
-            <img src={step_2}></img>
+            <img src={step_2} alt="step 2"></img>
           </div>
           <div>
             <h2
@@ -113,7 +113,7 @@ export default function SystemProcess() {
           transition={{ delay: 0.5 }}
         >
           <div>
-            <img src={step_3}></img>
+            <img src={step_3} alt="step 3"></img>
           </div>
           <div>
             <h2
@@ -146,7 +146,7 @@ export default function SystemProcess() {
           transition={{ delay: 0.5 }}
         >
           <div>
-            <img src={step_4}></img>
+            <img src={step_4} alt="step 4"></img>
           </div>
           <div>
             <h2
@@ -179,7 +179,7 @@ export default function SystemProcess() {
           transition={{ delay: 0.5 }}
         >
           <div>
-            <img src={step_5}></img>
+            <img src={step_5} alt="step 5"></img>
           </div>
           <div>
             <h2

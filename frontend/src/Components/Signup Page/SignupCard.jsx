@@ -80,7 +80,7 @@ export default function SignupCard() {
         className="rounded-3xl grid grid-cols-1 md:grid-cols-2 mt-20 gap-8 md:gap-10 items-stretch overflow-hidden"
       >
         {/* image */}
-        <div className=" md:h-full w-full overflow-hidden rounded-2xl">
+        <div className="md:h-full w-full overflow-hidden rounded-2xl">
           <img
             src={signupImage}
             alt="signup"

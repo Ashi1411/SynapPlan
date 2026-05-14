@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { fadeUp } from "../../animations";
 
 //! react toastify
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AddSubjectFrom() {
@@ -61,7 +61,7 @@ export default function AddSubjectFrom() {
         ...formData,
         dailyStudyHours: Number(formData.dailyStudyHours),
       };
-      const res = await addSubject(payload);
+      await addSubject(payload);
 
       toast.success("Subject added successfully");
     } catch (err) {
@@ -267,15 +267,6 @@ export default function AddSubjectFrom() {
           transition={{ delay: 0.3 }}
         ></motion.div>
       </motion.div>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        pauseOnHover
-        theme="colored"
-      />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import dashboard from "../../images/demo page/mobile_dashboard.png";
 import plannar from "../../images/demo page/mobile_plannar.png";
 import timer from "../../images/demo page/mobile_timer.png";

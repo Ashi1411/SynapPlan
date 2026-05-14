@@ -6,7 +6,6 @@ import { fadeUp } from "../../animations";
 
 export default function InsightPanel() {
   const [data, setData] = useState(null);
-  const [weekly, setWeekly] = useState(true); //? true when the selected button is week
 
   useEffect(() => {
     async function fetchDetails() {

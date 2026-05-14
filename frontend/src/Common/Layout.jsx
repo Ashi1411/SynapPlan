@@ -11,7 +11,12 @@ export default function Layout() {
       <ScrollToHash />
       <Outlet />
 
-      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+        toastStyle={{ zIndex: 999999 }}
+      />
     </>
   );
 }

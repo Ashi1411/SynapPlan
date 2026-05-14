@@ -8,7 +8,7 @@ import { startBreak } from "../../api/auth";
 import { endBreak } from "../../api/auth";
 import { completeSession } from "../../api/auth";
 import { getSession } from "../../api/auth";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { formatTimer } from "../../utils/formatTimer";
 import { formatDuration } from "../../utils/formatDuration";
@@ -337,15 +337,6 @@ export default function FocusTimer() {
           Session Completed : {((time / session?.duration) * 100).toFixed(1)}%
         </motion.p>
       </div>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={true}
-        closeOnClick
-        pauseOnHover
-        theme="colored"
-      />
     </div>
   );
 }

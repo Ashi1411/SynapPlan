@@ -8,7 +8,7 @@ import {
 
 import image from "../../images/settings page/security.png";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { motion } from "framer-motion";
@@ -81,7 +81,7 @@ export default function SecurityComponent() {
     }
 
     try {
-      const res = await changePassword({
+      await changePassword({
         newPassword: password,
         confirmPassword: confirmPassword,
       });
@@ -312,7 +312,6 @@ export default function SecurityComponent() {
         ></motion.div>
       </div>
 
-      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
     </div>
   );
 }
